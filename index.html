@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pogoda — Deep Weather</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #0d1117;
@@ -556,6 +556,7 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
   outline: none;
   transition: border-color .2s;
   -webkit-appearance: none;
+  appearance: none;
 }
 .overlay-search-wrap input:focus { border-color: var(--accent); }
 .overlay-search-wrap input::placeholder { color: var(--muted); }
@@ -1237,7 +1238,7 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
   width: 100%; background: var(--surface2); border: 1px solid var(--border);
   border-radius: 8px; padding: .5rem .75rem; color: var(--text);
   font-family: 'IBM Plex Mono', monospace; font-size: max(.85rem, 16px);
-  outline: none; transition: border-color .2s; -webkit-appearance: none; box-sizing: border-box;
+  outline: none; transition: border-color .2s; -webkit-appearance: none; appearance: none; box-sizing: border-box;
 }
 .climate-input-wrap input:focus { border-color: var(--accent); }
 .climate-input-wrap input::placeholder { color: var(--muted); }
@@ -1425,7 +1426,7 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
         <!-- Sunrise/sunset -->
         <div class="detail-tile">
           <div class="tile-label">🌅 Wschód / Zachód</div>
-          <div style="display:flex;gap:1rem;font-family:'Space Mono';font-size:.95rem;font-weight:700">
+          <div style="display:flex;gap:1rem;font-size:.95rem;font-weight:700">
             <span id="tileSunrise">—</span>
             <span style="color:var(--muted)">→</span>
             <span id="tileSunset">—</span>
@@ -1913,39 +1914,91 @@ function getWmoIcon(code, isDay) {
 // ============================================================
 // ANALYSIS ENGINE
 // ============================================================
+// === MODELE METEOROLOGICZNE (Steadman, Thom, etc.) ===
+function getVaporPressure(T, RH) {
+  // Ciśnienie pary wodnej (e) w hPa
+  return (RH / 100) * 6.105 * Math.exp((17.27 * T) / (237.7 + T));
+}
+
+function getThomDI(T, RH) {
+  // Wskaźnik Dyskomfortu Thoma (DI)
+  return T - (0.55 - 0.0055 * RH) * (T - 14.5);
+}
+
+function getSteadmanAT(T, RH, windKph) {
+  // Temperatura Odczuwalna Steadmana (AT)
+  const e = getVaporPressure(T, RH);
+  const v = windKph / 3.6; // v w m/s
+  return T + 0.33 * e - 0.70 * v - 4.0;
+}
+
+function calcHeatBalance(m_val, garment, T, windKph, RH, uv, isDay) {
+  // Model S = M - W +/- R +/- C - E +/- K
+  // Uproszczony model balansu cieplnego
+  const M = parseFloat(m_val); // Metabolizm (W)
+  const W = M * 0.1; // Praca (10% M)
+  
+  // Konwekcja (C) i Przewodzenie: zależne od wiatru i gradientu temp
+  const windMS = windKph / 3.6;
+  const h_c = 12.1 * Math.sqrt(windMS); // Wsp. konwekcji
+  const insulation = garment === 'winter' ? 0.4 : (garment === 'casual' ? 0.7 : 1.0);
+  const C = h_c * (33 - T) * insulation; // 33C to temp skóry
+  
+  // Promieniowanie (R): słońce/UV
+  const R = (isDay ? (uv * 10) : 0) * (garment === 'winter' ? 0.5 : 1.0);
+  
+  // Parowanie (E): pocenie, zależne od wilgotności
+  const e_skin = 56.2; // cisiśnienie nasycenia na skórze (hPa)
+  const e_air = getVaporPressure(T, RH);
+  const E = 2.0 * windMS * (e_skin - e_air) * insulation;
+
+  return M - W + R - C - E; // Wynik S (Waty)
+}
+
 function buildInsights(data) {
   const temp = data.current.temp_c;
   const wind = data.current.wind_kph;
   const rain = data.current.precip_mm;
   const humidity = data.current.humidity;
   const uv = data.current.uv;
+  const isDay = data.current.is_day === 1;
 
-  // Simplified comfort index
-  const comfort = temp - (wind * 0.25) + (humidity > 70 ? -1.5 : 0);
-  
+  // Zaplecze naukowe (Modele Profesjonalne)
+  const di = getThomDI(temp, humidity);
+  const v_p = getVaporPressure(temp, humidity);
+  const st_at = getSteadmanAT(temp, humidity, wind);
+
   let outdoorMsg = "W porządku";
   let outdoorOk = true;
   if (temp < 8) { outdoorMsg = "Chłodno"; outdoorOk = true; }
-  if (temp < 0) { outdoorMsg = "Mróz"; outdoorOk = false; }
-  if (temp > 30) { outdoorMsg = "Upał"; outdoorOk = true; }
-  if (wind > 25) { outdoorMsg = "Wietrznie"; outdoorOk = false; }
+  if (temp < -2) { outdoorMsg = "Mróz"; outdoorOk = false; }
+  if (temp > 26) { outdoorMsg = "Ciepło"; outdoorOk = true; }
+  if (temp > 33) { outdoorMsg = "Ekstremalny upał"; outdoorOk = false; }
+  if (wind > 35) { outdoorMsg = "Wietrznie"; outdoorOk = false; }
   if (rain > 0.1) { outdoorMsg = "Opady"; outdoorOk = false; }
-  if (outdoorOk && temp > 18 && temp < 26 && wind < 15) outdoorMsg = "Idealnie";
+  if (outdoorOk && di < 21 && temp > 19 && wind < 15) outdoorMsg = "Idealnie";
 
   let sportMsg = "Dobre warunki";
   let sportOk = true;
-  if (temp < 2) { sportMsg = "Zbyt zimno"; sportOk = false; }
-  if (temp > 29 && humidity > 65) { sportMsg = "Duszno"; sportOk = false; }
-  if (wind > 20) { sportMsg = "Silny wiatr"; sportOk = true; }
-  if (rain > 1) { sportMsg = "Mokro/Ślisko"; sportOk = false; }
-  if (uv > 7) { sportMsg = "Wysokie UV"; sportOk = true; }
+  
+  // Spójność: Jeśli Na zewnątrz jest NIE, Sport również (blokada przez deszcz, mróz itp.)
+  if (!outdoorOk) {
+    sportOk = false;
+    sportMsg = outdoorMsg;
+  } else {
+    if (temp < 2) { sportMsg = "Zbyt zimno"; sportOk = false; }
+    if (di > 24) { sportMsg = "Dyskomfort (DI)"; sportOk = false; }
+    if (wind > 25) { sportMsg = "Uciążliwy wiatr"; sportOk = true; }
+    if (uv > 7) { sportMsg = "Wysokie UV"; sportOk = true; }
+  }
 
   return {
-    comfort: comfort,
+    comfort: di,
     outdoor: { ok: outdoorOk, msg: outdoorMsg },
     sport: { ok: sportOk, msg: sportMsg },
     warning: rain > 5 ? "Ulewny deszcz" : (wind > 50 ? "Silny wiatr" : null),
-    feels: data.current.feelslike_c || temp
+    feels: data.current.feelslike_c || temp,
+    inputs: { temp, wind, rain, humidity, uv, isDay, di, v_p, st_at }
   };
 }
 
@@ -1954,33 +2007,44 @@ function renderInsights(i) {
   if (!i) { card.style.display = 'none'; return; }
   card.style.display = 'block';
   
-  const getCol = (ok) => ok ? 'var(--mild)' : 'var(--hot)';
+  // Neutralny dla Chłodno/Ciepło
+  const getCol = (msg, ok) => {
+    if (!msg) return 'var(--text)';
+    const m = msg.toUpperCase();
+    if (m === 'CHŁODNO' || m === 'CIEPŁO') return 'var(--text)';
+    return ok ? 'var(--mild)' : 'var(--hot)';
+  };
   
   card.innerHTML = `
     <div class="section-title">
       <span>🔍 Analiza warunków</span>
       <button class="wiki-btn" onclick="openWiki()">Wzory i definicje (i)</button>
     </div>
-    <div class="insights-grid">
-      <div class="insight-tile">
+    <div class="details-grid">
+      <div class="detail-tile clickable" onclick="openCalcModal('comfort')">
         <div class="tile-label">Komfort</div>
         <div class="tile-value">${i.comfort.toFixed(1)}</div>
-        <div class="tile-sub">${i.comfort > 20 ? 'Bardzo wysoki' : i.comfort > 10 ? 'Umiarkowany' : 'Niski'}</div>
+        <div class="tile-sub">${i.comfort > 25 ? 'Bardzo wysoki' : i.comfort > 12 ? 'Umiarkowany' : 'Niski'}</div>
       </div>
-      <div class="insight-tile">
+      <div class="detail-tile clickable" onclick="openCalcModal('feels')">
         <div class="tile-label">Odczuwalna (lok)</div>
         <div class="tile-value">${i.feels.toFixed(1)}°</div>
-        <div class="tile-sub">${Math.abs(i.feels - weatherData.current.temp_c) < 1 ? 'Zbliżona' : 'Znaczna różnica'}</div>
+        <div class="tile-sub">${Math.abs(i.feels - weatherData.current.temp_c) < 1.5 ? 'Zbliżona' : 'Znaczna różnica'}</div>
       </div>
-      <div class="insight-tile">
+      <div class="detail-tile">
         <div class="tile-label">Na zewnątrz</div>
-        <div class="tile-value" style="color:${getCol(i.outdoor.ok)}">${i.outdoor.msg.toUpperCase()}</div>
+        <div class="tile-value" style="color:${getCol(i.outdoor.msg, i.outdoor.ok)}">${i.outdoor.msg.toUpperCase()}</div>
         <div class="tile-sub">${i.outdoor.ok ? 'Zapraszamy' : 'Lepiej zostać'}</div>
       </div>
-      <div class="insight-tile">
+      <div class="detail-tile">
         <div class="tile-label">Sport</div>
-        <div class="tile-value" style="color:${getCol(i.sport.ok)}">${i.sport.msg.toUpperCase()}</div>
+        <div class="tile-value" style="color:${getCol(i.sport.msg, i.sport.ok)}">${i.sport.msg.toUpperCase()}</div>
         <div class="tile-sub">${i.sport.ok ? 'Ruszaj się' : 'Zalecana ostrożność'}</div>
+      </div>
+      <div class="detail-tile clickable" onclick="openHeatModal()" style="border-top:1px solid var(--accent); background:rgba(88,166,255,0.03)">
+        <div class="tile-label" style="color:var(--accent)">⚖️ Bilans Cieplny (S)</div>
+        <div class="tile-value" id="insightHeatVal">Otwórz…</div>
+        <div class="tile-sub">Sprawdź wpływ aktywności</div>
       </div>
     </div>
     ${i.warning ? `<div class="insight-alert">⚠️ ALERT: ${i.warning}</div>` : ''}
@@ -2462,6 +2526,90 @@ function closeWiki() {
   document.getElementById('wikiOverlay').classList.remove('open');
 }
 
+function openCalcModal(type) {
+  const m = document.getElementById('calcModal');
+  const inner = document.getElementById('calcModalInner');
+  const i = weatherInsights.inputs; 
+  let html = '';
+
+  if (type === 'comfort') {
+    const res = i.di;
+    html = `
+      <div class="calc-step">
+        <span class="step-label">Wskaźnik Dyskomfortu Thoma (DI):</span>
+        <span class="step-formula">T - (0.55 - 0.0055 * RH) * (T - 14.5)</span>
+      </div>
+      <div class="calc-step">
+        <span class="step-label">Twoje dane:</span>
+        <span class="step-val">${i.temp.toFixed(1)} - (0.55 - 0.0055 * ${i.humidity}) * (${i.temp.toFixed(1)} - 14.5)</span>
+      </div>
+      <div class="calc-result">
+        Indeks DI: ${res.toFixed(1)} ${res > 24 ? '⚠️ Dyskomfort' : '😊 OK'}
+      </div>
+    `;
+  } else if (type === 'feels') {
+    html = `
+      <div class="calc-step">
+        <span class="step-label">Ciśnienie Pary Wodnej (e):</span>
+        <span class="step-formula">(RH/100) * 6.105 * exp((17.27 * T)/(237.7 + T))</span>
+      </div>
+      <div class="calc-step">
+        <span class="step-label">Wynik e:</span>
+        <span class="step-val">${i.v_p.toFixed(2)} hPa</span>
+      </div>
+      <hr style="opacity:0.1; margin: 1rem 0;">
+      <div class="calc-step">
+        <span class="step-label">Model Steadmana (AT):</span>
+        <span class="step-formula">T + 0.33*e - 0.70*v - 4.0</span>
+      </div>
+      <div class="calc-step">
+        <span class="step-label">Twoje dane:</span>
+        <span class="step-val">${i.temp.toFixed(1)} + (0.33 * ${i.v_p.toFixed(2)}) - (0.70 * ${(i.wind/3.6).toFixed(1)}) - 4.0</span>
+      </div>
+      <div class="calc-result">
+        Steadman AT: ${i.st_at.toFixed(1)}°C
+      </div>
+    `;
+  }
+
+  inner.innerHTML = html;
+  document.getElementById('calcLocName').textContent = currentCity;
+  m.classList.add('open');
+}
+function closeCalcModal() {
+  document.getElementById('calcModal').classList.remove('open');
+}
+
+function openHeatModal() {
+  document.getElementById('heatModal').classList.add('open');
+  updateHeatCalc();
+}
+function closeHeatModal() {
+  document.getElementById('heatModal').classList.remove('open');
+}
+function updateHeatCalc() {
+  const m_val = document.getElementById('heatActivity').value;
+  const garment = document.getElementById('heatGarment').value;
+  const i = weatherInsights.inputs;
+  const s = calcHeatBalance(m_val, garment, i.temp, i.wind, i.humidity, i.uv, i.isDay);
+  
+  const res = document.getElementById('heatResult');
+  const d = document.getElementById('heatDesc');
+  const v = document.getElementById('heatSVal');
+  v.textContent = s.toFixed(0) + ' W';
+  
+  if (s > 100) {
+    res.style.color = 'var(--hot)';
+    d.textContent = 'Organizm magazynuje ciepło. Ryzyko przegrzania! Pij dużo wody.';
+  } else if (s < -150) {
+    res.style.color = 'var(--cold)';
+    d.textContent = 'Silna utrata ciepła. Ubierz się cieplej lub zwiększ tempo.';
+  } else {
+    res.style.color = 'var(--mild)';
+    d.textContent = 'Stan bliski równowagi. Optymalne warunki dla Twojej aktywności.';
+  }
+}
+
 // ... rest of code ...
 function getChartDataArrays(data) {
   let labels = [], values = [], values2 = [], rawTimes = [];
@@ -2771,6 +2919,7 @@ function renderAll(data) {
   renderHourly(forecast);
   renderDaily(forecast);
   renderDetails(cur, forecast);
+  weatherInsights = buildInsights(data); // Aktualizujemy globalny stan
   renderInsights(weatherInsights);
   
   // AQI integration (WeatherAPI current.air_quality)
@@ -2941,31 +3090,49 @@ function addTap(el, fn) {
   el.style.touchAction = 'manipulation';
   el.addEventListener('click', fn);
 }
-async function requestGeolocation(setAsHome = false) {
-  if (!navigator.geolocation) { showToast('Geolokalizacja niedostępna w tej przeglądarce', 'error'); return; }
 
-  // Check permissions API first if available
+async function requestGeolocation(setAsHome = false) {
+  if (!navigator.geolocation) {
+    showToast('Geolokalizacja niedostępna w tej przeglądarce', 'error');
+    return;
+  }
+
+  // Wstępne sprawdzenie uprawnień (jeśli API dostępne)
   if (navigator.permissions) {
     try {
       const perm = await navigator.permissions.query({ name: 'geolocation' });
       if (perm.state === 'denied') {
-        showToast('Dostęp do lokalizacji zablokowany — odblokuj w ustawieniach przeglądarki', 'error', 5000);
+        showToast('Dostęp do GPS zablokowany. Odblokuj w ustawieniach przeglądarki.', 'error', 10000);
         return;
       }
     } catch(e) {}
   }
 
-  showToast('Pobieranie lokalizacji…', 'info', 8000);
+  showToast('Pobieranie lokalizacji (max 15s)...', 'info', 15000);
 
   const geoOptions = {
     enableHighAccuracy: false,
     timeout: 12000,
-    maximumAge: 300000 // 5 min cache GPS
+    maximumAge: 300000
   };
 
-  navigator.geolocation.getCurrentPosition(async (pos) => {
+  try {
+    const pos = await new Promise((res, rej) => {
+      let isSettled = false;
+      const t = setTimeout(() => {
+        if (!isSettled) { isSettled = true; rej(new Error('TIMEOUT_OR_SILENT_FAIL')); }
+      }, 15000);
+      
+      navigator.geolocation.getCurrentPosition(
+        (p) => { if (!isSettled) { isSettled = true; clearTimeout(t); res(p); } },
+        (e) => { if (!isSettled) { isSettled = true; clearTimeout(t); rej(e); } },
+        geoOptions
+      );
+    });
+
     const { latitude: lat, longitude: lon } = pos.coords;
     let city = 'Moja lokalizacja', country = '';
+    
     try {
       const r = await fetchT(
         `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=pl`,
@@ -2982,17 +3149,18 @@ async function requestGeolocation(setAsHome = false) {
       showToast(`🏠 Ustawiono „${city}" jako miasto domowe`, 'success');
     }
     loadWeather(lat, lon, city, country);
-  }, (err) => {
+
+  } catch (err) {
     let msg = 'Nie udało się ustalić lokalizacji — sprawdź GPS';
-    if (window.location.protocol === 'file:') {
-      msg = 'Błąd dostępu do GPS (protokół file://). Spróbuj użyć wyszukiwarki lub zezwól na lokalizację w ustawieniach.';
+    if (err.message === 'TIMEOUT_OR_SILENT_FAIL' || err.code === 3) {
+      msg = 'GPS nie odpowiedział na czas (timeout). Użyj wyszukiwarki ręcznie.';
     } else if (err.code === 1) {
       msg = 'Dostęp do lokalizacji zablokowany przez użytkownika.';
-    } else if (err.code === 3) {
-      msg = 'Przekroczono czas oczekiwania na lokalizację.';
+    } else if (window.location.protocol === 'file:') {
+      msg = 'Błąd GPS (protokół file://). Spróbuj użyć wyszukiwarki ręcznie.';
     }
-    showToast(msg, 'error', 6000);
-  }, geoOptions);
+    showToast(msg, 'error', 8000);
+  }
 }
 
 // ============================================================
@@ -4567,8 +4735,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === e.currentTarget) closeWiki();
   });
   document.getElementById('wikiClose').addEventListener('click', closeWiki);
+  document.getElementById('calcModal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeCalcModal();
+  });
+  document.getElementById('calcModalClose').addEventListener('click', closeCalcModal);
+  
+  document.getElementById('heatModal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeHeatModal();
+  });
+  document.getElementById('heatModalClose').addEventListener('click', closeHeatModal);
+  document.getElementById('heatActivity').addEventListener('change', updateHeatCalc);
+  document.getElementById('heatGarment').addEventListener('change', updateHeatCalc);
+
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeWiki();
+    if (e.key === 'Escape') { closeWiki(); closeCalcModal(); closeHeatModal(); }
   });
   addTap(document.getElementById('starterGeo'), () => requestGeolocation(true));
   document.querySelectorAll('.popular-btn').forEach(btn => {
@@ -4590,40 +4770,107 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<!-- WIKI MODAL -->
+<!-- CALC MODAL (LIVE FORMULA) -->
+<div id="calcModal" class="wiki-overlay">
+  <div class="wiki-inner">
+    <button id="calcModalClose" class="wiki-close">Zamknij</button>
+    <div class="wiki-title">Szczegóły obliczeń (Live)</div>
+    <div id="calcModalInner"></div>
+    <p style="font-size: 0.65rem; color: var(--muted); margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 0.8rem;">
+      * Dane pobrane bezpośrednio ze stacji meteo dla lokalizacji: <b id="calcLocName"></b>
+    </p>
+  </div>
+</div>
+
+<style>
+.detail-tile.clickable { cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
+.detail-tile.clickable:hover { transform: translateY(-3px); border-color: var(--accent); }
+.calc-step { margin-bottom: 1rem; }
+.step-label { display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+.step-formula { font-size: 0.85rem; color: var(--text); }
+.step-val { font-size: 1rem; word-break: break-all; }
+.calc-result { margin-top: 1.5rem; padding: 1rem; background: var(--surface2); border-radius: 12px; font-size: 1.3rem; color: var(--mild); text-align: center; border: 1px solid var(--border); font-weight: 700; }
+</style>
 <div id="wikiOverlay" class="wiki-overlay">
   <div class="wiki-inner">
     <button id="wikiClose" class="wiki-close">Zamknij</button>
     <div class="wiki-title">Jak to liczymy?</div>
     
     <div class="wiki-item">
-      <div class="wiki-item-title">🌡️ Temperatura Odczuwalna (Feels Like)</div>
-      <div class="wiki-desc">Używamy standardowych algorytmów meteorologicznych:</div>
+      <div class="wiki-item-title">🌡️ 1. Temperatura Odczuwalna (Steadman AT)</div>
+      <div class="wiki-desc">Główny model pokazujący, jak wiatr i wilgoć zmieniają postrzeganie ciepła.</div>
       <div class="wiki-formula">
-        <b>Zimno (&lt;10°C)</b>: Wind Chill Index — uwzględnia siłę chłodzenia przez wiatr na odsłoniętą skórę.<br>
-        <b>Ciepło (&gt;26°C)</b>: Heat Index — uwzględnia wpływ wysokiej wilgotności na zdolność organizmu do chłodzenia się (pocenia).
+        AT = T + 0.33 * e - 0.70 * v - 4.0
+      </div>
+      <div class="wiki-desc" style="font-size:0.75rem;">
+        <b>T</b> = Temp (°C), <b>v</b> = Wiatr (m/s), <b>e</b> = Ciśnienie pary (hPa).
       </div>
     </div>
 
     <div class="wiki-item">
-      <div class="wiki-item-title">😊 Indeks Komfortu</div>
+      <div class="wiki-item-title">💧 2. Ciśnienie Pary Wodnej (e)</div>
+      <div class="wiki-desc">Niezbędne do wyliczenia AT. Przy wysokiej wilgotności czujesz się „ciężko” i duszno.</div>
       <div class="wiki-formula">
-        Komfort = Temp - (Wiatr * 0.25) + (Kara za wilgoć &gt; 70%)
+        e = (RH / 100) * 6.105 * exp((17.27 * T) / (237.7 + T))
       </div>
-      <div class="wiki-desc">Autorski wskaźnik oceniający ogólną „przyjemność" przebywania na zewnątrz. Idealny zakres to 18-24 punkty.</div>
     </div>
 
     <div class="wiki-item">
-      <div class="wiki-item-title">🏃 Analiza Aktywności (Sport/Outdoor)</div>
-      <div class="wiki-desc">Algorytm sprawdza 5 kluczowych czynników:</div>
+      <div class="wiki-item-title">😊 3. Wskaźnik Dyskomfortu Thoma (DI)</div>
+      <div class="wiki-desc">Skupia się na relacji temperatury i wilgotności.</div>
       <div class="wiki-formula">
-        1. Temperatura (optimum 15-22°C)<br>
-        2. Wiatr (blokada &gt; 35 km/h)<br>
-        3. Opady (blokada &gt; 0.5 mm)<br>
-        4. Wilgotność (kara za duchotę)<br>
-        5. Indeks UV (ostrzeżenia przy &gt; 7)
+        DI = T - (0.55 - 0.0055 * RH) * (T - 14.5)
+      </div>
+      <div class="wiki-desc" style="font-size:0.75rem;">
+        <b>DI &gt; 24</b>: Początek irytacji. <b>DI &gt; 32</b>: Bardzo silny dyskomfort.
       </div>
     </div>
+
+    <div class="wiki-item">
+      <div class="wiki-item-title">⚖️ 4. Bilans Cieplny Organizmu (S)</div>
+      <div class="wiki-desc">Określa, czy Twój organizm magazynuje ciepło, czy je traci.</div>
+      <div class="wiki-formula">
+        S = M - W +/- R +/- C - E +/- K
+      </div>
+      <div class="wiki-desc" style="font-size:0.7rem;">
+        <b>M</b>: Metabolizm, <b>W</b>: Praca, <b>R</b>: Promieniowanie, <b>C</b>: Konwekcja, <b>E</b>: Parowanie, <b>K</b>: Przewodnictwo.
+      </div>
+    </div>
+  </div>
+</div>
+<!-- HEAT MODAL (MODEL S) -->
+<div id="heatModal" class="wiki-overlay">
+  <div class="wiki-inner">
+    <button id="heatModalClose" class="wiki-close">Zamknij</button>
+    <div class="wiki-title">Interaktywny Bilans Cieplny (S)</div>
+    
+    <div class="wiki-item">
+      <div class="step-label">Wybierz swoją aktywność:</div>
+      <select id="heatActivity" class="climate-city-input" style="background:var(--surface); margin-bottom:1rem; border:1px solid var(--border); color:var(--text); width:100%; padding:0.8rem; border-radius:8px;">
+        <option value="60">Siedzenie / Odpoczynek (60W)</option>
+        <option value="120">Spokojny spacer (120W)</option>
+        <option value="300">Szybki marsz / Trucht (300W)</option>
+        <option value="600">Intensywny bieg (600W)</option>
+      </select>
+      
+      <div class="step-label">Wybierz ubiór / izolację:</div>
+      <select id="heatGarment" class="climate-city-input" style="background:var(--surface); border:1px solid var(--border); color:var(--text); width:100%; padding:0.8rem; border-radius:8px;">
+        <option value="summer">Ubiór letni (cienki)</option>
+        <option value="casual" selected>Ubiór przejściowy (casual)</option>
+        <option value="winter">Ubiór zimowy (warstwowy)</option>
+      </select>
+    </div>
+
+    <div id="heatResult" class="calc-result" style="margin-top:2rem;">
+      <div class="step-label" style="color:var(--text); opacity:0.6; margin-bottom:0.5rem;">Twoja akumulacja ciepła (S):</div>
+      <div id="heatSVal" style="font-size:2rem; margin-bottom:0.5rem;">—</div>
+      <div id="heatDesc" style="font-size:0.8rem; font-weight:400; line-height:1.4;">Wybierz parametry powyżej…</div>
+    </div>
+    
+    <p style="font-size:0.6rem; color:var(--muted); margin-top:1.5rem;">
+      Wzór: S = M - W +/- R +/- C - E +/- K. <br>
+      Program oblicza wpływ konwekcji (wiatr) i promieniowania (UV) na Twoje ciało.
+    </p>
   </div>
 </div>
 </body>
