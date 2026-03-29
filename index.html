@@ -2483,41 +2483,44 @@ function switchTab(tabId) {
 }
 
 async function fetchHistoryRecords(lat, lon) {
-  const years = [2024, 2023, 2022];
   const container = document.getElementById('historyRecordsGrid');
-  const date = new Date().toISOString().split('T')[0].slice(5);
+  const years = [2024, 2023, 2022];
   const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
   
   document.getElementById('historyDayLabel').textContent = `Rekordy dla dnia: ${today.toLocaleDateString('pl-PL', {day:'numeric', month:'long'})}`;
   container.innerHTML = '';
-  
+
   for (let year of years) {
-    const dt = `${year}-${date}`;
+    const dt = `${year}-${month}-${day}`;
     try {
-      const res = await fetch(`https://api.weatherapi.com/v1/history.json?key=${WEATHER_API_KEY}&q=${lat},${lon}&dt=${dt}`);
+      const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${dt}&end_date=${dt}&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,precipitation_sum&timezone=auto`;
+      const res = await fetch(url);
       if (!res.ok) continue;
       const data = await res.json();
-      if (!data.forecast || !data.forecast.forecastday || !data.forecast.forecastday[0]) continue;
-      const day = data.forecast.forecastday[0].day;
-      
+      if (!data.daily || !data.daily.temperature_2m_max) continue;
+
+      const maxT = data.daily.temperature_2m_max[0];
+      const minT = data.daily.temperature_2m_min[0];
+      const wind = data.daily.windspeed_10m_max[0]; // km/h (domyślnie w open-meteo archive)
+      const precip = data.daily.precipitation_sum[0];
+
       const card = document.createElement('div');
       card.className = 'weather-card';
       card.innerHTML = `
-        <div class="tile-label">${year}</div>
+        <div class="tile-label">${year} (Dane Hist.)</div>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;">
-          <div style="font-size:1.8rem; font-weight:800; color:var(--text)">${day.maxtemp_c}°</div>
+          <div style="font-size:1.8rem; font-weight:800; color:var(--text)">${toDisplay(maxT)}°</div>
           <div style="text-align:right">
-            <div style="font-size:0.75rem; color:var(--muted)">Min: ${day.mintemp_c}°</div>
-            <div style="font-size:0.75rem; color:var(--muted)">Wiatr: ${day.maxwind_kph} km/h</div>
+            <div style="font-size:0.75rem; color:var(--muted)">Min: ${toDisplay(minT)}°</div>
+            <div style="font-size:0.75rem; color:var(--muted)">Wiatr: ${windDisp(wind)}${windUnit()}</div>
           </div>
         </div>
-        <div style="font-size:0.7rem; color:var(--accent); margin-top:0.5rem;">Opady: ${day.totalprecip_mm} mm</div>
+        <div style="font-size:0.7rem; color:var(--accent); margin-top:0.5rem;">Opady: ${precipDisp(precip)} ${precipUnit()}</div>
       `;
       container.appendChild(card);
     } catch(e) { console.error(e); }
-  }
-  if (container.innerHTML === '') {
-    container.innerHTML = '<div class="climate-empty">Brak danych historycznych w WeatherAPI dla tej lokalizacji.</div>';
   }
 }
 
@@ -2672,29 +2675,44 @@ function drawChart(data) {
   function toX(i) { return pad.left + (i / (labels.length - 1)) * cW; }
   function toY(v) { return pad.top + (1 - (v - minV) / range) * cH; }
 
-  ctx.strokeStyle = 'rgba(48,54,61,0.6)';
+  ctx.strokeStyle = 'rgba(72,82,92,0.6)';
   ctx.lineWidth = 1;
+  const unitLabel = chartMode === 'temp' ? unitSym() : chartMode === 'precip' ? '%' : windUnit();
+  
   for (let g = 0; g <= 4; g++) {
     const y = pad.top + (g / 4) * cH;
     ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + cW, y);
     ctx.setLineDash([4, 4]); ctx.stroke(); ctx.setLineDash([]);
     const val = maxV - (g / 4) * range;
-    ctx.fillStyle = 'rgba(125,133,144,0.8)';
+    ctx.fillStyle = 'rgba(168,178,188,0.9)';
     ctx.font = '10px IBM Plex Mono, monospace';
     ctx.textAlign = 'right';
-    ctx.fillText(val.toFixed(0), pad.left - 6, y + 4);
+    ctx.fillText(Math.round(val) + unitLabel, pad.left - 8, y + 4);
   }
 
-  ctx.fillStyle = 'rgba(125,133,144,0.8)';
+  // X Labels
+  ctx.fillStyle = 'rgba(168,178,188,0.9)';
   ctx.font = '9px IBM Plex Mono, monospace';
   ctx.textAlign = 'center';
   labels.forEach((l, i) => {
     if (chartRange === '24h' && i % 4 !== 0) return;
-    ctx.fillText(l, toX(i), H - 8);
+    ctx.fillText(l, toX(i), H - 10);
   });
 
   const lineColor = chartMode === 'temp' ? '#f0a500' : chartMode === 'precip' ? '#388bfd' : '#58a6ff';
   const lineColor2 = '#79c0ff';
+
+  // Legend
+  ctx.textAlign = 'left';
+  ctx.font = '700 10px IBM Plex Mono, monospace';
+  if (chartMode === 'temp') {
+    ctx.fillStyle = lineColor; ctx.fillText('■ Temp.', pad.left, pad.top - 8);
+    ctx.fillStyle = lineColor2; ctx.fillText('■ Odcz.', pad.left + 70, pad.top - 8);
+  } else if (chartMode === 'precip') {
+    ctx.fillStyle = lineColor; ctx.fillText('■ Opady %', pad.left, pad.top - 8);
+  } else {
+    ctx.fillStyle = lineColor; ctx.fillText('■ Wiatr', pad.left, pad.top - 8);
+  }
 
   function drawLine(vals, color, fill) {
     ctx.beginPath();
