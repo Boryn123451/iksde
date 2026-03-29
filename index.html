@@ -9,9 +9,9 @@
 <style>
 :root {
   --bg: #0d1117;
-  --surface: #161b22;
-  --surface2: #21262d;
-  --border: #30363d;
+  --surface: rgba(22, 27, 34, 0.7);
+  --surface2: rgba(33, 38, 45, 0.8);
+  --border: rgba(48, 54, 61, 0.4);
   --text: #e6edf3;
   --muted: #7d8590;
   --accent: #58a6ff;
@@ -36,9 +36,9 @@
 }
 body.light {
   --bg: #f0f4f8;
-  --surface: #ffffff;
-  --surface2: #e8edf2;
-  --border: #c8d0da;
+  --surface: rgba(255, 255, 255, 0.8);
+  --surface2: rgba(232, 237, 242, 0.9);
+  --border: rgba(200, 208, 218, 0.5);
   --text: #1c2128;
   --muted: #5a6270;
 }
@@ -144,7 +144,7 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
   min-width: 80px;
   text-align: center;
 }
-.header-controls { display: flex; align-items: center; gap: .5rem; }
+.header-controls { display: flex; align-items: center; gap: .8rem; }
 .unit-toggle {
   display: flex;
   border: 1px solid var(--border);
@@ -169,12 +169,13 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 1.5rem;
-  backdrop-filter: blur(8px);
-  transition: border-color .2s;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: border-color .2s, transform .2s, box-shadow .2s;
   position: relative;
   overflow: hidden;
 }
-.weather-card:hover { border-color: var(--accent); }
+.weather-card:hover { border-color: var(--accent); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
 
 /* === HERO === */
 .hero-card {
@@ -185,7 +186,8 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
   margin-bottom: 1rem;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   transition: border-color .2s;
   animation: fadeSlideUp .4s ease;
 }
@@ -740,6 +742,65 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
 @keyframes dashAnim {
   to { stroke-dashoffset: 0; }
 }
+
+/* === TV MODE === */
+body.tv-active {
+  overflow: hidden;
+  --bg: #03050a;
+}
+.tv-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 2000;
+  display: none;
+  flex-direction: column;
+  padding: 4vh 6vw;
+  animation: fadeIn .8s ease;
+}
+.tv-overlay.active { display: flex; }
+.tv-slide {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: slideFadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tv-slide.active { display: flex; }
+.tv-temp-main { font-family: 'Orbitron', monospace; font-size: 18vh; font-weight: 900; line-height: 1; color: var(--accent); }
+.tv-city-name { font-family: 'Orbitron', monospace; font-size: 6vh; margin-bottom: 2vh; }
+.tv-desc { font-size: 4vh; color: var(--muted); margin-bottom: 5vh; }
+.tv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4vw; width: 100%; max-width: 1400px; }
+.tv-tile { background: var(--surface); padding: 3vh; border-radius: 2vh; border: 1px solid var(--border); }
+.tv-tile-label { font-size: 2vh; text-transform: uppercase; color: var(--muted); margin-bottom: 1vh; }
+.tv-tile-val { font-size: 5vh; font-weight: 700; font-family: 'Space Mono'; }
+.tv-close { position: absolute; top: 3vh; right: 3vw; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 1vh 2vh; border-radius: 1vh; cursor: pointer; font-size: 2vh; z-index: 2001; }
+.tv-progress { position: absolute; bottom: 0; left: 0; height: 6px; background: var(--accent); transition: width linear; }
+
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: scale(0.95) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* === PARTICLES === */
+#weatherParticles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* === WELL-BEING & TRIVIA === */
+.extra-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; animation: fadeSlideUp .4s ease .25s both; }
+.trivia-card { min-height: 100px; display: flex; align-items: center; gap: 1rem; }
+.trivia-icon { font-size: 2rem; opacity: 0.8; }
+.trivia-content { flex: 1; }
+.biomet-card { text-align: center; }
+.biomet-status { font-family: 'Orbitron'; font-size: 1.2rem; font-weight: 700; margin: .5rem 0; }
+.biomet-desc { font-size: .75rem; color: var(--muted); }
 
 /* === SCROLLBAR === */
 ::-webkit-scrollbar { height: 4px; width: 4px; }
@@ -1303,33 +1364,104 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
   .climate-generate-btn { width: 100%; text-align: center; }
   .climate-table { font-size: .62rem; }
 }
+
+/* ============================================================
+   TV MODE & EFFECTS (NEW)
+   ============================================================ */
+.tv-overlay {
+  position: fixed; inset: 0; background: #000; z-index: 1000;
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  padding: 5vh; font-family: 'Space Mono', monospace; color: #fff;
+}
+.tv-overlay.active { display: flex; }
+.tv-close { position: absolute; top: 2rem; right: 2rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: .5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 1.2rem; }
+.tv-slide { display: none; width: 100%; max-width: 1400px; text-align: center; animation: tvFade 0.5s ease; }
+.tv-slide.active { display: block; }
+@keyframes tvFade { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+.tv-city-name { font-size: 5vh; color: var(--accent); margin-bottom: 2vh; letter-spacing: 0.1em; }
+.tv-temp-main { font-size: 24vh; font-weight: 800; line-height: 1; margin: 2vh 0; font-family: sans-serif; }
+.tv-desc { font-size: 6vh; margin-bottom: 5vh; color: var(--muted); text-transform: uppercase; letter-spacing: 0.2em; }
+.tv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4vw; width: 100%; }
+.tv-tile { background: rgba(255,255,255,0.05); padding: 4vh; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+.tv-tile-label { font-size: 2.5vh; color: var(--muted); margin-bottom: 1.5vh; text-transform: uppercase; }
+.tv-tile-val { font-size: 6vh; font-weight: 800; }
+.tv-progress { position: absolute; bottom: 0; left: 0; height: 1.2vh; background: var(--accent); width: 0%; box-shadow: 0 0 20px var(--accent); }
+.tv-forecast-item { flex: 1; background: rgba(255,255,255,0.05); padding: 4vh 2vh; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); text-align: center; backdrop-filter: blur(10px); }
+
+#weatherParticles { position: fixed; inset: 0; pointer-events: none; z-index: -1; }
+
+.extra-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.trivia-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.2rem; background: rgba(255,165,0,0.04) !important; border: 1px solid rgba(255,165,0,0.12) !important; transition: transform 0.3s; }
+.trivia-card:hover { transform: translateY(-2px); border-color: rgba(255,165,0,0.3) !important; }
+.trivia-icon { font-size: 2.4rem; filter: drop-shadow(0 0 8px rgba(255,165,0,0.3)); }
+.biomet-card { text-align: center; background: rgba(88,166,255,0.04) !important; border: 1px solid rgba(88,166,255,0.12) !important; transition: transform 0.3s; }
+.biomet-card:hover { transform: translateY(-2px); border-color: rgba(88,166,255,0.3) !important; }
+.biomet-status { font-size: 1.4rem; font-weight: 900; margin: 0.4rem 0; letter-spacing: 0.05em; }
+.biomet-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+
+@media (max-width: 600px) {
+  .extra-row { grid-template-columns: 1fr; }
+  .tv-temp-main { font-size: 15vh; }
+  .tv-grid { grid-template-columns: 1fr; gap: 2vh; }
+}
 </style>
 </head>
 <body class="bg-night">
 
+<canvas id="weatherParticles"></canvas>
+
+<!-- TV Overlay -->
+<div id="tvOverlay" class="tv-overlay">
+  <button id="tvClose" class="tv-close">✕ Exit</button>
+  <div class="tv-slide active" id="tvSlide1">
+    <div class="tv-city-name" id="tvCity1">—</div>
+    <div class="tv-temp-main" id="tvTemp1">—°</div>
+    <div class="tv-desc" id="tvDesc1">—</div>
+    <div class="tv-grid">
+      <div class="tv-tile"><div class="tv-tile-label" data-t="tvHumidity">Humidity</div><div class="tv-tile-val" id="tvHum1">—%</div></div>
+      <div class="tv-tile"><div class="tv-tile-label" data-t="tvWind">Wind</div><div class="tv-tile-val" id="tvWind1">— km/h</div></div>
+      <div class="tv-tile"><div class="tv-tile-label" data-t="tvPressure">Pressure</div><div class="tv-tile-val" id="tvPress1">— hPa</div></div>
+    </div>
+  </div>
+  <div class="tv-slide" id="tvSlide2">
+    <div class="tv-city-name" id="tvCity2">—</div>
+    <div class="tv-desc" data-t="tvForecastTitle">Prognoza na najbliższe dni</div>
+    <div id="tvForecastList" style="display:flex; gap:2vw; margin-top:2vh;"></div>
+  </div>
+  <div class="tv-slide" id="tvSlide3">
+    <div class="tv-city-name" id="tvCity3">—</div>
+    <div class="tv-desc" data-t="tvAqiTitle">Jakość Powietrza</div>
+    <div class="tv-temp-main" id="tvAqiVal" style="font-size:12vh;">—</div>
+    <div id="tvAqiLabel" style="font-size:4vh; margin-top:-2vh; margin-bottom:4vh; color:var(--muted);">—</div>
+  </div>
+  <div class="tv-progress" id="tvProgress"></div>
+</div>
+
 <div class="app">
   <header class="app-header">
     <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="Wyszukaj miasto…" autocomplete="off">
-      <button class="icon-btn" id="searchBtn" title="Szukaj">🔍</button>
-      <button class="icon-btn" id="geoBtn" title="Moja lokalizacja">📍</button>
-      <button class="icon-btn" id="homeBtn" title="Wróć do miasta domowego" style="display:none">🏠</button>
+      <input type="text" id="searchInput" data-t-placeholder="searchPlaceholder" placeholder="Wyszukaj miasto…" autocomplete="off">
+      <button class="icon-btn" id="searchBtn" data-t-title="searchBtn" title="Szukaj">🔍</button>
+      <button class="icon-btn" id="geoBtn" data-t-title="geoBtn" title="Moja lokalizacja">📍</button>
+      <button class="icon-btn" id="homeBtn" data-t-title="homeBtn" title="Wróć do miasta domowego" style="display:none">🏠</button>
     </div>
     <div class="header-right">
       <div class="city-info">
         <div style="display:flex;align-items:center;gap:.4rem;">
           <div id="cityName">—</div>
-          <button class="fav-btn" id="favToggleBtn" title="Dodaj do ulubionych" style="display:none">☆</button>
-          <span id="homeBadge" class="home-badge" style="display:none">🏠 dom</span>
+          <button class="fav-btn" id="favToggleBtn" data-t-title="favTitle" title="Dodaj do ulubionych" style="display:none">☆</button>
+          <span id="homeBadge" class="home-badge" data-t="homeBadge" style="display:none">🏠 dom</span>
         </div>
         <div id="cityCountry"></div>
       </div>
       <div id="localTime">—:—:—</div>
       <div class="header-controls">
-        <button class="icon-btn" id="darkToggle" title="Tryb jasny/ciemny">🌙</button>
+        <button class="icon-btn" id="tvToggle" data-t-title="tvToggle" title="Tryb TV">📺</button>
+        <button class="icon-btn" id="langToggle" title="Change Language">PL</button>
+        <button class="icon-btn" id="darkToggle" data-t-title="themeToggle" title="Tryb jasny/ciemny">🌙</button>
         <div class="unit-toggle">
-          <button class="unit-btn active" id="unitSI" title="Jednostki SI (metryczne)">SI</button>
-          <button class="unit-btn" id="unitIMP" title="Jednostki imperialne">IMP</button>
+          <button class="unit-btn active" id="unitSI" data-t-title="unitMetric" title="Jednostki SI (metryczne)">SI</button>
+          <button class="unit-btn" id="unitIMP" data-t-title="unitImperial" title="Jednostki imperialne">IMP</button>
         </div>
       </div>
     </div>
@@ -1337,21 +1469,21 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
 
   <!-- Tab navigation -->
   <nav class="tab-nav" id="tabNav" style="display:none">
-    <button class="tab-btn active" data-tab="weather" id="tabWeather">☀️ Pogoda</button>
-    <button class="tab-btn" data-tab="climate" id="tabClimate">📊 Klimatogram</button>
-    <button class="tab-btn" data-tab="history" id="tabHistory">⏳ Kiedyś to było</button>
-    <button class="tab-btn" data-tab="astronomy" id="tabAstronomy">🌙 Astronomia</button>
+    <button class="tab-btn active" data-tab="weather" id="tabWeather" data-t="tabWeather">☀️ Pogoda</button>
+    <button class="tab-btn" data-tab="climate" id="tabClimate" data-t="tabClimate">📊 Klimatogram</button>
+    <button class="tab-btn" data-tab="history" id="tabHistory" data-t="tabHistory">⏳ Kiedyś to było</button>
+    <button class="tab-btn" data-tab="astronomy" id="tabAstronomy" data-t="tabAstronomy">🌙 Astronomia</button>
   </nav>
 
   <main id="appMain">
     <!-- Starter screen -->
     <div id="starterScreen" class="starter">
       <div class="starter-icon">🌍</div>
-      <h2>Sprawdź pogodę</h2>
-      <p>Wyszukaj miasto lub użyj swojej lokalizacji</p>
+      <h2 data-t="starterTitle">Sprawdź pogodę</h2>
+      <p data-t="starterDesc">Wyszukaj miasto lub użyj swojej lokalizacji</p>
       <div class="starter-actions">
-        <button class="starter-btn" id="starterSearch">🔍 Szukaj miasta</button>
-        <button class="starter-btn" id="starterGeo">📍 Moja lokalizacja</button>
+        <button class="starter-btn" id="starterSearch" data-t="starterBtnSearch">🔍 Szukaj miasta</button>
+        <button class="starter-btn" id="starterGeo" data-t="starterBtnGeo">📍 Moja lokalizacja</button>
       </div>
     </div>
 
@@ -1367,7 +1499,7 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
           </div>
           <div>
             <div id="heroTemp" class="hero-temp">—°</div>
-            <div id="heroFeelsLike" class="hero-feels">Odczuwalna: —°</div>
+            <div id="heroFeelsLike" class="hero-feels" data-t="heroFeelsLike">Odczuwalna: —°</div>
           </div>
         </div>
         <div class="hero-mini-row">
@@ -1380,13 +1512,29 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
 
       <!-- Stylist (NEW) -->
       <div class="weather-card" id="stylistCard" style="margin-bottom:1rem; background:rgba(88,166,255,0.03); border:1px solid rgba(88,166,255,0.2)">
-        <div class="section-title">🧥 Rekomendacja ubioru</div>
+        <div class="section-title" data-t="stylistTitle">🧥 Rekomendacja ubioru</div>
         <div id="stylistInner" style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
           <div id="stylistIcons" style="font-size:3.5rem; display:flex; gap:0.5rem; line-height:1;">—</div>
           <div style="flex:1;">
-            <div id="stylistAdvice" style="font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:0.3rem;">Obliczanie…</div>
-            <div id="stylistSub" style="font-size:0.75rem; color:var(--muted); line-height:1.4;">Analizujemy Twoje lokalne warunki...</div>
+            <div id="stylistAdvice" style="font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:0.3rem;" data-t="stylistCalculating">Obliczanie…</div>
+            <div id="stylistSub" style="font-size:0.75rem; color:var(--muted); line-height:1.4;" data-t="stylistAnalyzing">Analizujemy Twoje lokalne warunki...</div>
           </div>
+        </div>
+      </div>
+
+      <!-- Extra Row: Trivia & Biomet (NEW) -->
+      <div class="extra-row">
+        <div class="weather-card trivia-card">
+          <div class="trivia-icon">💡</div>
+          <div class="trivia-content">
+            <div class="tile-label" data-t="triviaLabel">Ciekawostka</div>
+            <div id="triviaText" style="font-size: 0.78rem; line-height: 1.4; color: var(--text);">—</div>
+          </div>
+        </div>
+        <div class="weather-card biomet-card">
+          <div class="tile-label" data-t="biometLabel">Wskaźnik Dobrego Samopoczucia</div>
+          <div id="biometStatus" class="biomet-status">—</div>
+          <div id="biometDesc" class="biomet-desc">—</div>
         </div>
       </div>
       
@@ -1398,7 +1546,7 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
       <div id="detailsGrid" class="details-grid">
         <!-- Wind -->
         <div class="detail-tile">
-          <div class="tile-label">💨 Wiatr</div>
+          <div class="tile-label" data-t="tileWind">💨 Wiatr</div>
           <div class="tile-value" id="tileWindSpeed">—</div>
           <div class="compass-wrap">
             <div id="tileWindCompass"></div>
@@ -1407,25 +1555,25 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
         </div>
         <!-- Humidity -->
         <div class="detail-tile">
-          <div class="tile-label">💧 Wilgotność</div>
+          <div class="tile-label" data-t="tileHumidity">💧 Wilgotność</div>
           <div class="tile-value" id="tileHumidity">—</div>
           <div class="humidity-bar-wrap"><div class="humidity-bar-fill" id="tileHumidityBar" style="width:0%"></div></div>
         </div>
         <!-- Pressure -->
         <div class="detail-tile">
-          <div class="tile-label">🌡️ Ciśnienie</div>
+          <div class="tile-label" data-t="tilePressure">🌡️ Ciśnienie</div>
           <div class="tile-value" id="tilePressure">—</div>
           <div class="tile-sub" id="tilePressureArrow">—</div>
         </div>
         <!-- Cloud cover -->
         <div class="detail-tile">
-          <div class="tile-label">☁️ Zachmurzenie</div>
+          <div class="tile-label" data-t="tileClouds">☁️ Zachmurzenie</div>
           <div class="tile-value" id="tileClouds">—</div>
           <div class="humidity-bar-wrap"><div class="humidity-bar-fill" id="tileCloudsBar" style="width:0%;background:var(--muted)"></div></div>
         </div>
         <!-- Sunrise/sunset -->
         <div class="detail-tile">
-          <div class="tile-label">🌅 Wschód / Zachód</div>
+          <div class="tile-label" data-t="tileSun">🌅 Wschód / Zachód</div>
           <div style="display:flex;gap:1rem;font-size:.95rem;font-weight:700">
             <span id="tileSunrise">—</span>
             <span style="color:var(--muted)">→</span>
@@ -1435,13 +1583,13 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
         </div>
         <!-- Precipitation -->
         <div class="detail-tile">
-          <div class="tile-label">🌂 Opady dziś</div>
+          <div class="tile-label" data-t="tilePrecip">🌂 Opady dziś</div>
           <div class="tile-value" id="tilePrecip">—</div>
           <div class="tile-sub" id="tilePrecipSub">mm</div>
         </div>
         <!-- UV -->
         <div class="detail-tile">
-          <div class="tile-label">☀️ UV Index</div>
+          <div class="tile-label" data-t="tileUV">☀️ UV Index</div>
           <div class="tile-value" id="tileUV">—</div>
           <div id="tileUVGauge" style="width:100%;height:8px;border-radius:4px;background:linear-gradient(90deg,#56d364,#f0a500,#f85149,#bc8cff);margin:.2rem 0;position:relative;"><div id="tileUVIndicator" style="position:absolute;top:-2px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #000;left:0%;transform:translateX(-50%);transition:left .5s ease;"></div></div>
           <div class="tile-sub" id="tileUVLabel">—</div>
@@ -1450,7 +1598,7 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
       
       <!-- AQI Section -->
       <div class="weather-card" id="aqiCard" style="margin-bottom:1rem; display:none;">
-        <div class="section-title">🍃 Jakość powietrza (AQI)</div>
+        <div class="section-title" data-t="aqiTitle">🍃 Jakość powietrza (AQI)</div>
         <div class="aqi-content" style="display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
           <div class="aqi-gauge-wrap" style="position:relative; width:100px; height:100px;">
             <svg viewBox="0 0 60 60" width="100" height="100">
@@ -1461,7 +1609,7 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
             <div id="aqiValue" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:1.8rem; font-weight:800; color:var(--text);">1</div>
           </div>
           <div style="flex:1;">
-            <div id="aqiLabel" style="font-size:1.2rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Dobra</div>
+            <div id="aqiLabel" style="font-size:1.2rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;" data-t="aqiGood">Dobra</div>
             <div class="aqi-stats" style="display:grid; grid-template-columns: 1fr 1fr; gap:0.8rem; font-size:0.7rem; color:var(--muted);">
               <div>PM2.5: <span id="aqiPM25" style="color:var(--text)">—</span> <div class="mini-bar"><div id="aqiPM25bar" class="mini-fill"></div></div></div>
               <div>PM10: <span id="aqiPM10" style="color:var(--text)">—</span> <div class="mini-bar"><div id="aqiPM10bar" class="mini-fill"></div></div></div>
@@ -1473,11 +1621,11 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
       </div>
       
       <div class="chart-section" id="weatherChartSection">
-        <div class="section-title">📉 Prognoza trendów</div>
+        <div class="section-title" data-t="chartTitle">📉 Prognoza trendów</div>
         <div class="chart-controls">
           <div class="chart-btn-group" id="chartModeBtns">
-            <button class="chart-btn active" data-mode="temp">Temperatura</button>
-            <button class="chart-btn" data-mode="precip">Opady</button>
+            <button class="chart-btn active" data-mode="temp" data-t="chartTemp">Temperatura</button>
+            <button class="chart-btn" data-mode="precip" data-t="chartPrecip">Opady</button>
           </div>
         </div>
         <div class="chart-canvas-wrap"><canvas id="chartCanvas" height="220"></canvas></div>
@@ -1486,11 +1634,11 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
       <!-- Compare cities -->
       <div class="compare-section" id="compareSection" style="margin-top:1rem">
         <div class="compare-header">
-          <div class="section-title" style="margin-bottom:0">🏙️ Porównanie miast</div>
-          <button class="compare-add-btn" id="compareAddBtn">+ Dodaj miasto</button>
+          <div class="section-title" style="margin-bottom:0" data-t="compareTitle">🏙️ Porównanie miast</div>
+          <button class="compare-add-btn" id="compareAddBtn" data-t="compareAddBtn">+ Dodaj miasto</button>
         </div>
         <div class="compare-cities" id="compareCities">
-          <div class="precip-empty" id="compareEmpty">Dodaj miasta, aby porównać warunki pogodowe</div>
+          <div class="precip-empty" id="compareEmpty" data-t="compareEmpty">Dodaj miasta, aby porównać warunki pogodowe</div>
         </div>
       </div>
     </div>
@@ -1498,32 +1646,39 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
     <!-- ════ HISTORY TAB (NEW) ════ -->
     <div id="historyTab" style="display:none; flex-direction:column; width:100%; padding:1rem;">
       <div class="climate-section">
-        <div class="section-title">⏳ Kiedyś to było (Rekordy z tego dnia)</div>
+        <div class="section-title" data-t="historyTitle">⏳ Kiedyś to było (Rekordy z tego dnia)</div>
         <div id="historyDayLabel" style="font-size:1.1rem; font-weight:700; margin-bottom:1rem; color:var(--accent);">—</div>
         <div id="historyRecordsGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
-          <div class="climate-loading"><div class="climate-spinner"></div><div>Pobieranie historii...</div></div>
+          <div class="climate-loading"><div class="climate-spinner"></div><div data-t="historyLoading">Pobieranie historii...</div></div>
         </div>
-        <div class="wiki-desc" style="margin-top:1.5rem; font-size:0.75rem;">Dane pobrane z archiwum WeatherAPI dla lat 2024, 2023 i 2022.</div>
+        <div class="wiki-desc" style="margin-top:1.5rem; font-size:0.75rem;" data-t="historyDesc">Dane pobrane z archiwum WeatherAPI dla lat 2024, 2023 i 2022.</div>
       </div>
     </div>
 
     <!-- ════ ASTRONOMY TAB (NEW) ════ -->
     <div id="astronomyTab" style="display:none; flex-direction:column; width:100%; padding:1rem;">
       <div class="climate-section">
-        <div class="section-title">🌙 Astronomia i Księżyc</div>
+        <div class="section-title" data-t="astroTitle">🌙 Astronomia i Księżyc</div>
         <div id="astroGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
           <!-- Moon -->
           <div class="weather-card" style="text-align:center; padding:2rem;">
-            <div class="tile-label" style="text-align:left;">Księżyc dzisiaj</div>
+            <div class="tile-label" style="text-align:left;" data-t="moonLabel">Księżyc dzisiaj</div>
             <div id="moonIcon" style="font-size:6rem; margin:1.5rem 0; line-height:1;">🌑</div>
             <div id="moonPhase" style="font-size:1.4rem; font-weight:700; color:var(--text); margin-bottom:0.5rem;">—</div>
-            <div id="moonIllum" style="color:var(--accent); font-weight:600;">Oświetlenie: —%</div>
+            <div id="moonIllum" style="color:var(--accent); font-weight:600;" data-t="moonIllum">Oświetlenie: —%</div>
           </div>
           <!-- Sun details -->
           <div class="weather-card">
-            <div class="tile-label">Słońce i Cykl</div>
+            <div class="tile-label" data-t="sunLabel">Słońce i Cykl</div>
             <div id="sunDetails" style="margin-top:1.5rem;"></div>
           </div>
+        </div>
+      </div>
+      <!-- Astro Events Calendar (NEW) -->
+      <div class="climate-section" style="margin-top:1rem;">
+        <div class="section-title" data-t="eventsTitle">📅 Kalendarz Wydarzeń Astronomicznych 2026</div>
+        <div id="astroEvents" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:0.8rem; margin-top:1rem;">
+          <!-- Items will be injected by JS -->
         </div>
       </div>
     </div>
@@ -1532,39 +1687,39 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
     <div id="climateTab" style="display:none; flex-direction:column; width:100%; gap:0">
       <div class="climate-section">
         <div class="climate-header">
-          <div class="section-title" style="margin-bottom:0">📊 Generator klimatogramów</div>
+          <div class="section-title" style="margin-bottom:0" data-t="climateTitle">📊 Generator klimatogramów</div>
           <div class="climate-mode-btns" id="climateModeGroup">
-            <button class="climate-mode-btn active" data-mode="single">Jedno miasto</button>
-            <button class="climate-mode-btn" data-mode="compare">Porównanie (do 3)</button>
+            <button class="climate-mode-btn active" data-mode="single" data-t="climateSingle">Jedno miasto</button>
+            <button class="climate-mode-btn" data-mode="compare" data-t="climateCompare">Porównanie (do 3)</button>
           </div>
         </div>
         <div class="climate-search-row" id="climateSearchRow">
           <div class="climate-city-slots" id="climateCitySlots">
             <div class="climate-city-slot" id="climateSlot0">
               <div class="climate-input-wrap">
-                <input type="text" class="climate-city-input" data-slot="0" placeholder="Wpisz miasto…" autocomplete="off" autocorrect="off" spellcheck="false">
+                <input type="text" class="climate-city-input" data-slot="0" data-t-placeholder="climatePlaceholder" placeholder="Wpisz miasto…" autocomplete="off" autocorrect="off" spellcheck="false">
                 <div class="climate-suggestions" id="climateSugg0"></div>
               </div>
               <div class="climate-slot-color" id="climateColor0" style="background:#58a6ff"></div>
             </div>
             <div class="climate-city-slot" id="climateSlot1" style="display:none">
               <div class="climate-input-wrap">
-                <input type="text" class="climate-city-input" data-slot="1" placeholder="Drugie miasto…" autocomplete="off" autocorrect="off" spellcheck="false">
+                <input type="text" class="climate-city-input" data-slot="1" data-t-placeholder="climatePlaceholder2" placeholder="Drugie miasto…" autocomplete="off" autocorrect="off" spellcheck="false">
                 <div class="climate-suggestions" id="climateSugg1"></div>
               </div>
               <div class="climate-slot-color" id="climateColor1" style="background:#f0a500"></div>
             </div>
             <div class="climate-city-slot" id="climateSlot2" style="display:none">
               <div class="climate-input-wrap">
-                <input type="text" class="climate-city-input" data-slot="2" placeholder="Trzecie miasto…" autocomplete="off" autocorrect="off" spellcheck="false">
+                <input type="text" class="climate-city-input" data-slot="2" data-t-placeholder="climatePlaceholder3" placeholder="Trzecie miasto…" autocomplete="off" autocorrect="off" spellcheck="false">
                 <div class="climate-suggestions" id="climateSugg2"></div>
               </div>
               <div class="climate-slot-color" id="climateColor2" style="background:#56d364"></div>
             </div>
           </div>
-          <button class="climate-generate-btn" id="climateGenerateBtn">Generuj klimatogram</button>
+          <button class="climate-generate-btn" id="climateGenerateBtn" data-t="climateBtn">Generuj klimatogram</button>
         </div>
-        <div class="climate-year-info" id="climateYearInfo">Dane historyczne 1995–2024 (30 lat · norma WMO)</div>
+        <div class="climate-year-info" id="climateYearInfo" data-t="climateYearInfo">Dane historyczne 1995–2024 (30 lat · norma WMO)</div>
         <div class="climate-chart-wrap" id="climateChartWrap" style="display:none">
           <div class="climate-legend" id="climateLegend"></div>
           <div style="position:relative">
@@ -1575,18 +1730,18 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
         </div>
         <div class="climate-loading" id="climateLoading" style="display:none">
           <div class="climate-spinner"></div>
-          <div id="climateLoadingText">Pobieranie danych klimatycznych…</div>
+          <div id="climateLoadingText" data-t="climateLoading">Pobieranie danych klimatycznych…</div>
         </div>
-        <div class="climate-empty" id="climateEmpty">Wpisz miasto i kliknij „Generuj klimatogram"</div>
+        <div class="climate-empty" id="climateEmpty" data-t="climateEmpty">Wpisz miasto i kliknij „Generuj klimatogram"</div>
       </div>
     </div>
 
   </main>
 
   <footer class="app-footer">
-    <span>Dane pogodowe: <a href="https://www.weatherapi.com/" target="_blank" title="Free Weather API">WeatherAPI.com</a></span>
-    <span>Geocoding: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim / OSM</a></span>
-    <span>Dane mają charakter informacyjny</span>
+    <span><span data-t="footerWeather">Dane pogodowe</span>: <a href="https://www.weatherapi.com/" target="_blank" title="Free Weather API">WeatherAPI.com</a></span>
+    <span><span data-t="footerGeocoding">Geocoding</span>: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim / OSM</a></span>
+    <span data-t="footerInfo">Dane mają charakter informacyjny</span>
   </footer>
 </div>
 
@@ -1594,10 +1749,10 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
 <div class="compare-search-overlay" id="compareSearchOverlay">
   <div class="compare-search-inner">
     <div class="cs-header">
-      <span>Dodaj miasto do porównania</span>
+      <span data-t="compareOverlayTitle">Dodaj miasto do porównania</span>
       <button class="overlay-close-btn" id="compareSearchClose">✕</button>
     </div>
-    <input type="search" id="compareSearchInput" placeholder="Wpisz nazwę miasta…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input type="search" id="compareSearchInput" data-t-placeholder="searchCityPlaceholder" placeholder="Wpisz nazwę miasta…" autocomplete="off" autocorrect="off" spellcheck="false">
     <div class="cs-results" id="compareSearchResults"></div>
   </div>
 </div>
@@ -1606,19 +1761,19 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
 <div class="search-overlay" id="searchOverlay">
   <div class="overlay-inner">
     <div class="overlay-header">
-      <span>Wybierz lokalizację</span>
+      <span data-t="searchOverlayTitle">Wybierz lokalizację</span>
       <div style="display:flex;gap:.5rem;align-items:center;">
         <button class="icon-btn" id="overlayGeoBtn" title="Użyj GPS i ustaw jako dom" style="font-size:.75rem;padding:.3rem .6rem;">📍 GPS</button>
         <button class="overlay-close-btn" id="overlayClose">✕</button>
       </div>
     </div>
     <div class="overlay-search-wrap">
-      <input type="search" id="overlaySearchInput" placeholder="Wpisz nazwę miasta…" autocomplete="off" autocorrect="off" spellcheck="false">
+      <input type="search" id="overlaySearchInput" data-t-placeholder="searchCityPlaceholder" placeholder="Wpisz nazwę miasta…" autocomplete="off" autocorrect="off" spellcheck="false">
     </div>
     <div class="search-results" id="searchResults"></div>
     <div class="search-recent" id="searchRecent"></div>
     <div class="fav-section" id="favSection" style="display:none">
-      <div class="fav-label">⭐ Ulubione</div>
+      <div class="fav-label" data-t="favLabel">⭐ Ulubione</div>
       <div id="favList"></div>
     </div>
   </div>
@@ -1682,33 +1837,273 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
 
 <script>
 // ============================================================
-// GLOBALS
+// GLOBALS & I18N
 // ============================================================
+const WEATHER_API_KEY = '356c581dc9ff452a942212719252101';
+let weatherData = null;
+let currentCity = 'Warszawa';
+let currentCountry = 'PL';
+let currentLat = null, currentLon = null;
+let currentTimezone = 'Europe/Warsaw';
+let currentUnits = localStorage.getItem('weather_unit_sys') || 'si';
+let currentLang = localStorage.getItem('weather_lang') || 'pl';
+let activeTab = 'weather';
+let chartMode = 'temp';
+let chartRange = '24h';
+let isDark = (localStorage.getItem('weather_theme') || 'dark') === 'dark';
+let _lastChartData = null;
+let tvModeActive = false;
+let tvSlideInterval = null;
+let weatherParticles = null;
+
+const translations = {
+  pl: {
+    searchPlaceholder: "Wyszukaj miasto…",
+    searchCityPlaceholder: "Wpisz nazwę miasta…",
+    searchBtn: "Szukaj",
+    geoBtn: "Moja lokalizacja",
+    homeBtn: "Wróć do miasta domowego",
+    favTitle: "Dodaj do ulubionych",
+    homeBadge: "🏠 dom",
+    tvToggle: "Tryb TV",
+    themeToggle: "Tryb jasny/ciemny",
+    unitMetric: "Jednostki SI (metryczne)",
+    unitImperial: "Jednostki imperialne",
+    tabWeather: "☀️ Pogoda",
+    tabClimate: "📊 Klimatogram",
+    tabHistory: "⏳ Kiedyś to było",
+    tabAstronomy: "🌙 Astronomia",
+    starterTitle: "Sprawdź pogodę",
+    starterDesc: "Wyszukaj miasto lub użyj swojej lokalizacji",
+    starterBtnSearch: "🔍 Szukaj miasta",
+    starterBtnGeo: "📍 Moja lokalizacja",
+    heroFeelsLike: "Odczuwalna: ",
+    stylistTitle: "🧥 Rekomendacja ubioru",
+    stylistCalculating: "Obliczanie…",
+    stylistAnalyzing: "Analizujemy Twoje lokalne warunki...",
+    triviaLabel: "Ciekawostka",
+    biometLabel: "Biomet",
+    tileWind: "💨 Wiatr",
+    tileHumidity: "💧 Wilgotność",
+    tilePressure: "🌡️ Ciśnienie",
+    tileClouds: "☁️ Zachmurzenie",
+    tileSun: "🌅 Wschód / Zachód",
+    tilePrecip: "🌂 Opady dziś",
+    tileUV: "☀️ UV Index",
+    aqiTitle: "🍃 Jakość powietrza (AQI)",
+    aqiGood: "Dobra",
+    aqiFair: "Przeciętna",
+    aqiMod: "Umiarkowana",
+    aqiPoor: "Słaba",
+    aqiVeryPoor: "Bardzo słaba",
+    chartTitle: "📉 Prognoza trendów",
+    chartTemp: "Temperatura",
+    chartPrecip: "Opady",
+    compareTitle: "🏙️ Porównanie miast",
+    compareAddBtn: "+ Dodaj miasto",
+    compareEmpty: "Dodaj miasta, aby porównać warunki pogodowe",
+    historyTitle: "⏳ Kiedyś to było (Rekordy z tego dnia)",
+    historyLoading: "Pobieranie historii...",
+    historyDesc: "Dane pobrane z archiwum WeatherAPI dla lat 2024, 2023 i 2022.",
+    astroTitle: "🌙 Astronomia i Księżyc",
+    moonLabel: "Księżyc dzisiaj",
+    moonIllum: "Oświetlenie: ",
+    sunLabel: "Słońce i Cykl",
+    eventsTitle: "📅 Kalendarz Wydarzeń Astronomicznych 2026",
+    climateTitle: "📊 Generator klimatogramów",
+    climateSingle: "Jedno miasto",
+    climateCompare: "Porównanie (do 3)",
+    climatePlaceholder: "Wpisz miasto…",
+    climatePlaceholder2: "Drugie miasto…",
+    climatePlaceholder3: "Trzecie miasto…",
+    climateBtn: "Generuj klimatogram",
+    climateYearInfo: "Dane historyczne 1995–2024 (30 lat · norma WMO)",
+    climateLoading: "Pobieranie danych klimatycznych…",
+    climateEmpty: "Wpisz miasto i kliknij „Generuj klimatogram\"",
+    footerWeather: "Dane pogodowe",
+    footerGeocoding: "Geocoding",
+    footerInfo: "Dane mają charakter informacyjny",
+    searchOverlayTitle: "Wybierz lokalizację",
+    compareOverlayTitle: "Dodaj miasto do porównania",
+    tvHumidity: "Wilgotność",
+    tvWind: "Wiatr",
+    tvPressure: "Ciśnienie",
+    tvForecastTitle: "Prognoza na najbliższe dni",
+    tvAqiTitle: "Jakość Powietrza",
+    wmo_0: "Bezchmurnie", wmo_1: "Przeważnie słonecznie", wmo_2: "Częściowe zachmurzenie", wmo_3: "Zachmurzenie całkowite",
+    wmo_45: "Mgła", wmo_48: "Szron mgielny", wmo_51: "Lekka mżawka", wmo_53: "Umiarkowana mżawka",
+    wmo_55: "Silna mżawka", wmo_61: "Słaby deszcz", wmo_63: "Umiarkowany deszcz", wmo_65: "Silny deszcz",
+    wmo_71: "Słaby śnieg", wmo_73: "Umiarkowany śnieg", wmo_75: "Silny śnieg", wmo_77: "Ziarna śniegu",
+    wmo_80: "Słabe przelotne opady", wmo_81: "Przelotne opady", wmo_82: "Silne przelotne opady",
+    wmo_85: "Przelotny śnieg", wmo_86: "Silny przelotny śnieg", wmo_95: "Burza",
+    uv_low: "Niski", uv_mod: "Umiarkowany", uv_high: "Wysoki", uv_very: "Bardzo wysoki", uv_ext: "Ekstremalny",
+    days: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+    daysShort: ["Nd", "Pn", "Wt", "Śr", "Cz", "Pt", "Sb"],
+    months: ["Stycznia", "Lutego", "Marca", "Kwietnia", "Maja", "Czerwca", "Lipca", "Sierpnia", "Września", "Października", "Listopada", "Grudnia"],
+    today: "Dziś",
+    precipProb: "Szansa opadów",
+    windMax: "Wiatr max",
+    insightsTitle: "🔍 Analiza warunków",
+    comfortLabel: "Komfort termiczny",
+    feelsLabel: "Odczuwalna (lok)",
+    alertExtreme: "⚠️ ALERT: Ekstremalne warunki!",
+    sunrise: "wschód",
+    sunset: "zachód",
+    hourlyForecast: "Prognoza godzinowa",
+    details: "▼ szczegóły"
+  },
+  en: {
+    searchPlaceholder: "Search city...",
+    searchCityPlaceholder: "Type city name...",
+    searchBtn: "Search",
+    geoBtn: "My location",
+    homeBtn: "Back to home city",
+    favTitle: "Add to favorites",
+    homeBadge: "🏠 home",
+    tvToggle: "TV Mode",
+    themeToggle: "Light/Dark mode",
+    unitMetric: "Metric (SI) units",
+    unitImperial: "Imperial units",
+    tabWeather: "☀️ Weather",
+    tabClimate: "📊 Climate",
+    tabHistory: "⏳ History",
+    tabAstronomy: "🌙 Astronomy",
+    starterTitle: "Check the Weather",
+    starterDesc: "Search for a city or use your location",
+    starterBtnSearch: "🔍 Search City",
+    starterBtnGeo: "📍 My Location",
+    heroFeelsLike: "Feels like: ",
+    stylistTitle: "🧥 Outfit Recommendation",
+    stylistCalculating: "Calculating...",
+    stylistAnalyzing: "Analyzing local conditions...",
+    triviaLabel: "Trivia",
+    biometLabel: "Biomet",
+    tileWind: "💨 Wind",
+    tileHumidity: "💧 Humidity",
+    tilePressure: "🌡️ Pressure",
+    tileClouds: "☁️ Clouds",
+    tileSun: "🌅 Sunrise / Sunset",
+    tilePrecip: "🌂 Precip today",
+    tileUV: "☀️ UV Index",
+    aqiTitle: "🍃 Air Quality (AQI)",
+    aqiGood: "Good",
+    aqiFair: "Fair",
+    aqiMod: "Moderate",
+    aqiPoor: "Poor",
+    aqiVeryPoor: "Very Poor",
+    chartTitle: "📉 Forecast Trends",
+    chartTemp: "Temperature",
+    chartPrecip: "Rain Chance",
+    compareTitle: "🏙️ City Comparison",
+    compareAddBtn: "+ Add City",
+    compareEmpty: "Add cities to compare weather conditions",
+    historyTitle: "⏳ Way Back (Daily Records)",
+    historyLoading: "Fetching history...",
+    historyDesc: "Data from WeatherAPI archive for 2024, 2023, and 2022.",
+    astroTitle: "🌙 Astronomy & Moon",
+    moonLabel: "Moon Today",
+    moonIllum: "Illumination: ",
+    sunLabel: "Sun Cycle",
+    eventsTitle: "📅 Astronomical Events Calendar 2026",
+    climateTitle: "📊 Climograph Generator",
+    climateSingle: "Single City",
+    climateCompare: "Compare (up to 3)",
+    climatePlaceholder: "Type city...",
+    climatePlaceholder2: "Second city...",
+    climatePlaceholder3: "Third city...",
+    climateBtn: "Generate Climograph",
+    climateYearInfo: "Historical data 1995–2024 (30 years · WMO standard)",
+    climateLoading: "Fetching climate data...",
+    climateEmpty: "Type a city and click \"Generate\"",
+    footerWeather: "Weather data",
+    footerGeocoding: "Geocoding",
+    footerInfo: "Data is for informational purposes only",
+    searchOverlayTitle: "Choose Location",
+    compareOverlayTitle: "Add City to Compare",
+    tvHumidity: "Humidity",
+    tvWind: "Wind",
+    tvPressure: "Pressure",
+    tvForecastTitle: "Next Few Days",
+    tvAqiTitle: "Air Quality",
+    wmo_0: "Clear Sky", wmo_1: "Mainly Clear", wmo_2: "Partly Cloudy", wmo_3: "Overcast",
+    wmo_45: "Fog", wmo_48: "Depositing Rime Fog", wmo_51: "Light Drizzle", wmo_53: "Moderate Drizzle",
+    wmo_55: "Dense Drizzle", wmo_61: "Slight Rain", wmo_63: "Moderate Rain", wmo_65: "Heavy Rain",
+    wmo_71: "Slight Snowfall", wmo_73: "Moderate Snowfall", wmo_75: "Heavy Snowfall", wmo_77: "Snow Grains",
+    wmo_80: "Slight Rain Showers", wmo_81: "Moderate Rain Showers", wmo_82: "Violent Rain Showers",
+    wmo_85: "Slight Snow Showers", wmo_86: "Heavy Snow Showers", wmo_95: "Thunderstorm",
+    uv_low: "Low", uv_mod: "Moderate", uv_high: "High", uv_very: "Very High", uv_ext: "Extreme",
+    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    today: "Today",
+    precipProb: "Precip chance",
+    windMax: "Wind max",
+    insightsTitle: "🔍 Condition Analysis",
+    comfortLabel: "Thermal Comfort",
+    feelsLabel: "Feels like (loc)",
+    alertExtreme: "⚠️ ALERT: Extreme conditions!",
+    sunrise: "sunrise",
+    sunset: "sunset",
+    hourlyForecast: "Hourly Forecast",
+    details: "▼ details"
+  }
+};
+
+function t(key) {
+  return (translations[currentLang] && translations[currentLang][key]) || key;
+}
+
+function updateUILanguage() {
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const key = el.getAttribute('data-t');
+    el.innerHTML = t(key);
+  });
+  document.querySelectorAll('[data-t-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-t-placeholder');
+    el.placeholder = t(key);
+  });
+  document.querySelectorAll('[data-t-title]').forEach(el => {
+    const key = el.getAttribute('data-t-title');
+    el.title = t(key);
+  });
+  const langBtn = document.getElementById('langToggle');
+  if (langBtn) langBtn.textContent = currentLang.toUpperCase();
+}
+
+function toggleLanguage() {
+  currentLang = currentLang === 'pl' ? 'en' : 'pl';
+  localStorage.setItem('weather_lang', currentLang);
+  updateUILanguage();
+  if (weatherData) {
+    const { lat, lon } = weatherData.location;
+    fetchWeather(lat, lon, currentCity, currentCountry);
+  }
+}
 const WMO_ICONS = {
-  0:  { icon: '☀️',  label: 'Bezchmurnie' },
-  1:  { icon: '🌤️', label: 'Przeważnie słonecznie' },
-  2:  { icon: '⛅',  label: 'Częściowe zachmurzenie' },
-  3:  { icon: '☁️',  label: 'Zachmurzenie całkowite' },
-  45: { icon: '🌫️', label: 'Mgła' },
-  48: { icon: '🌫️', label: 'Szron mgielny' },
-  51: { icon: '🌦️', label: 'Lekka mżawka' },
-  53: { icon: '🌦️', label: 'Umiarkowana mżawka' },
-  55: { icon: '🌧️', label: 'Silna mżawka' },
-  61: { icon: '🌧️', label: 'Słaby deszcz' },
-  63: { icon: '🌧️', label: 'Umiarkowany deszcz' },
-  65: { icon: '🌧️', label: 'Silny deszcz' },
-  71: { icon: '🌨️', label: 'Słaby śnieg' },
-  73: { icon: '🌨️', label: 'Umiarkowany śnieg' },
-  75: { icon: '❄️',  label: 'Silny śnieg' },
-  77: { icon: '🌨️', label: 'Ziarna śniegu' },
-  80: { icon: '🌦️', label: 'Słabe przelotne opady' },
-  81: { icon: '🌧️', label: 'Przelotne opady' },
-  82: { icon: '⛈️',  label: 'Silne przelotne opady' },
-  85: { icon: '🌨️', label: 'Przelotny śnieg' },
-  86: { icon: '❄️',  label: 'Silny przelotny śnieg' },
-  95: { icon: '⛈️',  label: 'Burza' },
-  96: { icon: '⛈️',  label: 'Burza z gradem' },
-  99: { icon: '⛈️',  label: 'Burza z silnym gradem' },
+  0:  { icon: '☀️',  labelKey: 'wmo_0' },
+  1:  { icon: '🌤️', labelKey: 'wmo_1' },
+  2:  { icon: '⛅',  labelKey: 'wmo_2' },
+  3:  { icon: '☁️',  labelKey: 'wmo_3' },
+  45: { icon: '🌫️', labelKey: 'wmo_45' },
+  48: { icon: '🌫️', labelKey: 'wmo_48' },
+  51: { icon: '🌦️', labelKey: 'wmo_51' },
+  53: { icon: '🌦️', labelKey: 'wmo_53' },
+  55: { icon: '🌧️', labelKey: 'wmo_55' },
+  61: { icon: '🌧️', labelKey: 'wmo_61' },
+  63: { icon: '🌧️', labelKey: 'wmo_63' },
+  65: { icon: '🌧️', labelKey: 'wmo_65' },
+  71: { icon: '🌨️', labelKey: 'wmo_71' },
+  73: { icon: '🌨️', labelKey: 'wmo_73' },
+  75: { icon: '❄️',  labelKey: 'wmo_75' },
+  77: { icon: '🌨️', labelKey: 'wmo_77' },
+  80: { icon: '🌦️', labelKey: 'wmo_80' },
+  81: { icon: '🌧️', labelKey: 'wmo_81' },
+  82: { icon: '⛈️',  labelKey: 'wmo_82' },
+  85: { icon: '🌨️', labelKey: 'wmo_85' },
+  86: { icon: '❄️',  labelKey: 'wmo_86' },
+  95: { icon: '⛈️',  labelKey: 'wmo_95' },
+  96: { icon: '⛈️',  labelKey: 'wmo_95' },
+  99: { icon: '⛈️',  labelKey: 'wmo_95' },
 };
 
 function weatherApiToWmo(code) {
@@ -1765,16 +2160,6 @@ function weatherApiToWmo(code) {
   return map[code] || 0;
 }
 
-let currentLat = null, currentLon = null;
-let currentCity = '', currentCountry = '';
-let currentTimezone = 'Europe/Warsaw';
-let weatherData = null;
-let weatherInsights = null;
-let activeTab = 'weather';
-let unitSystem = localStorage.getItem('weather_unit_sys') || 'si'; // 'si' | 'imperial'
-const WEATHER_API_KEY = '356c581dc9ff452a942212719252101';
-const API_BASE = 'https://api.weatherapi.com/v1/forecast.json';
-
 // ============================================================
 // UNIT CONVERSIONS
 // ============================================================
@@ -1827,14 +2212,6 @@ function waveDisp(m) {
   return isImp() ? (m * 3.28084).toFixed(1) : m.toFixed(1);
 }
 function waveUnit() { return isImp() ? 'ft' : 'm'; }
-let isDark = (localStorage.getItem('weather_theme') || 'dark') === 'dark';
-let chartMode = 'temp';
-let chartRange = '24h';
-let searchTimeout = null;
-let clockInterval = null;
-let _lastChartData = null;
-let _prevWindDeg = 0;
-
 // ============================================================
 // UTILS
 // ============================================================
@@ -1851,18 +2228,18 @@ function getTempColor(c) {
 
 function fmtDay(isoDate) {
   const d = new Date(isoDate + 'T12:00:00');
-  const days = ['Nd','Pn','Wt','Śr','Cz','Pt','Sb'];
-  return days[d.getDay()] + ' ' + d.getDate() + '.' + String(d.getMonth()+1).padStart(2,'0');
+  const dShort = t('daysShort');
+  return dShort[d.getDay()] + ' ' + d.getDate() + '.' + String(d.getMonth()+1).padStart(2,'0');
 }
 function fmtHour(isoDateTime) { return isoDateTime.slice(11,16); }
 
 function uvLabel(uv) {
   if (uv == null) return { label: '—', color: 'var(--muted)' };
-  if (uv < 3)  return { label: 'Niski',        color: 'var(--uv-low)' };
-  if (uv < 6)  return { label: 'Umiarkowany',  color: 'var(--uv-mod)' };
-  if (uv < 8)  return { label: 'Wysoki',        color: 'var(--uv-high)' };
-  if (uv < 11) return { label: 'Bardzo wysoki', color: 'var(--uv-extreme)' };
-  return { label: 'Ekstremalny', color: 'var(--uv-extreme)' };
+  if (uv < 3)  return { label: t('uv_low'),  color: 'var(--uv-low)' };
+  if (uv < 6)  return { label: t('uv_mod'),  color: 'var(--uv-mod)' };
+  if (uv < 8)  return { label: t('uv_high'), color: 'var(--uv-high)' };
+  if (uv < 11) return { label: t('uv_very'), color: 'var(--uv-very)' };
+  return { label: t('uv_ext'), color: 'var(--uv-extreme)' };
 }
 
 function windDegToDir(deg) {
@@ -1890,13 +2267,239 @@ function showToast(msg, type = 'info', duration = 3500) {
   el._timer = setTimeout(() => el.classList.remove('show'), duration);
 }
 
-function getWmoIcon(code, isDay) {
-  const entry = WMO_ICONS[code] || { icon: '🌡️', label: 'Nieznane' };
-  if (isDay === 0) {
-    const nightSwap = { '☀️': '🌙', '🌤️': '🌙', '⛅': '🌙' };
-    return { icon: nightSwap[entry.icon] || entry.icon, label: entry.label };
+// ============================================================
+// WEATHER EFFECTS (NEW)
+// ============================================================
+class WeatherParticles {
+  constructor() {
+    this.canvas = document.getElementById('weatherParticles');
+    this.ctx = this.canvas.getContext('2d');
+    this.particles = [];
+    this.type = 'none'; // 'none', 'rain', 'snow', 'mist'
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+    this.animate();
   }
-  return entry;
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+  setType(conditionCode) {
+    const wmo = weatherApiToWmo(conditionCode);
+    if ([61,63,65,80,81,82,95].includes(wmo)) this.type = 'rain';
+    else if ([71,73,75,77,85,86].includes(wmo)) this.type = 'snow';
+    else if ([45,48].includes(wmo)) this.type = 'mist';
+    else this.type = 'none';
+    this.initParticles();
+  }
+  initParticles() {
+    this.particles = [];
+    let count = 0;
+    if (this.type === 'rain') count = 100;
+    if (this.type === 'snow') count = 150;
+    if (this.type === 'mist') count = 50;
+
+    for (let i = 0; i < count; i++) {
+      this.particles.push(this.createParticle());
+    }
+  }
+  createParticle() {
+    if (this.type === 'rain') return { x: Math.random()*this.canvas.width, y: Math.random()*this.canvas.height, l: Math.random()*20+10, v: Math.random()*15+10, w: Math.random()*1+1 };
+    if (this.type === 'snow') return { x: Math.random()*this.canvas.width, y: Math.random()*this.canvas.height, r: Math.random()*3+1, v: Math.random()*2+1, o: Math.random()*0.02 };
+    if (this.type === 'mist') return { x: Math.random()*this.canvas.width, y: Math.random()*this.canvas.height, r: Math.random()*80+40, v: Math.random()*0.5+0.2, o: Math.random()*0.3+0.1 };
+    return {};
+  }
+  animate() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (this.type !== 'none') {
+      this.ctx.strokeStyle = this.type === 'rain' ? 'rgba(174,194,224,0.4)' : 'rgba(255,255,255,0.4)';
+      this.ctx.fillStyle = this.type === 'mist' ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.6)';
+      this.particles.forEach(p => {
+        if (this.type === 'rain') {
+          this.ctx.lineWidth = p.w;
+          this.ctx.beginPath(); this.ctx.moveTo(p.x, p.y); this.ctx.lineTo(p.x, p.y + p.l); this.ctx.stroke();
+          p.y += p.v; if (p.y > this.canvas.height) { p.y = -p.l; p.x = Math.random()*this.canvas.width; }
+        } else if (this.type === 'snow') {
+          this.ctx.beginPath(); this.ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); this.ctx.fill();
+          p.y += p.v; p.x += Math.sin(p.y * p.o) * 2;
+          if (p.y > this.canvas.height) { p.y = -10; p.x = Math.random()*this.canvas.width; }
+        } else if (this.type === 'mist') {
+          this.ctx.beginPath(); this.ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); this.ctx.fill();
+          p.x += p.v; if (p.x > this.canvas.width + p.r) p.x = -p.r;
+        }
+      });
+    }
+    requestAnimationFrame(() => this.animate());
+  }
+}
+
+function updateDynamicBackground() {
+  if (!weatherData) return;
+  const hour = new Date(weatherData.location.localtime).getHours();
+  const clouds = weatherData.current.cloud;
+  const isNight = weatherData.current.is_day === 0;
+  
+  let colors = ['#0d1117', '#161b22']; // Default dark
+  
+  if (!isNight) {
+    if (clouds > 70) colors = ['#37474f', '#546e7a']; // Overcast
+    else if (clouds > 30) colors = ['#1e88e5', '#64b5f6']; // Partly cloudy
+    else colors = ['#03a9f4', '#29b6f6']; // Clear day
+    
+    // Golden Hour
+    if (hour >= 18 && hour <= 20) colors = ['#ff7043', '#ffab91']; 
+    if (hour >= 5 && hour <= 7) colors = ['#ab47bc', '#ce93d8'];
+  } else {
+    if (clouds > 50) colors = ['#1a237e', '#283593']; // Cloudy night
+    else colors = ['#000428', '#004e92']; // Clear night
+  }
+  
+  document.body.style.background = `linear-gradient(135deg, ${colors[0]}, ${colors[1]}) fixed`;
+  if (weatherParticles) weatherParticles.setType(weatherData.current.condition.code);
+}
+
+function updateExtras() {
+  const trivia = [
+    "Najwyższa temperatura w Polsce to 40,2°C (Prószków, 1921).",
+    "Piorun może być 5 razy gorętszy od powierzchni Słońca.",
+    "Każdy płatek śniegu jest unikalny.",
+    "Najniższa temperatura w Polsce to -41,0°C (Siedlce, 1940).",
+    "Wiatr wieje z powodu różnic ciśnienia."
+  ];
+  const triviaEn = [
+    "The highest temperature in Poland was 40.2°C (Prószków, 1921).",
+    "A lightning bolt can be 5 times hotter than the surface of the sun.",
+    "Every snowflake is unique.",
+    "The lowest temperature in Poland was -41.0°C (Siedlce, 1940).",
+    "Wind blows due to differences in air pressure."
+  ];
+  const list = currentLang === 'pl' ? trivia : triviaEn;
+  document.getElementById('triviaText').textContent = list[Math.floor(Math.random() * list.length)];
+  
+  // Biomet calculation
+  const temp = weatherData.current.temp_c;
+  const press = weatherData.current.pressure_mb;
+  const clouds = weatherData.current.cloud;
+  
+  let score = 0;
+  if (temp > 18 && temp < 24) score += 2;
+  if (press > 1010 && press < 1020) score += 2;
+  if (clouds < 30) score += 1;
+  
+  const statusEl = document.getElementById('biometStatus');
+  const descEl = document.getElementById('biometDesc');
+  
+  if (score >= 4) {
+    statusEl.textContent = currentLang === 'pl' ? 'Korzystny' : 'Favorable';
+    statusEl.style.color = 'var(--aqi-good)';
+    descEl.textContent = currentLang === 'pl' ? 'Idealne warunki do spaceru.' : 'Perfect conditions for a walk.';
+  } else if (score >= 2) {
+    statusEl.textContent = currentLang === 'pl' ? 'Obojętny' : 'Neutral';
+    statusEl.style.color = 'var(--uv-mod)';
+    descEl.textContent = currentLang === 'pl' ? 'Brak silnych bodźców meteorologicznych.' : 'No strong meteorological stimuli.';
+  } else {
+    statusEl.textContent = currentLang === 'pl' ? 'Niekorzystny' : 'Unfavorable';
+    statusEl.style.color = 'var(--hot)';
+    descEl.textContent = currentLang === 'pl' ? 'Ryzyko obniżenia nastroju.' : 'Risk of lower mood.';
+  }
+}
+
+function renderAstroEvents() {
+  const events = [
+    { date: '2026-03-25', name: 'Zaćmienie Księżyca', icon: '🌘' },
+    { date: '2026-08-12', name: 'Maksimum Perseidów', icon: '🌠' },
+    { date: '2026-12-14', name: 'Geminidy', icon: '☄️' },
+    { date: '2026-06-21', name: 'Przesilenie letnie', icon: '☀️' }
+  ];
+  const eventsEn = [
+    { date: '2026-03-25', name: 'Lunar Eclipse', icon: '🌘' },
+    { date: '2026-08-12', name: 'Perseids Meteor Shower', icon: '🌠' },
+    { date: '2026-12-14', name: 'Geminids Meteor Shower', icon: '☄️' },
+    { date: '2026-06-21', name: 'Summer Solstice', icon: '☀️' }
+  ];
+  const list = currentLang === 'pl' ? events : eventsEn;
+  const wrap = document.getElementById('astroEvents');
+  if (wrap) {
+    wrap.innerHTML = list.map(ev => `
+      <div class="weather-card" style="display:flex; align-items:center; gap:1rem; padding:1rem;">
+        <div style="font-size:2rem;">${ev.icon}</div>
+        <div>
+          <div style="font-weight:700; color:var(--text);">${ev.name}</div>
+          <div style="font-size:0.75rem; color:var(--muted);">${ev.date}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function toggleTVMode() {
+  tvModeActive = !tvModeActive;
+  const overlay = document.getElementById('tvOverlay');
+  overlay.classList.toggle('active', tvModeActive);
+  
+  if (tvModeActive) {
+    document.documentElement.requestFullscreen().catch(() => {});
+    updateTVOverlay();
+    startTVSlides();
+  } else {
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    clearInterval(tvSlideInterval);
+  }
+}
+
+function updateTVOverlay() {
+  if (!weatherData) return;
+  const current = weatherData.current;
+  const loc = weatherData.location;
+  
+  const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  setEl('tvCity1', loc.name);
+  setEl('tvTemp1', Math.round(current.temp_c) + '°');
+  setEl('tvDesc1', current.condition.text);
+  setEl('tvHum1', current.humidity + '%');
+  setEl('tvWind1', Math.round(current.wind_kph) + ' km/h');
+  setEl('tvPress1', Math.round(current.pressure_mb) + ' hPa');
+  
+  setEl('tvCity2', loc.name);
+  const forecastList = document.getElementById('tvForecastList');
+  if (forecastList) {
+    forecastList.innerHTML = weatherData.forecast.forecastday.slice(0, 5).map(day => `
+      <div class="tv-forecast-item">
+        <div style="font-size:3vh; margin-bottom:1vh;">${fmtDay(day.date).split(' ')[0]}</div>
+        <div style="font-size:6vh;">${getWmoIcon(weatherApiToWmo(day.day.condition.code),1).icon}</div>
+        <div style="font-size:4vh; font-weight:800;">${Math.round(day.day.maxtemp_c)}°</div>
+      </div>
+    `).join('');
+  }
+  
+  setEl('tvCity3', loc.name);
+  const aqiVal = document.getElementById('tvAqiVal');
+  const aqiLab = document.getElementById('tvAqiLabel');
+  if (aqiVal) {
+    const epa = current.air_quality['us-epa-index'];
+    aqiVal.textContent = epa;
+    if (aqiLab) aqiLab.textContent = getAqiLabel(epa).text;
+  }
+}
+
+function startTVSlides() {
+  let activeSlide = 1;
+  clearInterval(tvSlideInterval);
+  tvSlideInterval = setInterval(() => {
+    activeSlide = activeSlide % 3 + 1;
+    document.querySelectorAll('.tv-slide').forEach(s => s.classList.remove('active'));
+    document.getElementById(`tvSlide${activeSlide}`).classList.add('active');
+    
+    const progress = document.getElementById('tvProgress');
+    if (progress) {
+      progress.style.transition = 'none';
+      progress.style.width = '0%';
+      setTimeout(() => {
+        progress.style.transition = 'width 10s linear';
+        progress.style.width = '100%';
+      }, 50);
+    }
+  }, 10000);
 }
 
 // ============================================================
@@ -1971,21 +2574,21 @@ function renderInsights(i) {
   
   card.innerHTML = `
     <div class="section-title">
-      <span>🔍 Analiza warunków</span>
+      <span>${t('insightsTitle')}</span>
     </div>
     <div class="details-grid">
       <div class="detail-tile clickable" onclick="openCalcModal('comfort')">
-        <div class="tile-label">Komfort termiczny</div>
+        <div class="tile-label">${t('comfortLabel')}</div>
         <div class="tile-value">${i.comfortMsg}</div>
-        <div class="tile-sub">${i.comfortVal.toFixed(1)} ${i.isDI ? '(Indeks DI)' : '(AT)'}</div>
+        <div class="tile-sub">${i.comfortVal.toFixed(1)} ${i.isDI ? '(DI)' : '(AT)'}</div>
       </div>
       <div class="detail-tile clickable" onclick="openCalcModal('feels')">
-        <div class="tile-label">Odczuwalna (lok)</div>
+        <div class="tile-label">${t('feelsLabel')}</div>
         <div class="tile-value">${i.feels.toFixed(1)}°${unitSym()}</div>
-        <div class="tile-sub">${Math.abs(i.feels - weatherData.current.temp_c) < 1.5 ? 'Zbliżona' : 'Znaczna różnica'}</div>
+        <div class="tile-sub">${Math.abs(i.feels - weatherData.current.temp_c) < 1.5 ? '...' : '!!!'}</div>
       </div>
     </div>
-    ${i.warning ? `<div class="insight-alert">⚠️ ALERT: ${i.warning}</div>` : ''}
+    ${i.warning ? `<div class="insight-alert">${t('alertExtreme')}</div>` : ''}
   `;
 }
 
@@ -2067,7 +2670,7 @@ function renderHero(cur, forecast) {
   const tempEl = document.getElementById('heroTemp');
   tempEl.textContent = toDisplay(cur.temp_c) + unitSym();
   tempEl.style.color = getTempColor(cur.temp_c);
-  document.getElementById('heroFeelsLike').textContent = `Odczuwalna: ${toDisplay(cur.feelslike_c)}${unitSym()}`;
+  document.getElementById('heroFeelsLike').textContent = `${t('heroFeelsLike')}${toDisplay(cur.feelslike_c)}${unitSym()}`;
   document.getElementById('heroHumidity').textContent = cur.humidity ?? '—';
   document.getElementById('heroWind').textContent = cur.wind_kph != null ? windDisp(cur.wind_kph) : '—';
   document.getElementById('heroWindUnit').textContent = windUnit();
@@ -2131,7 +2734,7 @@ function renderDaily(forecast) {
     const icon = getWmoIcon(code, 1).icon;
     const isToday = f.date === today;
     return `<div class="day-card${isToday ? ' today' : ''}" data-day-idx="${i}" style="cursor:pointer;" title="Kliknij aby zobaczyć szczegóły">
-      <div class="day-name">${isToday ? 'Dziś' : fmtDay(f.date)}</div>
+      <div class="day-name">${isToday ? t('today') : fmtDay(f.date)}</div>
       <div class="day-icon">${icon}</div>
       <div class="day-temps">
         <span class="day-max" style="color:${getTempColor(tmax)}">${toDisplay(tmax)}°</span>
@@ -2143,7 +2746,7 @@ function renderDaily(forecast) {
         <span>💨<span class="val">${windDisp(day.maxwind_kph)}${windUnit()}</span></span>
         ${uv != null ? `<span>UV<span class="val" style="color:${uvInfo.color}">${uv}</span></span>` : ''}
       </div>
-      <div style="font-size:.55rem;color:var(--accent);text-align:center;margin-top:.3rem;opacity:.6">▼ szczegóły</div>
+      <div style="font-size:.55rem;color:var(--accent);text-align:center;margin-top:.3rem;opacity:.6">${t('details')}</div>
     </div>`;
   }).join('');
 
@@ -2166,7 +2769,7 @@ function openDayModal(dayIdx) {
   const wmoCode = weatherApiToWmo(day.condition.code);
   const wmo = getWmoIcon(wmoCode, 1);
   const isToday = date === new Date().toISOString().slice(0, 10);
-  const dayLabel = isToday ? 'Dziś' : fmtDay(date);
+  const dayLabel = isToday ? t('today') : fmtDay(date);
 
   document.getElementById('dmIcon').textContent = wmo.icon;
   document.getElementById('dmName').textContent = dayLabel;
@@ -2233,7 +2836,7 @@ function openDayModal(dayIdx) {
   html += `</div>`; // close dm-stats
 
   html += `<div>
-    <div class="dm-hourly-title">Prognoza godzinowa</div>
+    <div class="dm-hourly-title">${t('hourlyForecast')}</div>
     <div class="dm-hourly">`;
 
   f.hour.forEach(h => {
@@ -4752,13 +5355,25 @@ window.addEventListener('resize', () => {
 document.addEventListener('DOMContentLoaded', () => {
   applyTheme(isDark);
   // restore unit
-  document.getElementById('unitSI').classList.toggle('active', unitSystem === 'si');
-  document.getElementById('unitIMP').classList.toggle('active', unitSystem === 'imperial');
+  document.getElementById('unitSI').classList.toggle('active', currentUnits === 'si');
+  document.getElementById('unitIMP').classList.toggle('active', currentUnits === 'imperial');
 
   setupChartControls();
   initCompare();
   initClimate();
   initTabs();
+  
+  // Language & TV
+  const langBtn = document.getElementById('langToggle');
+  if (langBtn) langBtn.addEventListener('click', toggleLanguage);
+  const tvBtn = document.getElementById('tvToggle');
+  if (tvBtn) tvBtn.addEventListener('click', toggleTVMode);
+  const tvClose = document.getElementById('tvClose');
+  if (tvClose) tvClose.addEventListener('click', toggleTVMode);
+
+  updateUILanguage();
+  weatherParticles = new WeatherParticles();
+
   const headerSearchInput = document.getElementById('searchInput');
   headerSearchInput.addEventListener('focus', (e) => {
     e.target.blur();
@@ -4897,8 +5512,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 <div id="wikiOverlay" class="wiki-overlay" onclick="closeWiki()">
   <div class="wiki-inner" onclick="event.stopPropagation()">
-    <button id="wikiClose" class="wiki-close" onclick="closeWiki()">Zamknij</button>
-    <div class="wiki-title">Jak to liczymy?</div>
+    <button id="wikiClose" class="wiki-close" onclick="closeWiki()" data-t="searchBtn">Zamknij</button>
+    <div class="wiki-title" data-t="howWeCalc">Jak to liczymy?</div>
     
     <div class="wiki-item">
       <div class="wiki-item-title">🌡️ 1. Temperatura Odczuwalna (Steadman AT)</div>
@@ -4945,8 +5560,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- HEAT MODAL (MODEL S) -->
 <div id="heatModal" class="wiki-overlay" onclick="closeHeatModal()">
   <div class="wiki-inner" onclick="event.stopPropagation()">
-    <button id="heatModalClose" class="wiki-close" onclick="closeHeatModal()">Zamknij</button>
-    <div class="wiki-title">Interaktywny Bilans Cieplny (S)</div>
+    <button id="heatModalClose" class="wiki-close" onclick="closeHeatModal()" data-t="searchBtn">Zamknij</button>
+    <div class="wiki-title" data-t="heatBalanceTitle">Interaktywny Bilans Cieplny (S)</div>
     
     <div class="wiki-item">
       <div class="step-label">Wybierz swoją aktywność:</div>
