@@ -649,7 +649,7 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
   color: var(--text);
 }
 .starter p { color: var(--muted); font-size: .88rem; margin-bottom: 2rem; }
-.starter-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+.starter-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; position: relative; z-index: 100; }
 .starter-btn {
   background: var(--surface2);
   border: 1px solid var(--border);
@@ -659,9 +659,10 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
   cursor: pointer;
   color: var(--text);
   font-family: 'IBM Plex Mono', monospace;
-  transition: background .15s, border-color .15s;
+  transition: all .15s;
 }
 .starter-btn:hover { background: var(--surface); border-color: var(--accent); }
+.starter-btn:active { transform: scale(0.96); opacity: 0.8; }
 .starter-popular { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
 .popular-label { font-size: .7rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; width: 100%; text-align: center; margin-bottom: .4rem; }
 .popular-btn {
@@ -3121,41 +3122,87 @@ function onSearchInput(e) {
 // addTap — zwykły click, Chrome Android nie ma 300ms delay od v32
 // touch-action: manipulation w CSS eliminuje podwójne tappy
 function addTap(el, fn) {
+  if (!el) return;
   el.style.touchAction = 'manipulation';
   el.addEventListener('click', fn);
 }
 
+async function fetchIPLocation(setAsHome = false) {
+  showToast('Próba ustalenia lokalizacji po IP (metoda 1/2)...', 'info', 4000);
+  
+  // Metoda 1: ipapi.co (bardzo dokładne, ale ma limity)
+  try {
+    const r = await fetchT('https://ipapi.co/json/', 8000);
+    if (r.ok) {
+      const d = await r.json();
+      if (d.latitude && d.longitude) {
+        const city = d.city || 'Moja lokalizacja (IP)';
+        const country = d.country_name || '';
+        if (setAsHome) setHomeLocation(d.latitude, d.longitude, city, country);
+        loadWeather(d.latitude, d.longitude, city, country);
+        showToast(`Lokalizacja ustalona (IP): ${city}`, 'success');
+        return;
+      }
+    }
+  } catch (e) {
+    console.warn('ipapi.co failed, trying next method...');
+  }
+
+  // Metoda 2: ip-api.com (bardzo stabilne, fallback)
+  showToast('Próba ustalenia lokalizacji po IP (metoda 2/2)...', 'info', 4000);
+  try {
+    const r = await fetch('http://ip-api.com/json/'); // ip-api.com na HTTP/S
+    const d = await r.json();
+    if (d.status === 'success') {
+      const city = d.city || 'Lokalizacja po IP';
+      const country = d.country || '';
+      if (setAsHome) setHomeLocation(d.lat, d.lon, city, country);
+      loadWeather(d.lat, d.lon, city, country);
+      showToast(`Lokalizacja (IP Fallback): ${city}`, 'success');
+      return;
+    }
+  } catch (e) {
+    console.error('All IP geolocation methods failed.');
+  }
+
+  showToast('Nie udało się ustalić lokalizacji (GPS ani IP). Spróbuj wpisać miasto.', 'error', 8000);
+}
+
 async function requestGeolocation(setAsHome = false) {
   if (!navigator.geolocation) {
-    showToast('Geolokalizacja niedostępna w tej przeglądarce', 'error');
+    showToast('Geolokalizacja niedostępna w tej przeglądarce.', 'error');
     return;
   }
 
-  // Wstępne sprawdzenie uprawnień (jeśli API dostępne)
-  if (navigator.permissions) {
+  // Animacja przycisku/stanu ładowania (opcjonalnie można dodać klasę .loading)
+  showToast('📡 Aktywacja GPS... Proszę czekać.', 'info', 3000);
+
+  // Wstępne sprawdzenie uprawnień
+  if (navigator.permissions && navigator.permissions.query) {
     try {
       const perm = await navigator.permissions.query({ name: 'geolocation' });
       if (perm.state === 'denied') {
-        showToast('Dostęp do GPS zablokowany. Odblokuj w ustawieniach przeglądarki.', 'error', 10000);
+        showToast('⚠️ Dostęp do lokalizacji jest zablokowany w przeglądarce. Przełączam na IP...', 'warning', 5000);
+        await fetchIPLocation(setAsHome);
         return;
       }
-    } catch(e) {}
+    } catch(e) { console.warn('Permissions query failed, proceeding to geolocation request.'); }
   }
-
-  showToast('Pobieranie lokalizacji (max 25s)...', 'info', 25000);
 
   const geoOptions = {
     enableHighAccuracy: true,
-    timeout: 20000,
-    maximumAge: 60000
+    timeout: 15000, // Skrócono do 15s dla lepszego UX (potem IP)
+    maximumAge: 0   // Chcemy świeżą lokalizację
   };
 
   try {
+    showToast('🛰️ Pobieranie współrzędnych GPS (do 15s)...', 'info', 15000);
+    
     const pos = await new Promise((res, rej) => {
       let isSettled = false;
       const t = setTimeout(() => {
         if (!isSettled) { isSettled = true; rej(new Error('TIMEOUT_OR_SILENT_FAIL')); }
-      }, 25000);
+      }, 18000); // Mały margines ponad timeout GPS
       
       navigator.geolocation.getCurrentPosition(
         (p) => { if (!isSettled) { isSettled = true; clearTimeout(t); res(p); } },
@@ -3167,33 +3214,39 @@ async function requestGeolocation(setAsHome = false) {
     const { latitude: lat, longitude: lon } = pos.coords;
     let city = 'Moja lokalizacja', country = '';
     
+    // Próba Reverse Geocodowania
     try {
       const r = await fetchT(
         `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=pl`,
-        8000,
-        { 'User-Agent': 'WeatherApp/1.0' }
+        6000,
+        { 'User-Agent': 'WeatherApp_V2/1.0' }
       );
-      const d = await r.json();
-      city = d.address.city || d.address.town || d.address.village || d.address.state || 'Moja lokalizacja';
-      country = d.address.country || '';
-    } catch(e) {}
+      if (r.ok) {
+        const d = await r.json();
+        city = d.address.city || d.address.town || d.address.village || d.address.suburb || d.address.state || 'Twoja lokalizacja';
+        country = d.address.country || '';
+      }
+    } catch(e) { 
+      console.warn('Reverse geocode failed, using coordinates only.');
+    }
 
     if (setAsHome) {
       setHomeLocation(lat, lon, city, country);
-      showToast(`🏠 Ustawiono „${city}" jako miasto domowe`, 'success');
+      showToast(`🏠 Dom: ${city}`, 'success');
     }
     loadWeather(lat, lon, city, country);
+    showToast(`📍 Znaleziono: ${city}`, 'success');
 
   } catch (err) {
-    let msg = 'Nie udało się ustalić lokalizacji — sprawdź GPS';
-    if (err.message === 'TIMEOUT_OR_SILENT_FAIL' || err.code === 3) {
-      msg = 'GPS nie odpowiedział na czas (timeout). Użyj wyszukiwarki ręcznie.';
-    } else if (err.code === 1) {
-      msg = 'Dostęp do lokalizacji zablokowany przez użytkownika.';
-    } else if (window.location.protocol === 'file:') {
-      msg = 'Błąd GPS (protokół file://). Spróbuj użyć wyszukiwarki ręcznie.';
+    console.warn('GPS Error/Timeout:', err);
+    let msg = '🛰️ GPS nie odpowiedział na czas...';
+    if (err.code === 1) {
+      msg = 'Dostęp zablokowany. Próbuję lokalizację po IP...';
+    } else if (err.code === 2) {
+      msg = 'Błąd urządzenia GPS. Próbuję lokalizację po IP...';
     }
-    showToast(msg, 'error', 8000);
+    showToast(msg, 'info', 4000);
+    await fetchIPLocation(setAsHome);
   }
 }
 
@@ -4742,7 +4795,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('searchBtn').addEventListener('click', openOverlay);
-  document.getElementById('geoBtn').addEventListener('click', () => requestGeolocation(false));
+  addTap(document.getElementById('geoBtn'), () => requestGeolocation(false));
   document.getElementById('overlayClose').addEventListener('click', closeOverlay);
   document.getElementById('overlayGeoBtn').addEventListener('click', () => { closeOverlay(); requestGeolocation(true); });
   document.getElementById('darkToggle').addEventListener('click', toggleTheme);
