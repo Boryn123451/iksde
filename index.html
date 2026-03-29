@@ -1334,9 +1334,11 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
   </header>
 
   <!-- Tab navigation -->
-  <nav class="tab-nav" id="tabNav">
+  <nav class="tab-nav" id="tabNav" style="display:none">
     <button class="tab-btn active" data-tab="weather" id="tabWeather">☀️ Pogoda</button>
     <button class="tab-btn" data-tab="climate" id="tabClimate">📊 Klimatogram</button>
+    <button class="tab-btn" data-tab="history" id="tabHistory">⏳ Kiedyś to było</button>
+    <button class="tab-btn" data-tab="astronomy" id="tabAstronomy">🌙 Astronomia</button>
   </nav>
 
   <main id="appMain">
@@ -1355,13 +1357,11 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
         <button class="popular-btn" data-lat="50.06" data-lon="19.94" data-city="Kraków" data-country="Polska">Kraków</button>
         <button class="popular-btn" data-lat="51.11" data-lon="17.04" data-city="Wrocław" data-country="Polska">Wrocław</button>
         <button class="popular-btn" data-lat="54.37" data-lon="18.61" data-city="Gdańsk" data-country="Polska">Gdańsk</button>
-        <button class="popular-btn" data-lat="48.86" data-lon="2.35"  data-city="Paryż" data-country="Francja">Paryż</button>
-        <button class="popular-btn" data-lat="51.51" data-lon="-0.13" data-city="Londyn" data-country="UK">Londyn</button>
       </div>
     </div>
 
-    <!-- Weather content (hidden until data loaded) -->
-    <div id="weatherContent" style="display:none; flex-direction:column; width:100%; gap:0">
+    <!-- ════ WEATHER TAB ════ -->
+    <div id="weatherTab" style="display:none; flex-direction:column; width:100%; gap:0">
       <!-- Hero -->
       <div class="hero-card" id="heroCard">
         <div class="hero-bg-icon" id="heroBgIcon">☀️</div>
@@ -1382,19 +1382,24 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
           <div class="hero-mini-item">🌡️ <span class="val" id="heroPressure">—</span> <span id="heroPressureUnit">hPa</span></div>
         </div>
       </div>
-      
-      <!-- Insights -->
-      <div id="insightsCard" class="weather-card" style="margin-bottom:1rem; display:none;"></div>
 
-      <!-- Hourly -->
-      <div class="section-wrap" style="padding:0; animation: fadeSlideUp .4s ease .1s both;">
-        <div id="hourlyStrip" class="hourly-strip"></div>
+      <!-- Stylist (NEW) -->
+      <div class="weather-card" id="stylistCard" style="margin-bottom:1rem; background:rgba(88,166,255,0.03); border:1px solid rgba(88,166,255,0.2)">
+        <div class="section-title">🧥 Rekomendacja ubioru</div>
+        <div id="stylistInner" style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+          <div id="stylistIcons" style="font-size:3.5rem; display:flex; gap:0.5rem; line-height:1;">—</div>
+          <div style="flex:1;">
+            <div id="stylistAdvice" style="font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:0.3rem;">Obliczanie…</div>
+            <div id="stylistSub" style="font-size:0.75rem; color:var(--muted); line-height:1.4;">Analizujemy Twoje lokalne warunki...</div>
+          </div>
+        </div>
       </div>
-
-      <!-- Daily -->
+      
+      <div id="insightsCard" class="weather-card" style="margin-bottom:1rem; display:none;"></div>
+      <div class="section-wrap" style="padding:0; animation: fadeSlideUp .4s ease .1s both;"><div id="hourlyStrip" class="hourly-strip"></div></div>
       <div id="dailyGrid" class="daily-grid"></div>
 
-      <!-- Details -->
+      <!-- Details Grid (Restored) -->
       <div id="detailsGrid" class="details-grid">
         <!-- Wind -->
         <div class="detail-tile">
@@ -1449,83 +1454,48 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
         <div class="detail-tile">
           <div class="tile-label">☀️ UV Index</div>
           <div class="tile-value" id="tileUV">—</div>
-          <div id="tileUVGauge" style="width:100%;height:8px;border-radius:4px;background:linear-gradient(90deg,#56d364,#f0a500,#f85149,#bc8cff);margin:.2rem 0;position:relative;">
-            <div id="tileUVIndicator" style="position:absolute;top:-2px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #000;left:0%;transform:translateX(-50%);transition:left .5s ease;"></div>
-          </div>
+          <div id="tileUVGauge" style="width:100%;height:8px;border-radius:4px;background:linear-gradient(90deg,#56d364,#f0a500,#f85149,#bc8cff);margin:.2rem 0;position:relative;"><div id="tileUVIndicator" style="position:absolute;top:-2px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #000;left:0%;transform:translateX(-50%);transition:left .5s ease;"></div></div>
           <div class="tile-sub" id="tileUVLabel">—</div>
         </div>
       </div>
-
-      <!-- Chart -->
-      <div class="chart-section">
-        <div class="section-title">Wykres</div>
+      
+      <!-- AQI Section -->
+      <div class="weather-card" id="aqiCard" style="margin-bottom:1rem; display:none;">
+        <div class="section-title">🍃 Jakość powietrza (AQI)</div>
+        <div class="aqi-content" style="display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
+          <div class="aqi-gauge-wrap" style="position:relative; width:100px; height:100px;">
+            <svg viewBox="0 0 60 60" width="100" height="100">
+              <circle cx="30" cy="30" r="25" fill="none" stroke="var(--border)" stroke-width="5"/>
+              <circle id="aqiGaugeFill" cx="30" cy="30" r="25" fill="none" stroke="var(--aqi-good)" stroke-width="5" 
+                      stroke-dasharray="157" stroke-dashoffset="157" transform="rotate(-90 30 30)" style="transition: stroke-dashoffset 1s ease;"/>
+            </svg>
+            <div id="aqiValue" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:1.8rem; font-weight:800; color:var(--text);">1</div>
+          </div>
+          <div style="flex:1;">
+            <div id="aqiLabel" style="font-size:1.2rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Dobra</div>
+            <div class="aqi-stats" style="display:grid; grid-template-columns: 1fr 1fr; gap:0.8rem; font-size:0.7rem; color:var(--muted);">
+              <div>PM2.5: <span id="aqiPM25" style="color:var(--text)">—</span> <div class="mini-bar"><div id="aqiPM25bar" class="mini-fill"></div></div></div>
+              <div>PM10: <span id="aqiPM10" style="color:var(--text)">—</span> <div class="mini-bar"><div id="aqiPM10bar" class="mini-fill"></div></div></div>
+              <div>NO2: <span id="aqiNO2" style="color:var(--text)">—</span> <div class="mini-bar"><div id="aqiNO2bar" class="mini-fill"></div></div></div>
+              <div>O3: <span id="aqiO3" style="color:var(--text)">—</span> <div class="mini-bar"><div id="aqiO3bar" class="mini-fill"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-section" id="weatherChartSection">
+        <div class="section-title">📉 Prognoza trendów</div>
         <div class="chart-controls">
           <div class="chart-btn-group" id="chartModeBtns">
             <button class="chart-btn active" data-mode="temp">Temperatura</button>
             <button class="chart-btn" data-mode="precip">Opady</button>
-            <button class="chart-btn" data-mode="wind">Wiatr</button>
-          </div>
-          <div class="chart-btn-group" id="chartRangeBtns">
-            <button class="chart-btn active" data-range="24h">24h</button>
-            <button class="chart-btn" data-range="7days">7 dni</button>
           </div>
         </div>
-        <div class="chart-canvas-wrap">
-          <canvas id="chartCanvas" height="220"></canvas>
-          <div id="chartTooltip"></div>
-        </div>
-      </div>
-
-      <!-- AQI -->
-      <div class="aqi-card" id="aqiCard">
-        <div class="section-title">Jakość powietrza</div>
-        <div class="aqi-top">
-          <div class="aqi-gauge-wrap">
-            <svg id="aqiGauge" viewBox="0 0 120 70" width="140" height="80">
-              <path d="M10,65 A50,50 0 0,1 110,65" fill="none" stroke="var(--border)" stroke-width="10" stroke-linecap="round"/>
-              <path id="aqiGaugeFill" d="M10,65 A50,50 0 0,1 110,65" fill="none" stroke="var(--aqi-good)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" style="transition: stroke-dashoffset .8s ease, stroke .4s;"/>
-            </svg>
-            <div class="aqi-main-value" id="aqiValue">—</div>
-            <div class="aqi-label" id="aqiLabel">—</div>
-          </div>
-          <div class="aqi-components">
-            <div class="aqi-comp"><div class="aqi-comp-name">PM2.5</div><div class="aqi-comp-val" id="aqiPM25">—</div><div class="aqi-comp-bar" id="aqiPM25bar" style="width:0%"></div></div>
-            <div class="aqi-comp"><div class="aqi-comp-name">PM10</div><div class="aqi-comp-val" id="aqiPM10">—</div><div class="aqi-comp-bar" id="aqiPM10bar" style="width:0%"></div></div>
-            <div class="aqi-comp"><div class="aqi-comp-name">NO₂</div><div class="aqi-comp-val" id="aqiNO2">—</div><div class="aqi-comp-bar" id="aqiNO2bar" style="width:0%"></div></div>
-            <div class="aqi-comp"><div class="aqi-comp-name">O₃</div><div class="aqi-comp-val" id="aqiO3">—</div><div class="aqi-comp-bar" id="aqiO3bar" style="width:0%"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- History -->
-      <div class="history-card" id="historyCard">
-        <div class="section-title">Ostatnie 7 dni</div>
-        <table class="history-table" id="historyTable">
-          <thead><tr><th>Data</th><th>Max</th><th>Min</th><th>Opady</th></tr></thead>
-          <tbody></tbody>
-        </table>
-        <div class="history-mini-chart" id="historyChart"></div>
-      </div>
-      <!-- Marine -->
-      <div class="marine-section" id="marineSection">
-        <div class="section-title">🌊 Dane morskie</div>
-        <div class="marine-grid" id="marineGrid"></div>
-      </div>
-
-      <!-- Sport conditions -->
-      <div class="sport-section" id="sportSection">
-        <div class="section-title">🏃 Warunki dla sportu</div>
-        <div class="sport-grid" id="sportGrid"></div>
-      </div>
-
-      <!-- Astronomy expanded -->
-      <div class="astro-section" id="astroSection">
-        <div class="section-title">🌙 Astronomia</div>
-        <div class="astro-grid" id="astroGrid"></div>
+        <div class="chart-canvas-wrap"><canvas id="chartCanvas" height="220"></canvas></div>
       </div>
 
       <!-- Compare cities -->
-      <div class="compare-section" id="compareSection">
+      <div class="compare-section" id="compareSection" style="margin-top:1rem">
         <div class="compare-header">
           <div class="section-title" style="margin-bottom:0">🏙️ Porównanie miast</div>
           <button class="compare-add-btn" id="compareAddBtn">+ Dodaj miasto</button>
@@ -1534,11 +1504,43 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
           <div class="precip-empty" id="compareEmpty">Dodaj miasta, aby porównać warunki pogodowe</div>
         </div>
       </div>
+    </div>
 
-    </div><!-- end weatherContent -->
+    <!-- ════ HISTORY TAB (NEW) ════ -->
+    <div id="historyTab" style="display:none; flex-direction:column; width:100%; padding:1rem;">
+      <div class="climate-section">
+        <div class="section-title">⏳ Kiedyś to było (Rekordy z tego dnia)</div>
+        <div id="historyDayLabel" style="font-size:1.1rem; font-weight:700; margin-bottom:1rem; color:var(--accent);">—</div>
+        <div id="historyRecordsGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
+          <div class="climate-loading"><div class="climate-spinner"></div><div>Pobieranie historii...</div></div>
+        </div>
+        <div class="wiki-desc" style="margin-top:1.5rem; font-size:0.75rem;">Dane pobrane z archiwum WeatherAPI dla lat 2024, 2023 i 2022.</div>
+      </div>
+    </div>
+
+    <!-- ════ ASTRONOMY TAB (NEW) ════ -->
+    <div id="astronomyTab" style="display:none; flex-direction:column; width:100%; padding:1rem;">
+      <div class="climate-section">
+        <div class="section-title">🌙 Astronomia i Księżyc</div>
+        <div id="astroGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
+          <!-- Moon -->
+          <div class="weather-card" style="text-align:center; padding:2rem;">
+            <div class="tile-label" style="text-align:left;">Księżyc dzisiaj</div>
+            <div id="moonIcon" style="font-size:6rem; margin:1.5rem 0; line-height:1;">🌑</div>
+            <div id="moonPhase" style="font-size:1.4rem; font-weight:700; color:var(--text); margin-bottom:0.5rem;">—</div>
+            <div id="moonIllum" style="color:var(--accent); font-weight:600;">Oświetlenie: —%</div>
+          </div>
+          <!-- Sun details -->
+          <div class="weather-card">
+            <div class="tile-label">Słońce i Cykl</div>
+            <div id="sunDetails" style="margin-top:1.5rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ════ CLIMATE TAB ════ -->
-    <div id="climateTab" style="display:none;flex-direction:column;width:100%;gap:0">
+    <div id="climateTab" style="display:none; flex-direction:column; width:100%; gap:0">
       <div class="climate-section">
         <div class="climate-header">
           <div class="section-title" style="margin-bottom:0">📊 Generator klimatogramów</div>
@@ -1779,6 +1781,7 @@ let currentCity = '', currentCountry = '';
 let currentTimezone = 'Europe/Warsaw';
 let weatherData = null;
 let weatherInsights = null;
+let activeTab = 'weather';
 let unitSystem = localStorage.getItem('weather_unit_sys') || 'si'; // 'si' | 'imperial'
 const WEATHER_API_KEY = '356c581dc9ff452a942212719252101';
 const API_BASE = 'https://api.weatherapi.com/v1/forecast.json';
@@ -1796,6 +1799,10 @@ function toDisplay(c) {
 }
 function unitSym() { return isImp() ? '°F' : '°C'; }
 function toDisplayRound(c) { return c != null ? Math.round(isImp() ? c * 9/5 + 32 : c) : '—'; }
+function toVal(c) { return (c != null && isImp()) ? (c * 9/5 + 32) : c; }
+function windVal(kmh) { return (kmh != null && isImp()) ? (kmh * 0.621371) : kmh; }
+function precipVal(mm) { return (mm != null && isImp()) ? (mm * 0.0393701) : mm; }
+function pressVal(hpa) { return (hpa != null && isImp()) ? (hpa * 0.02953) : hpa; }
 
 // Wind: km/h → mph
 function windDisp(kmh) {
@@ -1853,15 +1860,6 @@ function getTempColor(c) {
   return 'var(--hot)';
 }
 
-// Kolor temperatury dla klimatogramu — po 2°C czerwony
-function getClimateTempColor(c) {
-  if (c == null) return 'var(--text)';
-  if (c < -10) return 'var(--snow)';
-  if (c < 0)   return 'var(--cold)';
-  if (c < 2)   return 'var(--cool)';
-  return 'var(--hot)';
-}
-
 function fmtDay(isoDate) {
   const d = new Date(isoDate + 'T12:00:00');
   const days = ['Nd','Pn','Wt','Śr','Cz','Pt','Sb'];
@@ -1879,6 +1877,7 @@ function uvLabel(uv) {
 }
 
 function windDegToDir(deg) {
+  if (deg == null) return '—';
   const dirs = ['N','NE','E','SE','S','SW','W','NW'];
   return dirs[Math.round(deg / 45) % 8];
 }
@@ -1914,91 +1913,58 @@ function getWmoIcon(code, isDay) {
 // ============================================================
 // ANALYSIS ENGINE
 // ============================================================
-// === MODELE METEOROLOGICZNE (Steadman, Thom, etc.) ===
 function getVaporPressure(T, RH) {
-  // Ciśnienie pary wodnej (e) w hPa
   return (RH / 100) * 6.105 * Math.exp((17.27 * T) / (237.7 + T));
 }
 
 function getThomDI(T, RH) {
-  // Wskaźnik Dyskomfortu Thoma (DI)
   return T - (0.55 - 0.0055 * RH) * (T - 14.5);
 }
 
 function getSteadmanAT(T, RH, windKph) {
-  // Temperatura Odczuwalna Steadmana (AT)
   const e = getVaporPressure(T, RH);
-  const v = windKph / 3.6; // v w m/s
+  const v = windKph / 3.6;
   return T + 0.33 * e - 0.70 * v - 4.0;
-}
-
-function calcHeatBalance(m_val, garment, T, windKph, RH, uv, isDay) {
-  // Model S = M - W +/- R +/- C - E +/- K
-  // Uproszczony model balansu cieplnego
-  const M = parseFloat(m_val); // Metabolizm (W)
-  const W = M * 0.1; // Praca (10% M)
-  
-  // Konwekcja (C) i Przewodzenie: zależne od wiatru i gradientu temp
-  const windMS = windKph / 3.6;
-  const h_c = 12.1 * Math.sqrt(windMS); // Wsp. konwekcji
-  const insulation = garment === 'winter' ? 0.4 : (garment === 'casual' ? 0.7 : 1.0);
-  const C = h_c * (33 - T) * insulation; // 33C to temp skóry
-  
-  // Promieniowanie (R): słońce/UV
-  const R = (isDay ? (uv * 10) : 0) * (garment === 'winter' ? 0.5 : 1.0);
-  
-  // Parowanie (E): pocenie, zależne od wilgotności
-  const e_skin = 56.2; // cisiśnienie nasycenia na skórze (hPa)
-  const e_air = getVaporPressure(T, RH);
-  const E = 2.0 * windMS * (e_skin - e_air) * insulation;
-
-  return M - W + R - C - E; // Wynik S (Waty)
 }
 
 function buildInsights(data) {
   const temp = data.current.temp_c;
   const wind = data.current.wind_kph;
-  const rain = data.current.precip_mm;
   const humidity = data.current.humidity;
   const uv = data.current.uv;
   const isDay = data.current.is_day === 1;
-
-  // Zaplecze naukowe (Modele Profesjonalne)
-  const di = getThomDI(temp, humidity);
-  const v_p = getVaporPressure(temp, humidity);
-  const st_at = getSteadmanAT(temp, humidity, wind);
-
-  let outdoorMsg = "W porządku";
-  let outdoorOk = true;
-  if (temp < 8) { outdoorMsg = "Chłodno"; outdoorOk = true; }
-  if (temp < -2) { outdoorMsg = "Mróz"; outdoorOk = false; }
-  if (temp > 26) { outdoorMsg = "Ciepło"; outdoorOk = true; }
-  if (temp > 33) { outdoorMsg = "Ekstremalny upał"; outdoorOk = false; }
-  if (wind > 35) { outdoorMsg = "Wietrznie"; outdoorOk = false; }
-  if (rain > 0.1) { outdoorMsg = "Opady"; outdoorOk = false; }
-  if (outdoorOk && di < 21 && temp > 19 && wind < 15) outdoorMsg = "Idealnie";
-
-  let sportMsg = "Dobre warunki";
-  let sportOk = true;
+  const precip = data.current.precip_mm;
   
-  // Spójność: Jeśli Na zewnątrz jest NIE, Sport również (blokada przez deszcz, mróz itp.)
-  if (!outdoorOk) {
-    sportOk = false;
-    sportMsg = outdoorMsg;
+  const di = getThomDI(temp, humidity);
+  const at = getSteadmanAT(temp, humidity, wind);
+  
+  let comfortMsg = 'Brak danych';
+  let isDI = true;
+  
+  if (temp < 15) {
+    isDI = false;
+    if (at < 0) comfortMsg = 'Mroźno';
+    else if (at < 8) comfortMsg = 'Zimno';
+    else if (at < 15) comfortMsg = 'Chłodno';
+    else comfortMsg = 'Rześko';
   } else {
-    if (temp < 2) { sportMsg = "Zbyt zimno"; sportOk = false; }
-    if (di > 24) { sportMsg = "Dyskomfort (DI)"; sportOk = false; }
-    if (wind > 25) { sportMsg = "Uciążliwy wiatr"; sportOk = true; }
-    if (uv > 7) { sportMsg = "Wysokie UV"; sportOk = true; }
+    if (di < 21) comfortMsg = 'Przyjemnie';
+    else if (di < 24) comfortMsg = 'Umiarkowanie';
+    else if (di < 27) comfortMsg = 'Parno';
+    else if (di < 29) comfortMsg = 'Duszno';
+    else comfortMsg = 'Gorąco';
   }
 
+  const outdoorOk = temp > 5 && temp < 28 && precip < 0.2;
+  const sportOk = outdoorOk && wind < 25;
+  
   return {
-    comfort: di,
-    outdoor: { ok: outdoorOk, msg: outdoorMsg },
-    sport: { ok: sportOk, msg: sportMsg },
-    warning: rain > 5 ? "Ulewny deszcz" : (wind > 50 ? "Silny wiatr" : null),
-    feels: data.current.feelslike_c || temp,
-    inputs: { temp, wind, rain, humidity, uv, isDay, di, v_p, st_at }
+    comfortVal: isDI ? di : at,
+    comfortMsg: comfortMsg,
+    isDI: isDI,
+    feels: at,
+    warning: (temp < 0 || temp > 32 || wind > 50) ? 'Ekstremalne warunki!' : '',
+    inputs: { temp, wind, humidity, uv, isDay, di, v_p: getVaporPressure(temp, humidity), st_at: at }
   };
 }
 
@@ -2007,44 +1973,27 @@ function renderInsights(i) {
   if (!i) { card.style.display = 'none'; return; }
   card.style.display = 'block';
   
-  // Neutralny dla Chłodno/Ciepło
   const getCol = (msg, ok) => {
     if (!msg) return 'var(--text)';
     const m = msg.toUpperCase();
-    if (m === 'CHŁODNO' || m === 'CIEPŁO') return 'var(--text)';
+    if (m === 'CHŁODNO' || m === 'CIEPŁO' || m === 'ZIMNO' || m === 'MROŹNO') return 'var(--text)';
     return ok ? 'var(--mild)' : 'var(--hot)';
   };
   
   card.innerHTML = `
     <div class="section-title">
       <span>🔍 Analiza warunków</span>
-      <button class="wiki-btn" onclick="openWiki()">Wzory i definicje (i)</button>
     </div>
     <div class="details-grid">
       <div class="detail-tile clickable" onclick="openCalcModal('comfort')">
-        <div class="tile-label">Komfort</div>
-        <div class="tile-value">${i.comfort.toFixed(1)}</div>
-        <div class="tile-sub">${i.comfort > 25 ? 'Bardzo wysoki' : i.comfort > 12 ? 'Umiarkowany' : 'Niski'}</div>
+        <div class="tile-label">Komfort termiczny</div>
+        <div class="tile-value">${i.comfortMsg}</div>
+        <div class="tile-sub">${i.comfortVal.toFixed(1)} ${i.isDI ? '(Indeks DI)' : '(AT)'}</div>
       </div>
       <div class="detail-tile clickable" onclick="openCalcModal('feels')">
         <div class="tile-label">Odczuwalna (lok)</div>
-        <div class="tile-value">${i.feels.toFixed(1)}°</div>
+        <div class="tile-value">${i.feels.toFixed(1)}°${unitSym()}</div>
         <div class="tile-sub">${Math.abs(i.feels - weatherData.current.temp_c) < 1.5 ? 'Zbliżona' : 'Znaczna różnica'}</div>
-      </div>
-      <div class="detail-tile">
-        <div class="tile-label">Na zewnątrz</div>
-        <div class="tile-value" style="color:${getCol(i.outdoor.msg, i.outdoor.ok)}">${i.outdoor.msg.toUpperCase()}</div>
-        <div class="tile-sub">${i.outdoor.ok ? 'Zapraszamy' : 'Lepiej zostać'}</div>
-      </div>
-      <div class="detail-tile">
-        <div class="tile-label">Sport</div>
-        <div class="tile-value" style="color:${getCol(i.sport.msg, i.sport.ok)}">${i.sport.msg.toUpperCase()}</div>
-        <div class="tile-sub">${i.sport.ok ? 'Ruszaj się' : 'Zalecana ostrożność'}</div>
-      </div>
-      <div class="detail-tile clickable" onclick="openHeatModal()" style="border-top:1px solid var(--accent); background:rgba(88,166,255,0.03)">
-        <div class="tile-label" style="color:var(--accent)">⚖️ Bilans Cieplny (S)</div>
-        <div class="tile-value" id="insightHeatVal">Otwórz…</div>
-        <div class="tile-sub">Sprawdź wpływ aktywności</div>
       </div>
     </div>
     ${i.warning ? `<div class="insight-alert">⚠️ ALERT: ${i.warning}</div>` : ''}
@@ -2062,7 +2011,6 @@ function cacheGet(lat, lon) {
     const raw = localStorage.getItem(getCacheKey(lat, lon));
     if (!raw) return null;
     const c = JSON.parse(raw);
-    // Cache for 20 minutes
     if (Date.now() - c.ts > 20 * 60 * 1000) return null;
     return c;
   } catch { return null; }
@@ -2344,7 +2292,6 @@ function renderWindCompass(deg, speed) {
 }
 
 function renderSunArc(sunriseStr, sunsetStr) {
-  // Safe extraction of HH:MM
   const getHM = (s) => (s && s.includes('T') ? s.slice(11,16) : s);
   const sunrise = getHM(sunriseStr);
   const sunset  = getHM(sunsetStr);
@@ -2357,12 +2304,11 @@ function renderSunArc(sunriseStr, sunsetStr) {
   const riseMs = toMs(sunrise);
   const setMs  = toMs(sunset);
 
-  // Czas lokalny wyświetlanego miasta
   let nowTimeStr;
   try {
     const tz = currentTimezone && currentTimezone !== 'auto' ? currentTimezone : undefined;
     nowTimeStr = new Date().toLocaleTimeString('en-GB', {
-      timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false
+      timeZone: tz === 'auto' ? undefined : tz, hour: '2-digit', minute: '2-digit', hour12: false
     });
   } catch {
     nowTimeStr = new Date().toTimeString().slice(0,5);
@@ -2370,15 +2316,10 @@ function renderSunArc(sunriseStr, sunsetStr) {
   const nowMs = toMs(nowTimeStr);
   const isDay = nowMs > riseMs && nowMs < setMs;
 
-  // Faza księżyca dla ikony
-  const moon = getMoonPhase(new Date());
-
   const cx = 60, cy = 52, r = 38;
-
   let progress, bodyX, bodyY, arcColor, arcDash;
 
   if (isDay) {
-    // Dzień — słońce wzdłuż łuku dziennego
     progress = (nowMs - riseMs) / (setMs - riseMs);
     progress = Math.max(0.01, Math.min(0.99, progress));
     const angle = Math.PI - progress * Math.PI;
@@ -2387,15 +2328,12 @@ function renderSunArc(sunriseStr, sunsetStr) {
     arcColor = '#f0a50044';
     arcDash = '4,3';
   } else {
-    // Noc — księżyc wzdłuż łuku nocnego
-    // Noc: od zachodu do wschodu (12h przybliżone)
     const dayLen = setMs - riseMs;
     const nightLen = 24 * 3600000 - dayLen;
     let nightMs;
     if (nowMs > setMs) {
       nightMs = nowMs - setMs;
     } else {
-      // przed wschodem — od poprzedniego zachodu
       nightMs = (24 * 3600000 - setMs) + nowMs;
     }
     progress = Math.max(0.01, Math.min(0.99, nightMs / nightLen));
@@ -2406,84 +2344,46 @@ function renderSunArc(sunriseStr, sunsetStr) {
     arcDash = '3,4';
   }
 
-  // SVG słońca lub księżyca
   let bodyEl;
   if (isDay) {
-    // Słońce z promieniami
-    bodyEl = `<g transform="translate(${bodyX},${bodyY})">
-      <circle r="5.5" fill="#f0a500"/>
-      <g stroke="#f0a500" stroke-width="1.2" opacity=".7">
-        <line x1="0" y1="-8.5" x2="0" y2="-7"/>
-        <line x1="0" y1="7" x2="0" y2="8.5"/>
-        <line x1="-8.5" y1="0" x2="-7" y2="0"/>
-        <line x1="7" y1="0" x2="8.5" y2="0"/>
-        <line x1="-6" y1="-6" x2="-5" y2="-5"/>
-        <line x1="5" y1="-5" x2="6" y2="-6"/>
-        <line x1="-5" y1="5" x2="-6" y2="6"/>
-        <line x1="6" y1="6" x2="5" y2="5"/>
-      </g>
-    </g>`;
+    bodyEl = `<g transform="translate(${bodyX},${bodyY})"><circle r="5.5" fill="#f0a500"/></g>`;
   } else {
-    // Księżyc — sierp z fazą + etykieta
-    const illumPct = moon.illum;
-    // Sierp: pełny okrąg z wyciętym elipsoidem
-    const shift = (50 - illumPct) / 50 * 4.5;
-    const phase = moon.phase;
-    const waxing = phase < 14.77;
-    bodyEl = `<g transform="translate(${bodyX},${bodyY})">
-      <defs>
-        <mask id="moonArcMask">
-          <circle r="5.5" fill="white"/>
-          <ellipse cx="${waxing ? -shift : shift}" cy="0" rx="${Math.max(0.5, Math.abs(shift) + 1.5)}" ry="5.5" fill="black"/>
-        </mask>
-      </defs>
-      <circle r="5.5" fill="#2a3040"/>
-      <circle r="5.5" fill="#f0e68c" mask="url(#moonArcMask)" opacity=".9"/>
-      <circle r="5.5" fill="none" stroke="#cae8ff" stroke-width=".8" opacity=".6"/>
-    </g>
-    <text x="${bodyX}" y="${parseFloat(bodyY) + 16}" text-anchor="middle" font-size="6.5" fill="#cae8ff" font-family="IBM Plex Mono" opacity=".85">${moon.emoji} ${moon.name}</text>`;
+    bodyEl = `<g transform="translate(${bodyX},${bodyY})"><circle r="5.5" fill="#2a3040"/><circle r="5.5" fill="none" stroke="#cae8ff" stroke-width=".8" opacity=".6"/></g>`;
   }
 
   return `<svg viewBox="0 0 120 72" width="100%" height="68">
-    <defs>
-      <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="${isDay ? '#f0a500' : '#cae8ff'}" stop-opacity=".15"/>
-        <stop offset="50%" stop-color="${isDay ? '#f0a500' : '#cae8ff'}" stop-opacity=".35"/>
-        <stop offset="100%" stop-color="${isDay ? '#f0a500' : '#cae8ff'}" stop-opacity=".15"/>
-      </linearGradient>
-    </defs>
     <path d="M22,52 A38,38 0 0,1 98,52" fill="none" stroke="${isDay ? '#f0a500' : '#cae8ff'}" stroke-width="1.2" stroke-dasharray="${arcDash}" opacity=".4"/>
     ${bodyEl}
     <text x="22" y="66" font-size="7.5" fill="var(--muted)" font-family="IBM Plex Mono">${sunrise}</text>
     <text x="98" y="66" font-size="7.5" fill="var(--muted)" font-family="IBM Plex Mono" text-anchor="end">${sunset}</text>
-    <text x="60" y="66" font-size="6.5" fill="${isDay ? '#f0a500' : '#cae8ff'}" font-family="IBM Plex Mono" text-anchor="middle" opacity=".7">${isDay ? '☀️ dzień' : '🌙 noc'}</text>
   </svg>`;
 }
 
 function renderDetails(cur, forecast) {
+  if (!cur || !forecast || !forecast[0]) return;
   const todayForecast = forecast[0].day;
   const astroBase = forecast[0].astro;
   
-  // Wind
-  document.getElementById('tileWindSpeed').textContent = cur.wind_kph != null ? windDisp(cur.wind_kph) + ' ' + windUnit() : '—';
-  document.getElementById('tileWindCompass').innerHTML = cur.wind_degree != null ? renderWindCompass(cur.wind_degree, parseFloat(windDisp(cur.wind_kph))) : '';
-  document.getElementById('tileWindDir').textContent = cur.wind_dir || windDegToDir(cur.wind_degree);
+  const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   
-  // Humidity
+  setEl('tileWindSpeed', cur.wind_kph != null ? windDisp(cur.wind_kph) + ' ' + windUnit() : '—');
+  const compass = document.getElementById('tileWindCompass');
+  if (compass) compass.innerHTML = cur.wind_degree != null ? renderWindCompass(cur.wind_degree, 0) : '';
+  setEl('tileWindDir', cur.wind_dir || windDegToDir(cur.wind_degree));
+  
   const hum = cur.humidity || 0;
-  document.getElementById('tileHumidity').textContent = hum + '%';
-  document.getElementById('tileHumidityBar').style.width = hum + '%';
+  setEl('tileHumidity', hum + '%');
+  const hBar = document.getElementById('tileHumidityBar');
+  if (hBar) hBar.style.width = hum + '%';
   
-  // Pressure
-  document.getElementById('tilePressure').textContent = cur.pressure_mb != null ? pressDisp(cur.pressure_mb) + ' ' + pressUnit() : '—';
-  document.getElementById('tilePressureArrow').textContent = cur.pressure_mb > 1013 ? '↑ Wysokie' : cur.pressure_mb < 1000 ? '↓ Niskie' : '→ Normalne';
+  setEl('tilePressure', cur.pressure_mb != null ? pressDisp(cur.pressure_mb) + ' ' + pressUnit() : '—');
+  setEl('tilePressureArrow', cur.pressure_mb > 1013 ? '↑ Wysokie' : cur.pressure_mb < 1000 ? '↓ Niskie' : '→ Normalne');
   
-  // Clouds
   const clouds = cur.cloud || 0;
-  document.getElementById('tileClouds').textContent = clouds + '%';
-  document.getElementById('tileCloudsBar').style.width = clouds + '%';
+  setEl('tileClouds', clouds + '%');
+  const cBar = document.getElementById('tileCloudsBar');
+  if (cBar) cBar.style.width = clouds + '%';
   
-  // Sunrise / Sunset
   const fmtAstro = (s) => {
     if (!s) return '—';
     if (!s.includes('AM') && !s.includes('PM')) return s;
@@ -2496,34 +2396,25 @@ function renderDetails(cur, forecast) {
   
   const sunrise = fmtAstro(astroBase.sunrise);
   const sunset = fmtAstro(astroBase.sunset);
+  setEl('tileSunrise', sunrise);
+  setEl('tileSunset', sunset);
+  const arc = document.getElementById('tileSunArc');
+  if (arc) arc.innerHTML = renderSunArc(sunrise, sunset);
   
-  document.getElementById('tileSunrise').textContent = sunrise;
-  document.getElementById('tileSunset').textContent = sunset;
-  document.getElementById('tileSunArc').innerHTML = renderSunArc(sunrise, sunset);
-  
-  // Feels like
   const feels = cur.feelslike_c || cur.temp_c;
   const diff = feels - cur.temp_c;
-  document.getElementById('tileFeelsLike').textContent = toDisplay(feels) + unitSym();
-  document.getElementById('tileFeelsDiff').textContent = (diff >= 0 ? '+' : '') + diff.toFixed(1) + '° vs rzeczywista';
+  setEl('tileFeelsLike', toDisplay(feels) + unitSym());
+  setEl('tileFeelsDiff', (diff >= 0 ? '+' : '') + diff.toFixed(1) + '° vs rzeczywista');
   
-  // Precipitation
-  document.getElementById('tilePrecip').textContent = precipDisp(cur.precip_mm) + ' ' + precipUnit();
-  document.getElementById('tilePrecipSub').textContent = `Dziś: ${todayForecast.daily_chance_of_rain}% szans`;
+  setEl('tilePrecip', precipDisp(cur.precip_mm) + ' ' + precipUnit());
+  setEl('tilePrecipSub', `Dziś: ${todayForecast.daily_chance_of_rain}% szans`);
   
-  // UV
   const uv = cur.uv || 0;
   const uvInfo = uvLabel(uv);
-  document.getElementById('tileUV').textContent = uv;
-  document.getElementById('tileUVIndicator').style.left = Math.min((uv / 11) * 100, 100) + '%';
-  document.getElementById('tileUVLabel').textContent = uvInfo.label;
-}
-
-function openWiki() {
-  document.getElementById('wikiOverlay').classList.add('open');
-}
-function closeWiki() {
-  document.getElementById('wikiOverlay').classList.remove('open');
+  setEl('tileUV', uv);
+  const uvInd = document.getElementById('tileUVIndicator');
+  if (uvInd) uvInd.style.left = Math.min((uv / 11) * 100, 100) + '%';
+  setEl('tileUVLabel', uvInfo.label);
 }
 
 function openCalcModal(type) {
@@ -2580,37 +2471,139 @@ function closeCalcModal() {
   document.getElementById('calcModal').classList.remove('open');
 }
 
-function openHeatModal() {
-  document.getElementById('heatModal').classList.add('open');
-  updateHeatCalc();
+function switchTab(tabId) {
+  activeTab = tabId;
+  const tabs = ['weather', 'climate', 'history', 'astronomy'];
+  tabs.forEach(t => {
+    const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+    const content = document.getElementById(t + 'Tab');
+    if (btn) btn.classList.toggle('active', t === tabId);
+    if (content) content.style.display = t === tabId ? 'flex' : 'none';
+  });
 }
-function closeHeatModal() {
-  document.getElementById('heatModal').classList.remove('open');
-}
-function updateHeatCalc() {
-  const m_val = document.getElementById('heatActivity').value;
-  const garment = document.getElementById('heatGarment').value;
-  const i = weatherInsights.inputs;
-  const s = calcHeatBalance(m_val, garment, i.temp, i.wind, i.humidity, i.uv, i.isDay);
+
+async function fetchHistoryRecords(lat, lon) {
+  const years = [2024, 2023, 2022];
+  const container = document.getElementById('historyRecordsGrid');
+  const date = new Date().toISOString().split('T')[0].slice(5);
+  const today = new Date();
   
-  const res = document.getElementById('heatResult');
-  const d = document.getElementById('heatDesc');
-  const v = document.getElementById('heatSVal');
-  v.textContent = s.toFixed(0) + ' W';
+  document.getElementById('historyDayLabel').textContent = `Rekordy dla dnia: ${today.toLocaleDateString('pl-PL', {day:'numeric', month:'long'})}`;
+  container.innerHTML = '';
   
-  if (s > 100) {
-    res.style.color = 'var(--hot)';
-    d.textContent = 'Organizm magazynuje ciepło. Ryzyko przegrzania! Pij dużo wody.';
-  } else if (s < -150) {
-    res.style.color = 'var(--cold)';
-    d.textContent = 'Silna utrata ciepła. Ubierz się cieplej lub zwiększ tempo.';
-  } else {
-    res.style.color = 'var(--mild)';
-    d.textContent = 'Stan bliski równowagi. Optymalne warunki dla Twojej aktywności.';
+  for (let year of years) {
+    const dt = `${year}-${date}`;
+    try {
+      const res = await fetch(`https://api.weatherapi.com/v1/history.json?key=${WEATHER_API_KEY}&q=${lat},${lon}&dt=${dt}`);
+      if (!res.ok) continue;
+      const data = await res.json();
+      if (!data.forecast || !data.forecast.forecastday || !data.forecast.forecastday[0]) continue;
+      const day = data.forecast.forecastday[0].day;
+      
+      const card = document.createElement('div');
+      card.className = 'weather-card';
+      card.innerHTML = `
+        <div class="tile-label">${year}</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;">
+          <div style="font-size:1.8rem; font-weight:800; color:var(--text)">${day.maxtemp_c}°</div>
+          <div style="text-align:right">
+            <div style="font-size:0.75rem; color:var(--muted)">Min: ${day.mintemp_c}°</div>
+            <div style="font-size:0.75rem; color:var(--muted)">Wiatr: ${day.maxwind_kph} km/h</div>
+          </div>
+        </div>
+        <div style="font-size:0.7rem; color:var(--accent); margin-top:0.5rem;">Opady: ${day.totalprecip_mm} mm</div>
+      `;
+      container.appendChild(card);
+    } catch(e) { console.error(e); }
+  }
+  if (container.innerHTML === '') {
+    container.innerHTML = '<div class="climate-empty">Brak danych historycznych w WeatherAPI dla tej lokalizacji.</div>';
   }
 }
 
-// ... rest of code ...
+async function fetchAstronomy(lat, lon) {
+  const res = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
+  const data = await res.json();
+  const astro = data.astronomy.astro;
+  
+  const moonIconMap = {
+    'New Moon': '🌑', 'Waxing Crescent': '🌒', 'First Quarter': '🌓', 'Waxing Gibbous': '🌔',
+    'Full Moon': '🌕', 'Waning Gibbous': '🌖', 'Last Quarter': '🌗', 'Waning Crescent': '🌘'
+  };
+  const moonPhasePl = {
+    'New Moon': 'Nów',
+    'Waxing Crescent': 'Przybywający sierp',
+    'First Quarter': 'Pierwsza kwadra',
+    'Waxing Gibbous': 'Garb rosnący',
+    'Full Moon': 'Pełnia',
+    'Waning Gibbous': 'Garb malejący',
+    'Last Quarter': 'Ostatnia kwadra',
+    'Waning Crescent': 'Stary księżyc'
+  };
+  
+  const time24 = (t12) => {
+    if (!t12 || t12 === 'No moonrise' || t12 === 'No moonset') return t12;
+    const [time, modifier] = t12.split(' ');
+    let [hours, minutes] = time.split(':');
+    if (hours === '12') hours = '00';
+    if (modifier === 'PM') hours = parseInt(hours, 10) + 12;
+    return `${hours.toString().padStart(2, '0')}:${minutes}`;
+  };
+
+  document.getElementById('moonIcon').textContent = moonIconMap[astro.moon_phase] || '🌙';
+  document.getElementById('moonPhase').textContent = moonPhasePl[astro.moon_phase] || astro.moon_phase;
+  document.getElementById('moonIllum').textContent = `Oświetlenie: ${astro.moon_illumination}%`;
+  
+  document.getElementById('sunDetails').innerHTML = `
+    <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; padding-bottom:0.5rem; border-bottom:1px solid var(--surface2)">
+      <span style="color:var(--muted); font-size:0.8rem;">🌅 Wschód</span>
+      <span style="font-weight:700;">${time24(astro.sunrise)}</span>
+    </div>
+    <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; padding-bottom:0.5rem; border-bottom:1px solid var(--surface2)">
+      <span style="color:var(--muted); font-size:0.8rem;">🌇 Zachód</span>
+      <span style="font-weight:700;">${time24(astro.sunset)}</span>
+    </div>
+  `;
+}
+
+function renderStylist(temp, wind, precip) {
+  const icons = document.getElementById('stylistIcons');
+  const advice = document.getElementById('stylistAdvice');
+  const sub = document.getElementById('stylistSub');
+  
+  icons.innerHTML = '';
+  let set = [];
+  
+  if (temp < 0) {
+    set = ['🧥', '🧣', '🧤'];
+    advice.textContent = 'Dziś pełne uzbrojenie zimowe!';
+    sub.textContent = 'Mróz wymaga warstw. Pamiętaj o czapce i rękawiczkach.';
+  } else if (temp < 8) {
+    set = ['🧥', '🧣'];
+    advice.textContent = 'Gruba kurtka i szalik.';
+    sub.textContent = 'Jest zimno, ale bez mrozu. Szalik ochroni przed wiatrem.';
+  } else if (temp < 15) {
+    set = ['🧥'];
+    advice.textContent = 'Lekka kurtka lub płaszcz.';
+    sub.textContent = 'Pogoda przejściowa. Idealna na spacer w kurtce.';
+  } else if (temp < 22) {
+    set = ['👕', '👖'];
+    advice.textContent = 'Bluza lub długi rękaw.';
+    sub.textContent = 'Przyjemnie, ale jeszcze nie na krótki rękaw.';
+  } else {
+    set = ['👕', '🕶️'];
+    advice.textContent = 'Lekki T-shirt i okulary.';
+    sub.textContent = 'Jest ciepło! Pamiętaj o ochronie przed słońcem.';
+  }
+  
+  if (precip > 0.5) {
+    set.push('🌂');
+    advice.textContent = 'Weź parasol! Opady w toku.';
+  }
+  
+  set.forEach(s => icons.innerHTML += `<span>${s}</span>`);
+}
+
 function getChartDataArrays(data) {
   let labels = [], values = [], values2 = [], rawTimes = [];
   const forecast = data.forecast.forecastday;
@@ -2626,23 +2619,23 @@ function getChartDataArrays(data) {
     labels = chunk.map(h => h.time.slice(11, 16));
     
     if (chartMode === 'temp') {
-      values = chunk.map(h => h.temp_c);
-      values2 = chunk.map(h => h.feelslike_c);
+      values = chunk.map(h => toVal(h.temp_c));
+      values2 = chunk.map(h => toVal(h.feelslike_c));
     } else if (chartMode === 'precip') {
       values = chunk.map(h => h.chance_of_rain || 0);
     } else {
-      values = chunk.map(h => h.wind_kph || 0);
+      values = chunk.map(h => windVal(h.wind_kph || 0));
     }
   } else {
     rawTimes = forecast.map(f => f.date);
     labels = forecast.map(f => fmtDay(f.date));
     if (chartMode === 'temp') {
-      values  = forecast.map(f => f.day.maxtemp_c);
-      values2 = forecast.map(f => f.day.mintemp_c);
+      values  = forecast.map(f => toVal(f.day.maxtemp_c));
+      values2 = forecast.map(f => toVal(f.day.mintemp_c));
     } else if (chartMode === 'precip') {
       values = forecast.map(f => f.day.daily_chance_of_rain || 0);
     } else {
-      values = forecast.map(f => f.day.maxwind_kph || 0);
+      values = forecast.map(f => windVal(f.day.maxwind_kph || 0));
     }
   }
   return { labels, values, values2, rawTimes };
@@ -2665,12 +2658,10 @@ function drawChart(data) {
   const cW = W - pad.left - pad.right;
   const cH = H - pad.top - pad.bottom;
 
-  // BG
   ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--surface2').trim() || '#21262d';
   ctx.beginPath(); ctx.roundRect(0, 0, W, H, 8); ctx.fill();
 
   const { labels, values, values2 } = getChartDataArrays(data);
-
   if (!values.length) return;
 
   const allVals = [...values, ...(values2.length ? values2 : [])].filter(v => v != null);
@@ -2681,7 +2672,6 @@ function drawChart(data) {
   function toX(i) { return pad.left + (i / (labels.length - 1)) * cW; }
   function toY(v) { return pad.top + (1 - (v - minV) / range) * cH; }
 
-  // Grid lines
   ctx.strokeStyle = 'rgba(48,54,61,0.6)';
   ctx.lineWidth = 1;
   for (let g = 0; g <= 4; g++) {
@@ -2695,12 +2685,11 @@ function drawChart(data) {
     ctx.fillText(val.toFixed(0), pad.left - 6, y + 4);
   }
 
-  // X labels
   ctx.fillStyle = 'rgba(125,133,144,0.8)';
   ctx.font = '9px IBM Plex Mono, monospace';
   ctx.textAlign = 'center';
   labels.forEach((l, i) => {
-    if (chartRange === '24h' && i % 3 !== 0) return;
+    if (chartRange === '24h' && i % 4 !== 0) return;
     ctx.fillText(l, toX(i), H - 8);
   });
 
@@ -2733,11 +2722,6 @@ function drawChart(data) {
   } else {
     drawLine(values, lineColor, true);
   }
-
-  ctx.beginPath();
-  ctx.arc(toX(0), toY(values[0]), 5, 0, Math.PI * 2);
-  ctx.fillStyle = lineColor; ctx.fill();
-  ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
 }
 
 function drawCrosshair(data, clientX) {
@@ -2746,7 +2730,7 @@ function drawCrosshair(data, clientX) {
   if (!canvas || !_lastChartData) return;
   const rect = canvas.getBoundingClientRect();
   const mx = clientX - rect.left;
-  const { W } = _lastChartData;
+  const { W, H } = _lastChartData;
   const pad = { left: 48, right: 20, top: 20, bottom: 35 };
   const cW = W - pad.left - pad.right;
   const { labels, values, values2 } = getChartDataArrays(data);
@@ -2755,11 +2739,10 @@ function drawCrosshair(data, clientX) {
   const idx = Math.max(0, Math.min(n - 1, Math.round(rawIdx)));
   if (values[idx] == null) { tooltip.style.opacity = 0; return; }
 
-  // Redraw chart + crosshair overlay
   const dpr = window.devicePixelRatio || 1;
   const ctx = canvas.getContext('2d');
-  drawChart(data); // full redraw
-  const H = _lastChartData.H;
+  drawChart(data); 
+
   const allVals = [...values, ...(values2.length ? values2 : [])].filter(v => v != null);
   const minV = Math.min(...allVals) - (chartMode === 'temp' ? 2 : 0);
   const maxV = Math.max(...allVals) + (chartMode === 'temp' ? 2 : 0);
@@ -2771,7 +2754,6 @@ function drawCrosshair(data, clientX) {
 
   ctx.save();
   ctx.scale(dpr, dpr);
-  // Vertical line
   ctx.beginPath();
   ctx.strokeStyle = 'rgba(88,166,255,0.5)';
   ctx.lineWidth = 1;
@@ -2780,7 +2762,7 @@ function drawCrosshair(data, clientX) {
   ctx.lineTo(cx, H - pad.bottom);
   ctx.stroke();
   ctx.setLineDash([]);
-  // Dot on line
+  
   const lineColor = chartMode === 'temp' ? '#f0a500' : chartMode === 'precip' ? '#388bfd' : '#58a6ff';
   ctx.beginPath();
   ctx.arc(cx, cy, 6, 0, Math.PI * 2);
@@ -2789,6 +2771,7 @@ function drawCrosshair(data, clientX) {
   ctx.strokeStyle = '#fff';
   ctx.lineWidth = 2;
   ctx.stroke();
+
   if (values2.length && chartMode === 'temp') {
     const cy2 = toY(values2[idx]);
     ctx.beginPath();
@@ -2801,7 +2784,6 @@ function drawCrosshair(data, clientX) {
   }
   ctx.restore();
 
-  // Tooltip content
   const unit = chartMode === 'temp' ? unitSym() : chartMode === 'precip' ? '%' : ' ' + windUnit();
   const val = chartMode === 'temp' ? toDisplay(values[idx]) : (values[idx] || 0).toFixed(0);
   let html = `<span class="tt-time">${labels[idx]}</span><span class="tt-val" style="color:${lineColor}">${val}${unit}</span>`;
@@ -2811,7 +2793,6 @@ function drawCrosshair(data, clientX) {
   tooltip.innerHTML = html;
   tooltip.style.opacity = 1;
 
-  // Position tooltip
   const tooltipW = 110;
   let tx = cx + 12;
   if (tx + tooltipW > W - 10) tx = cx - tooltipW - 12;
@@ -2823,7 +2804,6 @@ function setupChartTooltip(data) {
   const canvas = document.getElementById('chartCanvas');
   const tooltip = document.getElementById('chartTooltip');
   if (!canvas) return;
-  // Remove old listeners by cloning
   const newCanvas = canvas.cloneNode(true);
   canvas.parentNode.replaceChild(newCanvas, canvas);
   const c = document.getElementById('chartCanvas');
@@ -2834,7 +2814,6 @@ function setupChartTooltip(data) {
     drawChart(data);
   });
 
-  // Touch support
   c.addEventListener('touchstart', (e) => { e.preventDefault(); drawCrosshair(data, e.touches[0].clientX); }, { passive: false });
   c.addEventListener('touchmove',  (e) => { e.preventDefault(); drawCrosshair(data, e.touches[0].clientX); }, { passive: false });
   c.addEventListener('touchend',   (e) => { setTimeout(() => { tooltip.style.opacity = 0; drawChart(data); }, 1500); });
@@ -2844,11 +2823,9 @@ function renderChart(data) {
   requestAnimationFrame(() => { drawChart(data); setupChartTooltip(data); });
 }
 
-// Logic moved to renderAQIFresh
-
 function renderAQIFresh(aqi) {
-  if (!aqi) return;
-  const epaIdx = aqi['us-epa-index']; // 1-6
+  if (!aqi || !document.getElementById('aqiCard')) return;
+  const epaIdx = aqi['us-epa-index']; 
   document.getElementById('aqiCard').style.display = 'block';
   
   const config = [
@@ -2866,12 +2843,16 @@ function renderAQIFresh(aqi) {
   document.getElementById('aqiValue').style.color = c.color;
   
   const fill = document.getElementById('aqiGaugeFill');
-  fill.style.stroke = c.color;
-  fill.style.strokeDashoffset = 157 - (157 * c.pct);
+  if (fill) {
+    fill.style.stroke = c.color;
+    fill.style.strokeDashoffset = 157 - (157 * c.pct);
+  }
 
   function setComp(id, barId, val, maxVal) {
-    document.getElementById(id).textContent = val != null ? val.toFixed(1) : '—';
-    if (val != null) document.getElementById(barId).style.width = Math.min(val/maxVal*100,100) + '%';
+    const el = document.getElementById(id);
+    const bar = document.getElementById(barId);
+    if (el) el.textContent = val != null ? val.toFixed(1) : '—';
+    if (bar && val != null) bar.style.width = Math.min(val/maxVal*100,100) + '%';
   }
   setComp('aqiPM25','aqiPM25bar', aqi.pm2_5, 75);
   setComp('aqiPM10','aqiPM10bar', aqi.pm10, 150);
@@ -2879,11 +2860,6 @@ function renderAQIFresh(aqi) {
   setComp('aqiO3','aqiO3bar',     aqi.o3, 240);
 }
 
-// Obsolete Open-Meteo logic removed.
-
-// ============================================================
-// HEADER CLOCK
-// ============================================================
 function updateHeader() {
   document.getElementById('cityName').textContent = currentCity || '—';
   document.getElementById('cityCountry').textContent = currentCountry || '';
@@ -2907,42 +2883,33 @@ function updateHeader() {
 // RENDER ALL
 // ============================================================
 function renderAll(data) {
-  // WeatherAPI uses location.tz_id
   currentTimezone = data.location.tz_id || 'auto';
-  
   const cur = data.current;
   const forecast = data.forecast.forecastday;
   
   updateBackground(weatherApiToWmo(cur.condition.code), cur.is_day);
-  
   renderHero(cur, forecast);
   renderHourly(forecast);
   renderDaily(forecast);
   renderDetails(cur, forecast);
-  weatherInsights = buildInsights(data); // Aktualizujemy globalny stan
+  weatherInsights = buildInsights(data);
   renderInsights(weatherInsights);
   
-  // AQI integration (WeatherAPI current.air_quality)
-  if (cur.air_quality) {
-    renderAQIFresh(cur.air_quality);
-  }
+  if (cur.air_quality) renderAQIFresh(cur.air_quality);
+  renderChart(data);
 
-  // Update starter screen
   updateHeader();
   document.getElementById('starterScreen').style.display = 'none';
-  document.getElementById('weatherContent').style.display = 'flex';
-  document.getElementById('compareSection').style.display = '';
+  const wt = document.getElementById('weatherTab');
+  if (wt) wt.style.display = 'flex';
+  const nav = document.getElementById('tabNav');
+  if (nav) nav.style.display = 'flex';
   
-  // Since we removed fetchHistory and fetchMarine, we hide those sections as per simplification
-  document.getElementById('historyCard').style.display = 'none';
-  document.getElementById('marineSection').style.display = 'none';
+  fetchHistoryRecords(currentLat, currentLon);
+  fetchAstronomy(currentLat, currentLon);
+  renderStylist(cur.temp_c, cur.wind_kph, cur.precip_mm);
 
-  // Update climate slot 0 with current city
-  if (climateSlots && !climateSlots[0]) {
-    climateSlots[0] = { lat: currentLat, lon: currentLon, name: currentCity };
-    const inp0 = document.querySelector('.climate-city-input[data-slot="0"]');
-    if (inp0 && !inp0.value) inp0.value = currentCity + (currentCountry ? `, ${currentCountry}` : '');
-  }
+  if (activeTab !== 'weather') switchTab(activeTab); // Keep current tab if searching
 }
 
 // ============================================================
@@ -2987,6 +2954,11 @@ async function loadWeather(lat, lon, cityName, countryName) {
   }
   saveLastLocation(lat, lon, currentCity, currentCountry);
   saveToRecent({ name: currentCity, country: currentCountry, lat, lon });
+  
+  // Extra tabs data
+  fetchHistoryRecords(lat, lon);
+  fetchAstronomy(lat, lon);
+  renderStylist(weatherData.current.temp_c, weatherData.current.wind_kph, weatherData.current.precip_mm);
 }
 
 // ============================================================
@@ -3264,8 +3236,6 @@ function toggleUnit(sys) {
   document.getElementById('unitIMP').classList.toggle('active', sys === 'imperial');
   if (weatherData) {
     renderAll(weatherData);
-    if (aqiData) renderAQI(aqiData);
-    if (historyData) renderHistory(historyData);
   }
 }
 
@@ -3949,19 +3919,27 @@ function renderCompareCities() {
 // ============================================================
 // TAB SWITCHING
 // ============================================================
-function switchTab(tabName) {
-  ['weatherContent','climateTab'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
+function switchTab(tabId) {
+  const tabs = ['weather', 'history', 'astronomy', 'climate'];
+  tabs.forEach(t => {
+    const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+    const content = document.getElementById(t + 'Tab');
+    if (btn) btn.classList.toggle('active', t === tabId);
+    if (content) content.style.display = t === tabId ? 'flex' : 'none';
   });
-  if (tabName === 'weather') {
-    const wc = document.getElementById('weatherContent');
-    if (weatherData) wc.style.display = 'flex';
-    else { document.getElementById('starterScreen').style.display = 'block'; wc.style.display = 'none'; }
-  } else if (tabName === 'climate') {
-    document.getElementById('climateTab').style.display = 'flex';
+  
+  if (tabId === 'weather') {
+    const wt = document.getElementById('weatherTab');
+    if (weatherData) {
+      wt.style.display = 'flex';
+      document.getElementById('starterScreen').style.display = 'none';
+    } else {
+      wt.style.display = 'none';
+      document.getElementById('starterScreen').style.display = 'block';
+    }
+  } else {
+    document.getElementById('starterScreen').style.display = 'none';
   }
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabName));
 }
 
 function initTabs() {
@@ -4439,6 +4417,17 @@ function calcMonthSolar(lat, lon, timezone) {
 
 function fmtDayLen(min) {
   return `${Math.floor(min / 60)}h ${min % 60}m`;
+}
+
+function toggleUnit(sys) {
+  unitSystem = sys;
+  localStorage.setItem('weather_unit_sys', sys);
+  document.getElementById('unitSI').classList.toggle('active', sys === 'si');
+  document.getElementById('unitIMP').classList.toggle('active', sys === 'imperial');
+  if (weatherData) {
+    renderAll(weatherData); 
+    if (activeTab === 'weather') renderChart(weatherData);
+  }
 }
 
 function renderClimateTable(datasets, solarByCity) {
