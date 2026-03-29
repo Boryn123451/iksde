@@ -2522,8 +2522,9 @@ async function fetchHistoryRecords(lat, lon) {
   const day = String(today.getDate()).padStart(2, '0');
   
   document.getElementById('historyDayLabel').textContent = `Rekordy dla dnia: ${today.toLocaleDateString('pl-PL', {day:'numeric', month:'long'})}`;
-  container.innerHTML = '';
+  container.innerHTML = '<div class="compare-loading">Pobieranie danych historycznych…</div>';
 
+  let html = '';
   for (let year of years) {
     const dt = `${year}-${month}-${day}`;
     try {
@@ -2535,70 +2536,74 @@ async function fetchHistoryRecords(lat, lon) {
 
       const maxT = data.daily.temperature_2m_max[0];
       const minT = data.daily.temperature_2m_min[0];
-      const wind = data.daily.windspeed_10m_max[0]; // km/h (domyślnie w open-meteo archive)
+      const wind = data.daily.windspeed_10m_max[0];
       const precip = data.daily.precipitation_sum[0];
 
-      const card = document.createElement('div');
-      card.className = 'weather-card';
-      card.innerHTML = `
-        <div class="tile-label">${year} (Dane Hist.)</div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;">
-          <div style="font-size:1.8rem; font-weight:800; color:var(--text)">${toDisplay(maxT)}°</div>
-          <div style="text-align:right">
-            <div style="font-size:0.75rem; color:var(--muted)">Min: ${toDisplay(minT)}°</div>
-            <div style="font-size:0.75rem; color:var(--muted)">Wiatr: ${windDisp(wind)}${windUnit()}</div>
+      html += `
+        <div class="weather-card">
+          <div class="tile-label">${year} (DANE HIST.)</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;">
+            <div style="font-size:1.8rem; font-weight:800; color:var(--text)">${toDisplay(maxT)}°</div>
+            <div style="text-align:right">
+              <div style="font-size:0.75rem; color:var(--muted)">Min: ${toDisplay(minT)}°</div>
+              <div style="font-size:0.75rem; color:var(--muted)">Wiatr: ${windDisp(wind)}${windUnit()}</div>
+            </div>
           </div>
+          <div style="font-size:0.7rem; color:var(--accent); margin-top:0.5rem;">Opady: ${precipDisp(precip)} ${precipUnit()}</div>
         </div>
-        <div style="font-size:0.7rem; color:var(--accent); margin-top:0.5rem;">Opady: ${precipDisp(precip)} ${precipUnit()}</div>
       `;
-      container.appendChild(card);
     } catch(e) { console.error(e); }
   }
+  container.innerHTML = html;
 }
 
-async function fetchAstronomy(lat, lon) {
-  const res = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
-  const data = await res.json();
-  const astro = data.astronomy.astro;
-  
-  const moonIconMap = {
-    'New Moon': '🌑', 'Waxing Crescent': '🌒', 'First Quarter': '🌓', 'Waxing Gibbous': '🌔',
-    'Full Moon': '🌕', 'Waning Gibbous': '🌖', 'Last Quarter': '🌗', 'Waning Crescent': '🌘'
-  };
-  const moonPhasePl = {
-    'New Moon': 'Nów',
-    'Waxing Crescent': 'Przybywający sierp',
-    'First Quarter': 'Pierwsza kwadra',
-    'Waxing Gibbous': 'Garb rosnący',
-    'Full Moon': 'Pełnia',
-    'Waning Gibbous': 'Garb malejący',
-    'Last Quarter': 'Ostatnia kwadra',
-    'Waning Crescent': 'Stary księżyc'
-  };
-  
-  const time24 = (t12) => {
-    if (!t12 || t12 === 'No moonrise' || t12 === 'No moonset') return t12;
-    const [time, modifier] = t12.split(' ');
-    let [hours, minutes] = time.split(':');
-    if (hours === '12') hours = '00';
-    if (modifier === 'PM') hours = parseInt(hours, 10) + 12;
-    return `${hours.toString().padStart(2, '0')}:${minutes}`;
-  };
+async function fetchAstronomy(lat, lon, timezone) {
+  try {
+    // 1. Fetch Moon from WeatherAPI
+    const moonRes = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
+    const moonData = await moonRes.json();
+    const astro = moonData.astronomy.astro;
 
-  document.getElementById('moonIcon').textContent = moonIconMap[astro.moon_phase] || '🌙';
-  document.getElementById('moonPhase').textContent = moonPhasePl[astro.moon_phase] || astro.moon_phase;
-  document.getElementById('moonIllum').textContent = `Oświetlenie: ${astro.moon_illumination}%`;
-  
-  document.getElementById('sunDetails').innerHTML = `
-    <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; padding-bottom:0.5rem; border-bottom:1px solid var(--surface2)">
-      <span style="color:var(--muted); font-size:0.8rem;">🌅 Wschód</span>
-      <span style="font-weight:700;">${time24(astro.sunrise)}</span>
-    </div>
-    <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; padding-bottom:0.5rem; border-bottom:1px solid var(--surface2)">
-      <span style="color:var(--muted); font-size:0.8rem;">🌇 Zachód</span>
-      <span style="font-weight:700;">${time24(astro.sunset)}</span>
-    </div>
-  `;
+    // 2. Fetch Sun from Open-Meteo (more reliable for DST jumping day)
+    const sunRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=sunrise,sunset&timezone=auto`);
+    const sunData = await sunRes.json();
+    
+    let riseStr = '—', setStr = '—';
+    if (sunData && sunData.daily && sunData.daily.sunrise) {
+      riseStr = sunData.daily.sunrise[0].split('T')[1];
+      setStr = sunData.daily.sunset[0].split('T')[1];
+    }
+
+    const moonIconMap = {
+      'New Moon': '🌑', 'Waxing Crescent': '🌒', 'First Quarter': '🌓', 'Waxing Gibbous': '🌔',
+      'Full Moon': '🌕', 'Waning Gibbous': '🌖', 'Last Quarter': '🌗', 'Waning Crescent': '🌘'
+    };
+    const moonPhasePl = {
+      'New Moon': 'Nów',
+      'Waxing Crescent': 'Przybywający sierp',
+      'First Quarter': 'Pierwsza kwadra',
+      'Waxing Gibbous': 'Garb rosnący',
+      'Full Moon': 'Pełnia',
+      'Waning Gibbous': 'Garb malejący',
+      'Last Quarter': 'Ostatnia kwadra',
+      'Waning Crescent': 'Stary księżyc'
+    };
+
+    document.getElementById('moonIcon').textContent = moonIconMap[astro.moon_phase] || '🌙';
+    document.getElementById('moonPhase').textContent = moonPhasePl[astro.moon_phase] || astro.moon_phase;
+    document.getElementById('moonIllum').textContent = `Oświetlenie: ${astro.moon_illumination}%`;
+    
+    document.getElementById('sunDetails').innerHTML = `
+      <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; padding-bottom:0.5rem; border-bottom:1px solid var(--surface2)">
+        <span style="color:var(--muted); font-size:0.8rem;">🌅 Wschód</span>
+        <span style="font-weight:700;">${riseStr}</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; padding-bottom:0.5rem; border-bottom:1px solid var(--surface2)">
+        <span style="color:var(--muted); font-size:0.8rem;">🌇 Zachód</span>
+        <span style="font-weight:700;">${setStr}</span>
+      </div>
+    `;
+  } catch (e) { console.error('Astro Error:', e); }
 }
 
 function renderStylist(temp, wind, precip) {
@@ -2962,7 +2967,7 @@ function renderAll(data) {
   if (nav) nav.style.display = 'flex';
   
   fetchHistoryRecords(currentLat, currentLon);
-  fetchAstronomy(currentLat, currentLon);
+  fetchAstronomy(currentLat, currentLon, currentTimezone);
   renderStylist(cur.temp_c, cur.wind_kph, cur.precip_mm);
 
   if (activeTab !== 'weather') switchTab(activeTab); // Keep current tab if searching
