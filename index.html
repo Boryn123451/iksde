@@ -3142,12 +3142,12 @@ async function requestGeolocation(setAsHome = false) {
     } catch(e) {}
   }
 
-  showToast('Pobieranie lokalizacji (max 15s)...', 'info', 15000);
+  showToast('Pobieranie lokalizacji (max 25s)...', 'info', 25000);
 
   const geoOptions = {
-    enableHighAccuracy: false,
-    timeout: 12000,
-    maximumAge: 300000
+    enableHighAccuracy: true,
+    timeout: 20000,
+    maximumAge: 60000
   };
 
   try {
@@ -3155,7 +3155,7 @@ async function requestGeolocation(setAsHome = false) {
       let isSettled = false;
       const t = setTimeout(() => {
         if (!isSettled) { isSettled = true; rej(new Error('TIMEOUT_OR_SILENT_FAIL')); }
-      }, 15000);
+      }, 25000);
       
       navigator.geolocation.getCurrentPosition(
         (p) => { if (!isSettled) { isSettled = true; clearTimeout(t); res(p); } },
