@@ -1432,12 +1432,6 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
           </div>
           <div id="tileSunArc" class="sun-arc-wrap"></div>
         </div>
-        <!-- Feels like -->
-        <div class="detail-tile">
-          <div class="tile-label">🌡️ Odczuwalna</div>
-          <div class="tile-value" id="tileFeelsLike">—</div>
-          <div class="tile-sub" id="tileFeelsDiff">—</div>
-        </div>
         <!-- Precipitation -->
         <div class="detail-tile">
           <div class="tile-label">🌂 Opady dziś</div>
@@ -2395,10 +2389,6 @@ function renderDetails(cur, forecast) {
   const arc = document.getElementById('tileSunArc');
   if (arc) arc.innerHTML = renderSunArc(sunrise, sunset);
   
-  const feels = cur.feelslike_c || cur.temp_c;
-  const diff = feels - cur.temp_c;
-  setEl('tileFeelsLike', toDisplay(feels) + unitSym());
-  setEl('tileFeelsDiff', (diff >= 0 ? '+' : '') + diff.toFixed(1) + '° vs rzeczywista');
   
   setEl('tilePrecip', precipDisp(cur.precip_mm) + ' ' + precipUnit());
   setEl('tilePrecipSub', `Dziś: ${todayForecast.daily_chance_of_rain}% szans`);
@@ -2593,6 +2583,14 @@ async function fetchAstronomy(lat, lon, timezone) {
     document.getElementById('moonPhase').textContent = moonPhasePl[astro.moon_phase] || astro.moon_phase;
     document.getElementById('moonIllum').textContent = `Oświetlenie: ${astro.moon_illumination}%`;
     
+    // Update Main Tab Sun Tiles
+    const sRise = document.getElementById('tileSunrise');
+    const sSet = document.getElementById('tileSunset');
+    if (sRise) sRise.textContent = riseStr;
+    if (sSet) sSet.textContent = setStr;
+    const sArc = document.getElementById('tileSunArc');
+    if (sArc) sArc.innerHTML = renderSunArc(riseStr, setStr);
+
     document.getElementById('sunDetails').innerHTML = `
       <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; padding-bottom:0.5rem; border-bottom:1px solid var(--surface2)">
         <span style="color:var(--muted); font-size:0.8rem;">🌅 Wschód</span>
@@ -2650,7 +2648,8 @@ function getChartDataArrays(data) {
   
   if (chartRange === '24h') {
     const allHours = forecast.flatMap(d => d.hour);
-    const nowStr = new Date().toISOString().slice(0, 13);
+    // Use space as separator to match WeatherAPI format
+    const nowStr = new Date().toISOString().slice(0, 13).replace('T', ' ');
     let si = allHours.findIndex(h => h.time.slice(0,13) >= nowStr);
     if (si < 0) si = 0;
     const chunk = allHours.slice(si, si + 24);
@@ -2957,7 +2956,6 @@ function renderAll(data) {
   renderInsights(weatherInsights);
   
   if (cur.air_quality) renderAQIFresh(cur.air_quality);
-  renderChart(data);
 
   updateHeader();
   document.getElementById('starterScreen').style.display = 'none';
@@ -2966,6 +2964,9 @@ function renderAll(data) {
   const nav = document.getElementById('tabNav');
   if (nav) nav.style.display = 'flex';
   
+  // Render chart AFTER making the tab visible so offsetWidth is correct
+  setTimeout(() => renderChart(data), 50);
+
   fetchHistoryRecords(currentLat, currentLon);
   fetchAstronomy(currentLat, currentLon, currentTimezone);
   renderStylist(cur.temp_c, cur.wind_kph, cur.precip_mm);
