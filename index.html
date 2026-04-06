@@ -715,6 +715,10 @@ body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e
 .skel-daily { display: grid; grid-template-columns: repeat(7, 1fr); gap: .75rem; }
 .skel-day { height: 120px; }
 
+/* === AQI mini bars === */
+.mini-bar { width: 100%; height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; margin-top: 4px; }
+.mini-fill { height: 100%; border-radius: 2px; background: var(--accent); width: 0%; transition: width .5s ease; }
+
 /* === FOOTER === */
 .app-footer {
   font-size: .65rem;
@@ -1840,13 +1844,17 @@ body.tv-active {
 // GLOBALS & I18N
 // ============================================================
 const WEATHER_API_KEY = '356c581dc9ff452a942212719252101';
+const API_BASE = 'https://api.weatherapi.com/v1/forecast.json';
 let weatherData = null;
+let weatherInsights = null;
 let currentCity = 'Warszawa';
 let currentCountry = 'PL';
 let currentLat = null, currentLon = null;
 let currentTimezone = 'Europe/Warsaw';
 let currentUnits = localStorage.getItem('weather_unit_sys') || 'si';
+let unitSystem = currentUnits;
 let currentLang = localStorage.getItem('weather_lang') || 'pl';
+let searchTimeout, clockInterval;
 let activeTab = 'weather';
 let chartMode = 'temp';
 let chartRange = '24h';
@@ -2076,7 +2084,7 @@ function toggleLanguage() {
   updateUILanguage();
   if (weatherData) {
     const { lat, lon } = weatherData.location;
-    fetchWeather(lat, lon, currentCity, currentCountry);
+    loadWeather(lat, lon, currentCity, currentCountry);
   }
 }
 const WMO_ICONS = {
@@ -2105,6 +2113,47 @@ const WMO_ICONS = {
   96: { icon: '⛈️',  labelKey: 'wmo_95' },
   99: { icon: '⛈️',  labelKey: 'wmo_95' },
 };
+
+function getWmoIcon(code, isDay) {
+  const entry = WMO_ICONS[code] || WMO_ICONS[0];
+  let icon = entry.icon;
+  // Night overrides for clear/partly cloudy
+  if (isDay === 0) {
+    if (code === 0) icon = '🌙';
+    else if (code === 1) icon = '🌙';
+    else if (code === 2) icon = '🌥️';
+  }
+  return { icon, label: t(entry.labelKey) };
+}
+
+function getAqiLabel(idx) {
+  const labels = [
+    { text: 'Dobra',             color: 'var(--aqi-good)' },
+    { text: 'Umiarkowana',       color: 'var(--aqi-fair)' },
+    { text: 'Niezdrowa (wrażl.)',color: 'var(--aqi-mod)'  },
+    { text: 'Niezdrowa',         color: 'var(--aqi-mod)'  },
+    { text: 'Bardzo niezdrowa',  color: 'var(--aqi-poor)' },
+    { text: 'Hazardowa',         color: 'var(--aqi-very-poor)' },
+  ];
+  return labels[(idx || 1) - 1] || labels[0];
+}
+
+function getClimateTempColor(t) {
+  if (t == null) return 'var(--muted)';
+  if (t < -10) return '#cae8ff';
+  if (t < 0)   return '#79c0ff';
+  if (t < 10)  return '#a8d8ea';
+  if (t < 18)  return '#56d364';
+  if (t < 25)  return '#f0a500';
+  return '#f85149';
+}
+
+function openWiki() {
+  document.getElementById('wikiOverlay').classList.add('open');
+}
+function closeWiki() {
+  document.getElementById('wikiOverlay').classList.remove('open');
+}
 
 function weatherApiToWmo(code) {
   const map = {
@@ -3097,16 +3146,7 @@ function closeHeatModal() {
   document.getElementById('heatModal').classList.remove('open');
 }
 
-function switchTab(tabId) {
-  activeTab = tabId;
-  const tabs = ['weather', 'climate', 'history', 'astronomy'];
-  tabs.forEach(t => {
-    const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
-    const content = document.getElementById(t + 'Tab');
-    if (btn) btn.classList.toggle('active', t === tabId);
-    if (content) content.style.display = t === tabId ? 'flex' : 'none';
-  });
-}
+// switchTab defined below in tab section
 
 async function fetchHistoryRecords(lat, lon) {
   const container = document.getElementById('historyRecordsGrid');
@@ -3412,6 +3452,7 @@ function drawCrosshair(data, clientX) {
 
   ctx.save();
   ctx.scale(dpr, dpr);
+  ctx.scale(dpr, dpr);
   ctx.beginPath();
   ctx.strokeStyle = 'rgba(88,166,255,0.5)';
   ctx.lineWidth = 1;
@@ -3561,6 +3602,7 @@ function renderAll(data) {
   
   if (cur.air_quality) renderAQIFresh(cur.air_quality);
 
+  updateExtras();
   updateHeader();
   document.getElementById('starterScreen').style.display = 'none';
   const wt = document.getElementById('weatherTab');
@@ -3571,8 +3613,6 @@ function renderAll(data) {
   // Render chart AFTER making the tab visible so offsetWidth is correct
   setTimeout(() => renderChart(data), 50);
 
-  fetchHistoryRecords(currentLat, currentLon);
-  fetchAstronomy(currentLat, currentLon, currentTimezone);
   renderStylist(cur.temp_c, cur.wind_kph, cur.precip_mm);
 
   if (activeTab !== 'weather') switchTab(activeTab); // Keep current tab if searching
@@ -3586,7 +3626,6 @@ async function fetchFresh(lat, lon) {
   const r = await fetchT(url, 12000);
   if (!r.ok) throw new Error('HTTP ' + r.status);
   weatherData = await r.json();
-  weatherInsights = buildInsights(weatherData);
   cacheSave(lat, lon, weatherData, currentCity, currentCountry);
   renderAll(weatherData);
   hideLoadingState();
@@ -3600,7 +3639,6 @@ async function loadWeather(lat, lon, cityName, countryName) {
   const cached = cacheGet(lat, lon);
   if (cached) {
     weatherData = cached.data;
-    weatherInsights = buildInsights(weatherData);
     currentCity = cached.city || currentCity;
     currentCountry = cached.country || currentCountry;
     renderAll(weatherData);
@@ -3623,8 +3661,7 @@ async function loadWeather(lat, lon, cityName, countryName) {
   
   // Extra tabs data
   fetchHistoryRecords(lat, lon);
-  fetchAstronomy(lat, lon);
-  renderStylist(weatherData.current.temp_c, weatherData.current.wind_kph, weatherData.current.precip_mm);
+  fetchAstronomy(lat, lon, currentTimezone);
 }
 
 // ============================================================
@@ -3754,7 +3791,7 @@ async function fetchIPLocation(setAsHome = false) {
   // Metoda 2: ip-api.com (bardzo stabilne, fallback)
   showToast('Próba ustalenia lokalizacji po IP (metoda 2/2)...', 'info', 4000);
   try {
-    const r = await fetch('http://ip-api.com/json/'); // ip-api.com na HTTP/S
+    const r = await fetch('https://ip-api.com/json/');
     const d = await r.json();
     if (d.status === 'success') {
       const city = d.city || 'Lokalizacja po IP';
@@ -3947,15 +3984,7 @@ function toggleTheme() {
   applyTheme(isDark);
   if (weatherData) renderChart(weatherData);
 }
-function toggleUnit(sys) {
-  unitSystem = sys;
-  localStorage.setItem('weather_unit_sys', unitSystem);
-  document.getElementById('unitSI').classList.toggle('active', sys === 'si');
-  document.getElementById('unitIMP').classList.toggle('active', sys === 'imperial');
-  if (weatherData) {
-    renderAll(weatherData);
-  }
-}
+// toggleUnit defined below
 
 // ============================================================
 // CHART CONTROLS
@@ -4638,6 +4667,7 @@ function renderCompareCities() {
 // TAB SWITCHING
 // ============================================================
 function switchTab(tabId) {
+  activeTab = tabId;
   const tabs = ['weather', 'history', 'astronomy', 'climate'];
   tabs.forEach(t => {
     const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
@@ -5139,6 +5169,7 @@ function fmtDayLen(min) {
 
 function toggleUnit(sys) {
   unitSystem = sys;
+  currentUnits = sys;
   localStorage.setItem('weather_unit_sys', sys);
   document.getElementById('unitSI').classList.toggle('active', sys === 'si');
   document.getElementById('unitIMP').classList.toggle('active', sys === 'imperial');
@@ -5342,9 +5373,9 @@ window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
     if (weatherData) renderChart(weatherData);
-    // Redraw climate chart if visible
-    if (document.getElementById('climateChartWrap')?.style.display !== 'none') {
-      generateClimateChart();
+    // Redraw climate chart if visible (no refetch)
+    if (_climateDatasets.length && document.getElementById('climateChartWrap')?.style.display !== 'none') {
+      drawClimateChart(_climateDatasets, _climateTooltipMonth);
     }
   }, 200);
 });
@@ -5354,9 +5385,9 @@ window.addEventListener('resize', () => {
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
   applyTheme(isDark);
-  // restore unit
-  document.getElementById('unitSI').classList.toggle('active', currentUnits === 'si');
-  document.getElementById('unitIMP').classList.toggle('active', currentUnits === 'imperial');
+  // restore unit — unitSystem and currentUnits are both initialized from localStorage
+  document.getElementById('unitSI').classList.toggle('active', unitSystem === 'si');
+  document.getElementById('unitIMP').classList.toggle('active', unitSystem === 'imperial');
 
   setupChartControls();
   initCompare();
