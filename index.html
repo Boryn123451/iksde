@@ -175,6 +175,12 @@
           <div class="tile-sub" id="tileUVLabel">—</div>
         </div>
 
+        <!-- Extremes Trigger -->
+        <div class="detail-tile" id="extremesTile" style="cursor:pointer; transition:border-color 0.2s" title="Pokaż najgorętsze i najzimniejsze miejsca" role="button" tabindex="0">
+          <div class="tile-label">🌍 Globalne ekstrema</div>
+          <div class="tile-value" style="font-size:1.1rem; line-height:1.4; padding-top:0.4rem">Dzisiejsze<br>rekordy</div>
+          <div class="tile-sub" style="margin-top:auto; color:var(--accent)">Sprawdź listę ↗</div>
+        </div>
       </div>
 
       <!-- Insights -->
@@ -392,23 +398,34 @@
   </div>
 </div>
 
+<!-- Extremes Modal -->
+<div class="day-modal-overlay" id="extremesModalOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="exTitle">
+  <div class="day-modal" id="extremesModal" style="width: min(700px, 95vw); max-height: 85vh; display:flex; flex-direction:column">
+    <div class="day-modal-header">
+      <div class="day-modal-title">
+        <span class="day-modal-icon">🌍</span>
+        <div>
+          <div class="day-modal-name" id="exTitle">Globalne Ekstrema</div>
+          <div class="day-modal-desc">Najbardziej skrajne temperatury na świecie</div>
+        </div>
+      </div>
+      <button class="day-modal-close" id="exModalClose" aria-label="Zamknij">✕</button>
+    </div>
+    <div class="day-modal-body" id="exBody" style="flex:1; overflow-y:auto; padding: 1.5rem; display:flex; flex-direction:column; gap:2rem;">
+      <div style="text-align:center; padding:2rem; color:var(--muted)">Ładowanie...</div>
+    </div>
+  </div>
+</div>
+
+
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <!-- Loading Overlay -->
 <div class="loading-overlay" id="loadingOverlay">
-  <div class="loading-inner">
-    <div class="skeleton skel-hero"></div>
-    <div class="skeleton skel-hourly"></div>
-    <div class="skel-daily">
-      <div class="skeleton skel-day"></div>
-      <div class="skeleton skel-day"></div>
-      <div class="skeleton skel-day"></div>
-      <div class="skeleton skel-day"></div>
-      <div class="skeleton skel-day"></div>
-      <div class="skeleton skel-day"></div>
-      <div class="skeleton skel-day"></div>
-    </div>
+  <div class="loading-spinner-wrap">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Aktualizowanie danych...</div>
   </div>
 </div>
 

@@ -14,6 +14,7 @@ import { bindComparisonPanel, renderComparisonPanel } from './components/compari
 
 import { renderDaily } from './components/dailyForecast.js';
 import { renderDetails } from './components/detailsGrid.js';
+import { openExtremesModal, closeExtremesModal } from './components/extremesView.js';
 import { updateBackground, updateFavBtn, updateHeader, updateHomeBtn } from './components/header.js';
 import { renderHero } from './components/heroWeather.js';
 import { renderHourly } from './components/hourlyStrip.js';
@@ -301,6 +302,11 @@ function refreshCurrentWeather() {
 
 function bindGlobalEvents() {
   setupChartControls();
+  byId('extremesTile')?.addEventListener('click', () => openExtremesModal(loadWeather));
+  byId('exModalClose')?.addEventListener('click', closeExtremesModal);
+  byId('extremesModalOverlay')?.addEventListener('click', (e) => {
+    if (e.target.id === 'extremesModalOverlay') closeExtremesModal();
+  });
   bindSearchOverlay({ loadWeather, requestGeolocation });
   setupMap({ loadWeather });
   bindComparisonPanel({ loadWeather });
