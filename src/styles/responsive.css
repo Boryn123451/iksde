@@ -1,0 +1,108 @@
+﻿@media (max-width: 600px) {
+  .daily-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .day-card { scroll-snap-align: start; flex-shrink: 0; width: 130px; }
+  .details-grid { grid-template-columns: repeat(2, 1fr); }
+  .header-right { width: 100%; justify-content: space-between; }
+  .app-header { flex-direction: column; align-items: stretch; }
+}
+@media (max-width: 768px) {
+  .hero-temp { font-size: clamp(2.5rem, 8vw, 4rem); }
+  .details-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .search-overlay {
+    padding: 12px 0 0;
+  }
+  .overlay-inner {
+    border-radius: 16px;
+    width: calc(100% - 1rem);
+  }
+  .overlay-search-wrap input {
+    font-size: 16px;
+  }
+}
+
+/* ===== MOBILE COMPACT LAYOUT ===== */
+@media (max-width: 600px) {
+  /* Header kompaktowy */
+  .app-header { padding: .5rem .75rem; gap: .4rem; flex-wrap: wrap; }
+  .search-wrap { gap: .3rem; }
+  .search-wrap input { font-size: .75rem; padding: .35rem .55rem; }
+  .icon-btn { font-size: 1rem; padding: .3rem .4rem; }
+  .city-name { font-size: 1rem; }
+  .app-mode-toggle { width: 100%; }
+  .app-mode-btn { flex: 1; }
+  #localTime { font-size: .75rem; }
+  .unit-btn { padding: .25rem .4rem; font-size: .68rem; }
+
+  /* Hero kompaktowy */
+  .hero-card { padding: 1rem; border-radius: 12px; }
+  .hero-temp { font-size: 3.2rem; }
+  .hero-mini-row { gap: .5rem; flex-wrap: wrap; }
+  .hero-mini-item { font-size: .7rem; }
+
+  /* Pasek godzinowy — mniejsze sloty */
+  .hour-slot { min-width: 54px; padding: .45rem .25rem; }
+  .h-time { font-size: .58rem; }
+  .h-icon { font-size: 1.1rem; }
+  .h-temp { font-size: .78rem; }
+
+  /* Karty dzienne — 2 kolumny zamiast 7 */
+  .daily-grid { grid-template-columns: repeat(2, 1fr); gap: .5rem; }
+  .day-card { padding: .65rem .5rem; }
+
+  /* Siatka detali — 2 kolumny */
+  .details-grid { grid-template-columns: repeat(2, 1fr); gap: .5rem; }
+  .detail-tile { padding: .75rem; }
+
+  /* Wykres — niższy na mobile */
+  #chartCanvas { height: 160px !important; }
+
+  /* Sport — 2 kolumny */
+  .sport-grid { grid-template-columns: repeat(2, 1fr); }
+  .sport-card { padding: .65rem .7rem; }
+  .sport-icon { font-size: 1.4rem; }
+  .sport-name { font-size: .62rem; }
+  .sport-score { font-size: 1.3rem; }
+
+  /* Astro — 2 kolumny */
+  .astro-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Marine — 2 kolumny */
+  .marine-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Mapa */
+  #mapCanvas { height: 310px !important; }
+  .quick-grid { grid-template-columns: 1fr; }
+  .next-hours-grid { grid-template-columns: 1fr; }
+  .alerts-grid,
+  .comparison-grid,
+  .insights-grid { grid-template-columns: 1fr; }
+  .settings-sections { grid-template-columns: 1fr; }
+  .status-row { gap: .35rem; }
+  .map-city-popup { max-width: 220px; }
+  .map-layer-btns { flex-wrap: wrap; gap: 1px; }
+  .map-layer-btn { font-size: .62rem; padding: .22rem .45rem; }
+  .tourism-hero,
+  .tourism-section { padding: 1rem; border-radius: 12px; }
+  .tourism-attractions,
+  .tourism-gallery { grid-template-columns: 1fr; }
+  .tourism-basic-grid,
+  .tourism-cost-grid,
+  .tourism-safety-grid { grid-template-columns: 1fr; }
+
+  /* AQI kompaktowy */
+  .aqi-top { flex-direction: column; gap: .75rem; }
+
+  /* Historia — ukryj tabelę, zostaw tylko wykres */
+  .history-table thead th:nth-child(4) { display: none; }
+  .history-table td:nth-child(4) { display: none; }
+
+  /* Sekcje — mniejszy padding */
+  .sport-section, .astro-section, .marine-section { padding: 1rem; }
+  .section-title { font-size: .85rem; }
+
+  /* Footer schowany na mobile */
+  .app-footer { font-size: .6rem; padding: .5rem; flex-direction: column; gap: .15rem; }
+}

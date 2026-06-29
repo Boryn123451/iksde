@@ -1,0 +1,35 @@
+﻿:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #7d8590;
+  --accent: #58a6ff;
+  --cold: #79c0ff;
+  --cool: #a8d8ea;
+  --mild: #56d364;
+  --warm: #f0a500;
+  --hot: #f85149;
+  --rain: #388bfd;
+  --snow: #cae8ff;
+  --storm: #bc8cff;
+  --uv-low: #56d364;
+  --uv-mod: #f0a500;
+  --uv-high: #f85149;
+  --uv-extreme: #bc8cff;
+  --aqi-good: #56d364;
+  --aqi-fair: #f0a500;
+  --aqi-mod: #f85149;
+  --aqi-poor: #bc8cff;
+  --aqi-very-poor: #d62728;
+  --grad: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+}
+body.light {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --surface2: #e8edf2;
+  --border: #c8d0da;
+  --text: #1c2128;
+  --muted: #5a6270;
+}

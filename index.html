@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Modułowa aplikacja pogodowa z prognozą, AQI, historią, mapą i danymi astronomicznymi.">
+  <meta name="theme-color" content="#0d1117">
+  <title>Pogoda — Deep Weather</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-night">
+
+<div class="app">
+  <header class="app-header">
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Wyszukaj miasto…" autocomplete="off" aria-label="Otwórz wyszukiwarkę miasta">
+      <button class="icon-btn" id="searchBtn" title="Szukaj" aria-label="Szukaj miasta">🔍</button>
+      <button class="icon-btn" id="geoBtn" title="Moja lokalizacja" aria-label="Moja lokalizacja">📍</button>
+      <button class="icon-btn" id="homeBtn" title="Wróć do miasta domowego" aria-label="Wróć do miasta domowego" style="display:none">🏠</button>
+    </div>
+    <div class="header-right">
+      <div class="city-info">
+        <div style="display:flex;align-items:center;gap:.4rem;">
+          <span id="cityFlagEmoji" class="city-flag-emoji" aria-hidden="true" style="display:none"></span>
+          <img id="cityFlag" class="city-flag-img" alt="" loading="lazy" style="display:none">
+          <div id="cityName">—</div>
+          <button class="fav-btn" id="favToggleBtn" title="Dodaj do ulubionych" aria-label="Dodaj do ulubionych" style="display:none">☆</button>
+          <span id="homeBadge" class="home-badge" style="display:none">🏠 dom</span>
+        </div>
+        <div id="cityCountry"></div>
+      </div>
+      <div id="localTime">—:—:—</div>
+      <div class="header-controls">
+        <button class="icon-btn" id="darkToggle" title="Tryb jasny/ciemny" aria-label="Tryb jasny lub ciemny">🌙</button>
+        <button class="icon-btn" id="refreshBtn" title="Odśwież dane" aria-label="Odśwież dane">↻</button>
+        <button class="icon-btn" id="shareBtn" title="Udostępnij prognozę" aria-label="Udostępnij prognozę">↗</button>
+        <button class="icon-btn" id="settingsBtn" title="Ustawienia widoku" aria-label="Ustawienia widoku">⚙</button>
+        <div class="unit-toggle">
+          <button class="unit-btn active" id="unitSI" title="Jednostki SI (metryczne)">SI</button>
+          <button class="unit-btn" id="unitIMP" title="Jednostki imperialne">IMP</button>
+        </div>
+      </div>
+    </div>
+    <div class="app-mode-toggle" role="tablist" aria-label="Tryb aplikacji">
+      <button class="app-mode-btn active" id="modeWeatherBtn" type="button" role="tab" aria-selected="true">Pogoda</button>
+      <button class="app-mode-btn" id="modeTourismBtn" type="button" role="tab" aria-selected="false">Turystyka</button>
+    </div>
+  </header>
+
+  <main id="appMain">
+    <!-- Starter screen -->
+    <div id="starterScreen" class="starter">
+      <div class="starter-icon">🌍</div>
+      <h2>Sprawdź pogodę</h2>
+      <p>Wyszukaj miasto lub użyj swojej lokalizacji</p>
+      <div class="starter-actions">
+        <button class="starter-btn" id="starterSearch">🔍 Szukaj miasta</button>
+        <button class="starter-btn" id="starterGeo">📍 Moja lokalizacja</button>
+      </div>
+      <div class="starter-popular">
+        <div class="popular-label">Popularne</div>
+        <button class="popular-btn" data-lat="52.23" data-lon="21.01" data-city="Warszawa" data-country="Polska" data-country-code="PL">Warszawa</button>
+        <button class="popular-btn" data-lat="50.06" data-lon="19.94" data-city="Kraków" data-country="Polska" data-country-code="PL">Kraków</button>
+        <button class="popular-btn" data-lat="51.11" data-lon="17.04" data-city="Wrocław" data-country="Polska" data-country-code="PL">Wrocław</button>
+        <button class="popular-btn" data-lat="54.37" data-lon="18.61" data-city="Gdańsk" data-country="Polska" data-country-code="PL">Gdańsk</button>
+        <button class="popular-btn" data-lat="48.86" data-lon="2.35"  data-city="Paryż" data-country="Francja" data-country-code="FR">Paryż</button>
+        <button class="popular-btn" data-lat="51.51" data-lon="-0.13" data-city="Londyn" data-country="Wielka Brytania" data-country-code="GB">Londyn</button>
+      </div>
+    </div>
+
+    <!-- Weather content (hidden until data loaded) -->
+    <div id="weatherContent" style="display:none; flex-direction:column; width:100%; gap:0">
+      <div class="status-row" id="statusRow">
+        <span id="networkStatus" class="status-pill online">online</span>
+        <span id="updatedStatus" class="updated-status">brak aktualizacji</span>
+      </div>
+
+      <section class="alerts-section" id="alertsSection">
+        <div class="section-title">Alerty pogodowe</div>
+        <div class="alerts-grid" id="alertsGrid"></div>
+      </section>
+
+      <!-- Hero -->
+      <div class="hero-card" id="heroCard">
+        <div class="hero-bg-icon" id="heroBgIcon">☀️</div>
+        <div class="hero-top">
+          <div>
+            <div id="heroIcon" class="hero-icon-main">—</div>
+            <div id="heroDesc" class="hero-desc">—</div>
+          </div>
+          <div>
+            <div id="heroTemp" class="hero-temp">—°</div>
+            <div id="heroFeelsLike" class="hero-feels">Odczuwalna: —°</div>
+          </div>
+        </div>
+        <div class="hero-mini-row">
+          <div class="hero-mini-item">💧 <span class="val" id="heroHumidity">—</span>%</div>
+          <div class="hero-mini-item">💨 <span class="val" id="heroWind">—</span> <span id="heroWindUnit">km/h</span> <span id="heroWindDir" style="color:var(--accent)">—</span></div>
+          <div class="hero-mini-item">☁️ <span class="val" id="heroClouds">—</span>%</div>
+          <div class="hero-mini-item">🌡️ <span class="val" id="heroPressure">—</span> <span id="heroPressureUnit">hPa</span></div>
+        </div>
+      </div>
+
+      <!-- Hourly -->
+      <div class="section-wrap" style="padding:0; animation: fadeSlideUp .4s ease .1s both;">
+        <div id="hourlyStrip" class="hourly-strip"></div>
+      </div>
+
+      <!-- Daily -->
+      <div id="dailyGrid" class="daily-grid"></div>
+
+      <!-- Details -->
+      <div id="detailsGrid" class="details-grid">
+        <!-- Wind -->
+        <div class="detail-tile">
+          <div class="tile-label">💨 Wiatr</div>
+          <div class="tile-value" id="tileWindSpeed">—</div>
+          <div class="compass-wrap">
+            <div id="tileWindCompass"></div>
+            <span class="tile-sub" id="tileWindDir">—</span>
+          </div>
+        </div>
+        <!-- Humidity -->
+        <div class="detail-tile">
+          <div class="tile-label">💧 Wilgotność</div>
+          <div class="tile-value" id="tileHumidity">—</div>
+          <div class="humidity-bar-wrap"><div class="humidity-bar-fill" id="tileHumidityBar" style="width:0%"></div></div>
+        </div>
+        <!-- Pressure -->
+        <div class="detail-tile">
+          <div class="tile-label">🌡️ Ciśnienie</div>
+          <div class="tile-value" id="tilePressure">—</div>
+          <div class="tile-sub" id="tilePressureArrow">—</div>
+        </div>
+        <!-- Cloud cover -->
+        <div class="detail-tile">
+          <div class="tile-label">☁️ Zachmurzenie</div>
+          <div class="tile-value" id="tileClouds">—</div>
+          <div class="humidity-bar-wrap"><div class="humidity-bar-fill" id="tileCloudsBar" style="width:0%;background:var(--muted)"></div></div>
+        </div>
+        <!-- Sunrise/sunset -->
+        <div class="detail-tile">
+          <div class="tile-label">🌅 Wschód / Zachód</div>
+          <div style="display:flex;gap:1rem;font-family:'Space Mono';font-size:.95rem;font-weight:700">
+            <span id="tileSunrise">—</span>
+            <span style="color:var(--muted)">→</span>
+            <span id="tileSunset">—</span>
+        <div class="hero-bg-icon" id="heroBgIcon">☀️</div>
+        <div class="hero-top">
+          <div>
+            <div id="heroIcon" class="hero-icon-main">—</div>
+            <div id="heroDesc" class="hero-desc">—</div>
+          </div>
+          <div>
+            <div id="heroTemp" class="hero-temp">—°</div>
+            <div id="heroFeelsLike" class="hero-feels">Odczuwalna: —°</div>
+          </div>
+        </div>
+        <div class="hero-mini-row">
+          <div class="hero-mini-item">💧 <span class="val" id="heroHumidity">—</span>%</div>
+          <div class="hero-mini-item">💨 <span class="val" id="heroWind">—</span> <span id="heroWindUnit">km/h</span> <span id="heroWindDir" style="color:var(--accent)">—</span></div>
+          <div class="hero-mini-item">☁️ <span class="val" id="heroClouds">—</span>%</div>
+          <div class="hero-mini-item">🌡️ <span class="val" id="heroPressure">—</span> <span id="heroPressureUnit">hPa</span></div>
+        </div>
+      </div>
+
+      <!-- Hourly -->
+      <div class="section-wrap" style="padding:0; animation: fadeSlideUp .4s ease .1s both;">
+        <div id="hourlyStrip" class="hourly-strip"></div>
+      </div>
+
+      <!-- Daily -->
+      <div id="dailyGrid" class="daily-grid"></div>
+
+      <!-- Details -->
+      <div id="detailsGrid" class="details-grid">
+        <!-- Wind -->
+        <div class="detail-tile">
+          <div class="tile-label">💨 Wiatr</div>
+          <div class="tile-value" id="tileWindSpeed">—</div>
+          <div class="compass-wrap">
+            <div id="tileWindCompass"></div>
+            <span class="tile-sub" id="tileWindDir">—</span>
+          </div>
+        </div>
+        <!-- Humidity -->
+        <div class="detail-tile">
+          <div class="tile-label">💧 Wilgotność</div>
+          <div class="tile-value" id="tileHumidity">—</div>
+          <div class="humidity-bar-wrap"><div class="humidity-bar-fill" id="tileHumidityBar" style="width:0%"></div></div>
+        </div>
+        <!-- Pressure -->
+        <div class="detail-tile">
+          <div class="tile-label">🌡️ Ciśnienie</div>
+          <div class="tile-value" id="tilePressure">—</div>
+          <div class="tile-sub" id="tilePressureArrow">—</div>
+        </div>
+        <!-- Cloud cover -->
+        <div class="detail-tile">
+          <div class="tile-label">☁️ Zachmurzenie</div>
+          <div class="tile-value" id="tileClouds">—</div>
+          <div class="humidity-bar-wrap"><div class="humidity-bar-fill" id="tileCloudsBar" style="width:0%;background:var(--muted)"></div></div>
+        </div>
+        <!-- Sunrise/sunset -->
+        <div class="detail-tile">
+          <div class="tile-label">🌅 Wschód / Zachód</div>
+          <div style="display:flex;gap:1rem;font-family:'Space Mono';font-size:.95rem;font-weight:700">
+            <span id="tileSunrise">—</span>
+            <span style="color:var(--muted)">→</span>
+            <span id="tileSunset">—</span>
+          </div>
+          <div id="tileSunArc" class="sun-arc-wrap"></div>
+        </div>
+        <!-- Feels like -->
+        <div class="detail-tile">
+          <div class="tile-label">🌡️ Odczuwalna</div>
+          <div class="tile-value" id="tileFeelsLike">—</div>
+          <div class="tile-sub" id="tileFeelsDiff">—</div>
+        </div>
+        <!-- Precipitation -->
+        <div class="detail-tile">
+          <div class="tile-label">🌂 Opady dziś</div>
+          <div class="tile-value" id="tilePrecip">—</div>
+          <div class="tile-sub" id="tilePrecipSub">mm</div>
+        </div>
+        <!-- UV -->
+        <div class="detail-tile">
+          <div class="tile-label">☀️ UV Index</div>
+          <div class="tile-value" id="tileUV">—</div>
+          <div id="tileUVGauge" style="width:100%;height:8px;border-radius:4px;background:linear-gradient(90deg,#56d364,#f0a500,#f85149,#bc8cff);margin:.2rem 0;position:relative;">
+            <div id="tileUVIndicator" style="position:absolute;top:-2px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #000;left:0%;transform:translateX(-50%);transition:left .5s ease;"></div>
+          </div>
+          <div class="tile-sub" id="tileUVLabel">—</div>
+        </div>
+        <!-- Comfort -->
+        <div class="detail-tile detail-tile--comfort" id="comfortSection">
+          <div class="tile-label">😊 Komfort</div>
+          <div class="comfort-ring-wrap" id="comfortRing"></div>
+          <div class="tile-sub" id="comfortReasons"></div>
+        </div>
+      </div>
+
+      <!-- Insights -->
+      <div class="insights-section" id="insightsSection">
+        <div class="section-title">Dzisiaj warto / nie warto</div>
+        <div class="insights-grid" id="insightsGrid"></div>
+        <div class="export-actions">
+          <button class="export-btn" id="exportJsonBtn" type="button">Eksport JSON</button>
+          <button class="export-btn" id="exportCsvBtn" type="button">Eksport CSV</button>
+        </div>
+      </div>
+
+      <div class="clothing-section" id="clothingSection">
+        <div class="section-title">Co założyć?</div>
+        <div class="clothing-list" id="clothingList"></div>
+      </div>
+
+      <section class="next-hours-section" id="nextHoursSection">
+        <div class="section-title">Najbliższe 3 godziny</div>
+        <div class="next-hours-grid" id="nextHoursGrid"></div>
+      </section>
+
+      <section class="comparison-section" id="comparisonSection">
+        <div class="section-title-row">
+          <div class="section-title">Porównanie miast</div>
+          <button class="export-btn" id="compareCurrentBtn" type="button">Dodaj aktualne</button>
+        </div>
+        <div class="comparison-grid" id="comparisonGrid"></div>
+      </section>
+
+      <!-- Chart -->
+      <div class="chart-section" id="chartSection">
+        <div class="section-title">Wykres</div>
+        <div class="chart-controls">
+          <div class="chart-btn-group" id="chartModeBtns">
+            <button class="chart-btn active" data-mode="temp">Temperatura</button>
+            <button class="chart-btn" data-mode="precip">Opady</button>
+            <button class="chart-btn" data-mode="wind">Wiatr</button>
+          </div>
+          <div class="chart-btn-group" id="chartRangeBtns">
+            <button class="chart-btn active" data-range="24h">24h</button>
+            <button class="chart-btn" data-range="7days">7 dni</button>
+          </div>
+        </div>
+        <div class="chart-canvas-wrap">
+          <canvas id="chartCanvas" height="220"></canvas>
+          <div id="chartTooltip"></div>
+        </div>
+      </div>
+
+      <!-- AQI -->
+      <div class="aqi-card" id="aqiCard">
+        <div class="section-title">Jakość powietrza</div>
+        <div class="aqi-top">
+          <div class="aqi-gauge-wrap">
+            <svg id="aqiGauge" viewBox="0 0 120 70" width="140" height="80">
+              <path d="M10,65 A50,50 0 0,1 110,65" fill="none" stroke="var(--border)" stroke-width="10" stroke-linecap="round"/>
+              <path id="aqiGaugeFill" d="M10,65 A50,50 0 0,1 110,65" fill="none" stroke="var(--aqi-good)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" style="transition: stroke-dashoffset .8s ease, stroke .4s;"/>
+            </svg>
+            <div class="aqi-main-value" id="aqiValue">—</div>
+            <div class="aqi-label" id="aqiLabel">—</div>
+          </div>
+          <div class="aqi-components">
+            <div class="aqi-comp"><div class="aqi-comp-name">PM2.5</div><div class="aqi-comp-val" id="aqiPM25">—</div><div class="aqi-comp-bar" id="aqiPM25bar" style="width:0%"></div></div>
+            <div class="aqi-comp"><div class="aqi-comp-name">PM10</div><div class="aqi-comp-val" id="aqiPM10">—</div><div class="aqi-comp-bar" id="aqiPM10bar" style="width:0%"></div></div>
+            <div class="aqi-comp"><div class="aqi-comp-name">NO₂</div><div class="aqi-comp-val" id="aqiNO2">—</div><div class="aqi-comp-bar" id="aqiNO2bar" style="width:0%"></div></div>
+            <div class="aqi-comp"><div class="aqi-comp-name">O₃</div><div class="aqi-comp-val" id="aqiO3">—</div><div class="aqi-comp-bar" id="aqiO3bar" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History -->
+      <div class="history-card" id="historyCard">
+        <div class="section-title">Ostatnie 7 dni</div>
+        <table class="history-table" id="historyTable">
+          <thead><tr><th>Data</th><th>Max</th><th>Min</th><th>Opady</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="history-mini-chart" id="historyChart"></div>
+      </div>
+      <!-- Marine -->
+      <div class="marine-section" id="marineSection">
+        <div class="section-title">🌊 Dane morskie</div>
+        <div class="marine-grid" id="marineGrid"></div>
+      </div>
+
+      <!-- Sport conditions -->
+      <div class="sport-section" id="sportSection">
+        <div class="section-title">🏃 Warunki dla sportu</div>
+        <div class="sport-grid" id="sportGrid"></div>
+      </div>
+
+      <!-- Astronomy -->
+      <div class="astro-section" id="astroSection">
+        <div class="section-title">🌙 Astronomia</div>
+        <div class="astro-grid" id="astroGrid"></div>
+      </div>
+
+    </div><!-- end weatherContent -->
+    <div id="tourismContent" class="tourism-content" style="display:none"></div>
+  </main>
+
+  <!-- Mapa — zawsze widoczna, niezależnie od załadowanej pogody -->
+  <div class="app" style="padding-top:0">
+    <div class="map-section" id="mapSection">
+      <div class="map-header">
+        <div class="section-title" style="margin-bottom:0">🗺️ Mapa pogodowa</div>
+        <div class="map-layer-btns" id="mapLayerBtns">
+          <button class="map-layer-btn active" data-layer="temp" type="button">Temperatura</button>
+          <button class="map-layer-btn" data-layer="precip" type="button">Opady</button>
+          <button class="map-layer-btn" data-layer="radar" type="button">Radar</button>
+          <button class="map-layer-btn" data-layer="wind" type="button">Wiatr</button>
+          <button class="map-layer-btn" data-layer="cloud" type="button">Chmury</button>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <div id="mapCanvas" class="weather-map-webgl" role="application" aria-label="Interaktywna mapa pogodowa"></div>
+        <div class="map-info-stack" aria-hidden="true">
+          <div class="map-info-pill" id="mapZoomBadge">Zoom 4.0</div>
+          <div class="map-info-pill" id="mapRegionBadge">Obszar: Polska / PL</div>
+          <div class="map-info-pill map-radar-pill" id="mapRadarBadge" hidden>Radar: —</div>
+        </div>
+        <div class="map-legend" id="mapLegend" aria-hidden="true"></div>
+        <div class="map-city-popup" id="mapCityPopup"></div>
+        <div class="map-fallback" id="mapFallback" hidden>Warstwa mapy chwilowo niedostępna. Punkty pogodowe pozostają aktywne.</div>
+        <div class="map-controls">
+        <button class="map-zoom-btn" id="mapZoomIn" type="button" aria-label="Powiększ mapę">+</button>
+        <button class="map-zoom-btn" id="mapZoomOut" type="button" aria-label="Pomniejsz mapę">−</button>
+        </div>
+        <div class="map-attribution" id="mapAttribution">
+          Mapa: <a href="https://openfreemap.org" target="_blank" rel="noreferrer">OpenFreeMap</a> /
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OSM</a> ·
+          silnik: <a href="https://maplibre.org" target="_blank" rel="noreferrer">MapLibre</a> +
+          <a href="https://deck.gl" target="_blank" rel="noreferrer">deck.gl</a> ·
+          pogoda: <a href="https://open-meteo.com" target="_blank" rel="noreferrer">Open-Meteo</a> ·
+          radar: <a href="https://www.rainviewer.com/api/weather-maps-api.html" target="_blank" rel="noreferrer">RainViewer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <span>Dane pogodowe: <a href="https://open-meteo.com" target="_blank">Open-Meteo</a> (CC BY 4.0)</span>
+    <span>Geocoding: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim / OSM</a></span>
+    <span>Dane mają charakter informacyjny</span>
+  </footer>
+</div>
+
+<!-- Settings Overlay -->
+<div class="settings-overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="settingsTitle">
+  <div class="settings-inner">
+    <div class="overlay-header">
+      <span id="settingsTitle">Ustawienia ekranu</span>
+      <button class="overlay-close-btn" id="settingsClose" aria-label="Zamknij ustawienia">✕</button>
+    </div>
+    <div class="settings-sections" id="settingsSections"></div>
+  </div>
+</div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="searchOverlayTitle">
+  <div class="overlay-inner">
+    <div class="overlay-header">
+      <span id="searchOverlayTitle">Wybierz lokalizację</span>
+      <div style="display:flex;gap:.5rem;align-items:center;">
+        <button class="icon-btn" id="overlayGeoBtn" title="Użyj GPS i ustaw jako dom" aria-label="Użyj GPS i ustaw jako dom" style="font-size:.75rem;padding:.3rem .6rem;">📍 GPS</button>
+        <button class="overlay-close-btn" id="overlayClose" aria-label="Zamknij wyszukiwarkę">✕</button>
+      </div>
+    </div>
+    <div class="overlay-search-wrap">
+      <input type="search" id="overlaySearchInput" placeholder="Wpisz nazwę miasta…" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Nazwa miasta">
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-recent" id="searchRecent"></div>
+    <div class="fav-section" id="favSection" style="display:none">
+      <div class="fav-label">⭐ Ulubione</div>
+      <div id="favList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Hour Detail Modal -->
+<div class="hour-modal-overlay" id="hourModalOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="hmTime">
+  <div class="hour-modal" id="hourModal">
+    <div class="hour-modal-header">
+      <div>
+        <div style="display:flex;align-items:center;gap:.7rem;">
+          <span id="hmIcon" style="font-size:2rem">☀️</span>
+          <div>
+            <div class="hour-modal-time" id="hmTime">—</div>
+            <div class="hour-modal-desc" id="hmDesc">—</div>
+          </div>
+        </div>
+      </div>
+      <button class="hour-modal-close" id="hourModalClose" aria-label="Zamknij szczegóły godziny">✕</button>
+    </div>
+    <div class="hour-modal-body" id="hmBody"></div>
+  </div>
+</div>
+
+<!-- Day Detail Modal -->
+<div class="day-modal-overlay" id="dayModalOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="dmName">
+  <div class="day-modal" id="dayModal">
+    <div class="day-modal-header">
+      <div class="day-modal-title">
+        <span class="day-modal-icon" id="dmIcon">☀️</span>
+        <div>
+          <div class="day-modal-name" id="dmName">—</div>
+          <div class="day-modal-desc" id="dmDesc">—</div>
+        </div>
+      </div>
+      <button class="day-modal-close" id="dayModalClose" aria-label="Zamknij szczegóły dnia">✕</button>
+    </div>
+    <div class="day-modal-body" id="dmBody"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-inner">
+    <div class="skeleton skel-hero"></div>
+    <div class="skeleton skel-hourly"></div>
+    <div class="skel-daily">
+      <div class="skeleton skel-day"></div>
+      <div class="skeleton skel-day"></div>
+      <div class="skeleton skel-day"></div>
+      <div class="skeleton skel-day"></div>
+      <div class="skeleton skel-day"></div>
+      <div class="skeleton skel-day"></div>
+      <div class="skeleton skel-day"></div>
+    </div>
+  </div>
+</div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

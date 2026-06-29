@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Deep Weather">
+  <rect width="512" height="512" rx="96" fill="#0d1117"/>
+  <rect x="54" y="54" width="404" height="404" rx="72" fill="#161b22" stroke="#30363d" stroke-width="10"/>
+  <path d="M116 316c26-84 78-132 140-132s114 48 140 132" fill="none" stroke="#58a6ff" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="256" cy="232" r="58" fill="#f0a500"/>
+  <path d="M146 330h220c34 0 62 26 62 58s-28 58-62 58H154c-40 0-72-28-72-64 0-28 18-48 44-56 4-1 12-3 20-4z" fill="#21262d" stroke="#79c0ff" stroke-width="12"/>
+  <path d="M156 390h56M238 390h118" stroke="#56d364" stroke-width="16" stroke-linecap="round"/>
+  <path d="M118 108h276" stroke="#30363d" stroke-width="10" stroke-linecap="round"/>
+  <path d="M118 134h148" stroke="#58a6ff" stroke-width="10" stroke-linecap="round"/>
+</svg>

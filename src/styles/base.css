@@ -1,0 +1,30 @@
+﻿*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background .4s, color .3s;
+  position: relative;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--grad);
+  z-index: -1;
+  transition: background .8s ease;
+  pointer-events: none;
+}
+body.bg-sunny::before   { --grad: linear-gradient(135deg, #0d1f40 0%, #0a2a5c 40%, #1a3a6e 100%); }
+body.bg-cloud::before   { --grad: linear-gradient(135deg, #1a1f2e 0%, #0d1520 100%); }
+body.bg-rain::before    { --grad: linear-gradient(135deg, #0d1b2a 0%, #0a1520 50%, #091218 100%); }
+body.bg-storm::before   { --grad: linear-gradient(135deg, #1a0d2e 0%, #0d0a20 50%, #0d1020 100%); }
+body.bg-snow::before    { --grad: linear-gradient(135deg, #1a2030 0%, #0d1525 100%); }
+body.bg-night::before   { --grad: linear-gradient(135deg, #060810 0%, #0d1117 100%); }
+body.light.bg-sunny::before { --grad: linear-gradient(135deg, #e8f4ff 0%, #d0e8ff 100%); }
+body.light.bg-cloud::before { --grad: linear-gradient(135deg, #e8edf5 0%, #d8e0ec 100%); }
+body.light.bg-rain::before  { --grad: linear-gradient(135deg, #d8e8f5 0%, #c8d8e8 100%); }
+

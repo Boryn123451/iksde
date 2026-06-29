@@ -1,0 +1,25 @@
+{
+  "name": "pogoda-vite",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "dev:auto": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run-vite.ps1 -Mode dev -StartPort 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "preview:auto": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run-vite.ps1 -Mode preview -StartPort 4173",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vite": "^6.3.0",
+    "vitest": "^3.1.0"
+  },
+  "dependencies": {
+    "@deck.gl/aggregation-layers": "^9.3.1",
+    "@deck.gl/core": "^9.3.1",
+    "@deck.gl/layers": "^9.3.1",
+    "@deck.gl/mapbox": "^9.3.1",
+    "maplibre-gl": "^5.24.0"
+  }
+}

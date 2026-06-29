@@ -1,0 +1,88 @@
+{
+  "updated": "2026-06-29T08:31:39.645Z",
+  "start_date": "2026-05-28",
+  "end_date": "2026-06-27",
+  "hot": [
+    {
+      "name": "Basra",
+      "country": "Irak",
+      "temp": 50.9,
+      "date": "2026-06-23",
+      "lat": 30.508,
+      "lon": 47.783
+    },
+    {
+      "name": "Sulaibiya",
+      "country": "Kuwejt",
+      "temp": 50.1,
+      "date": "2026-06-23",
+      "lat": 29.283,
+      "lon": 47.817
+    },
+    {
+      "name": "Mitribah",
+      "country": "Kuwejt",
+      "temp": 49.8,
+      "date": "2026-06-23",
+      "lat": 29.825,
+      "lon": 47.36
+    },
+    {
+      "name": "Nasiriyah",
+      "country": "Irak",
+      "temp": 49.8,
+      "date": "2026-06-23",
+      "lat": 31.058,
+      "lon": 46.257
+    },
+    {
+      "name": "Amarah",
+      "country": "Irak",
+      "temp": 49.6,
+      "date": "2026-06-22",
+      "lat": 31.845,
+      "lon": 47.145
+    },
+    {
+      "name": "Turbat",
+      "country": "Pakistan",
+      "temp": 49.5,
+      "date": "2026-05-28",
+      "lat": 26.002,
+      "lon": 63.048
+    },
+    {
+      "name": "Ahvaz",
+      "country": "Iran",
+      "temp": 49.3,
+      "date": "2026-06-23",
+      "lat": 31.318,
+      "lon": 48.67
+    },
+    {
+      "name": "Jacobabad",
+      "country": "Pakistan",
+      "temp": 49,
+      "date": "2026-05-28",
+      "lat": 28.281,
+      "lon": 68.438
+    },
+    {
+      "name": "Sibi",
+      "country": "Pakistan",
+      "temp": 49,
+      "date": "2026-05-28",
+      "lat": 29.543,
+      "lon": 67.877
+    },
+    {
+      "name": "Fahud",
+      "country": "Oman",
+      "temp": 48.5,
+      "date": "2026-06-11",
+      "lat": 22.25,
+      "lon": 56.483
+    }
+  ],
+  "cold": []
+}

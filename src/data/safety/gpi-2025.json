@@ -1,0 +1,1541 @@
+[
+  {
+    "iso3": "AFG",
+    "country": "Afghanistan",
+    "year": 2025,
+    "rank": 158,
+    "score": 3.229,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "AGO",
+    "country": "Angola",
+    "year": 2025,
+    "rank": 76,
+    "score": 1.987,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ALB",
+    "country": "Albania",
+    "year": 2025,
+    "rank": 52,
+    "score": 1.812,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ARE",
+    "country": "United Arab Emirates",
+    "year": 2025,
+    "rank": 52,
+    "score": 1.812,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ARG",
+    "country": "Argentina",
+    "year": 2025,
+    "rank": 46,
+    "score": 1.768,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ARM",
+    "country": "Armenia",
+    "year": 2025,
+    "rank": 58,
+    "score": 1.893,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "AUS",
+    "country": "Australia",
+    "year": 2025,
+    "rank": 18,
+    "score": 1.505,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "AUT",
+    "country": "Austria",
+    "year": 2025,
+    "rank": 4,
+    "score": 1.294,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "AZE",
+    "country": "Azerbaijan",
+    "year": 2025,
+    "rank": 95,
+    "score": 2.067,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BDI",
+    "country": "Burundi",
+    "year": 2025,
+    "rank": 133,
+    "score": 2.574,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BEL",
+    "country": "Belgium",
+    "year": 2025,
+    "rank": 16,
+    "score": 1.492,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BEN",
+    "country": "Benin",
+    "year": 2025,
+    "rank": 112,
+    "score": 2.211,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BFA",
+    "country": "Burkina Faso",
+    "year": 2025,
+    "rank": 152,
+    "score": 3.016,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BGD",
+    "country": "Bangladesh",
+    "year": 2025,
+    "rank": 123,
+    "score": 2.318,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BGR",
+    "country": "Bulgaria",
+    "year": 2025,
+    "rank": 29,
+    "score": 1.61,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BHR",
+    "country": "Bahrain",
+    "year": 2025,
+    "rank": 100,
+    "score": 2.099,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BIH",
+    "country": "Bosnia and Herzegovina",
+    "year": 2025,
+    "rank": 59,
+    "score": 1.895,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BLR",
+    "country": "Belarus",
+    "year": 2025,
+    "rank": 119,
+    "score": 2.267,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BOL",
+    "country": "Bolivia",
+    "year": 2025,
+    "rank": 83,
+    "score": 2.005,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BRA",
+    "country": "Brazil",
+    "year": 2025,
+    "rank": 130,
+    "score": 2.472,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BTN",
+    "country": "Bhutan",
+    "year": 2025,
+    "rank": 21,
+    "score": 1.536,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BWA",
+    "country": "Botswana",
+    "year": 2025,
+    "rank": 43,
+    "score": 1.743,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CAF",
+    "country": "Central African Republic",
+    "year": 2025,
+    "rank": 150,
+    "score": 2.912,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CAN",
+    "country": "Canada",
+    "year": 2025,
+    "rank": 14,
+    "score": 1.491,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CHE",
+    "country": "Switzerland",
+    "year": 2025,
+    "rank": 4,
+    "score": 1.294,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CHL",
+    "country": "Chile",
+    "year": 2025,
+    "rank": 62,
+    "score": 1.899,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CHN",
+    "country": "China",
+    "year": 2025,
+    "rank": 98,
+    "score": 2.093,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CIV",
+    "country": "Cote d' Ivoire",
+    "year": 2025,
+    "rank": 94,
+    "score": 2.066,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CMR",
+    "country": "Cameroon",
+    "year": 2025,
+    "rank": 137,
+    "score": 2.683,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "COD",
+    "country": "Democratic Republic of the Congo",
+    "year": 2025,
+    "rank": 160,
+    "score": 3.292,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "COG",
+    "country": "Republic of the Congo",
+    "year": 2025,
+    "rank": 103,
+    "score": 2.132,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "COL",
+    "country": "Colombia",
+    "year": 2025,
+    "rank": 140,
+    "score": 2.695,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CRI",
+    "country": "Costa Rica",
+    "year": 2025,
+    "rank": 54,
+    "score": 1.843,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CUB",
+    "country": "Cuba",
+    "year": 2025,
+    "rank": 102,
+    "score": 2.123,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CYP",
+    "country": "Cyprus",
+    "year": 2025,
+    "rank": 68,
+    "score": 1.933,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CZE",
+    "country": "Czechia",
+    "year": 2025,
+    "rank": 11,
+    "score": 1.435,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "DEU",
+    "country": "Germany",
+    "year": 2025,
+    "rank": 20,
+    "score": 1.533,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "DJI",
+    "country": "Djibouti",
+    "year": 2025,
+    "rank": 122,
+    "score": 2.276,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "DNK",
+    "country": "Denmark",
+    "year": 2025,
+    "rank": 8,
+    "score": 1.393,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "DOM",
+    "country": "Dominican Republic",
+    "year": 2025,
+    "rank": 79,
+    "score": 1.996,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "DZA",
+    "country": "Algeria",
+    "year": 2025,
+    "rank": 92,
+    "score": 2.042,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ECU",
+    "country": "Ecuador",
+    "year": 2025,
+    "rank": 129,
+    "score": 2.459,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "EGY",
+    "country": "Egypt",
+    "year": 2025,
+    "rank": 107,
+    "score": 2.157,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ERI",
+    "country": "Eritrea",
+    "year": 2025,
+    "rank": 132,
+    "score": 2.542,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ESP",
+    "country": "Spain",
+    "year": 2025,
+    "rank": 25,
+    "score": 1.578,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "EST",
+    "country": "Estonia",
+    "year": 2025,
+    "rank": 24,
+    "score": 1.559,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ETH",
+    "country": "Ethiopia",
+    "year": 2025,
+    "rank": 138,
+    "score": 2.688,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "FIN",
+    "country": "Finland",
+    "year": 2025,
+    "rank": 10,
+    "score": 1.42,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "FRA",
+    "country": "France",
+    "year": 2025,
+    "rank": 74,
+    "score": 1.967,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GAB",
+    "country": "Gabon",
+    "year": 2025,
+    "rank": 117,
+    "score": 2.238,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GBR",
+    "country": "United Kingdom",
+    "year": 2025,
+    "rank": 30,
+    "score": 1.634,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GEO",
+    "country": "Georgia",
+    "year": 2025,
+    "rank": 109,
+    "score": 2.185,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GHA",
+    "country": "Ghana",
+    "year": 2025,
+    "rank": 61,
+    "score": 1.898,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GIN",
+    "country": "Guinea",
+    "year": 2025,
+    "rank": 118,
+    "score": 2.253,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GMB",
+    "country": "The Gambia",
+    "year": 2025,
+    "rank": 55,
+    "score": 1.855,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GNB",
+    "country": "Guinea-Bissau",
+    "year": 2025,
+    "rank": 101,
+    "score": 2.112,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GNQ",
+    "country": "Equatorial Guinea",
+    "year": 2025,
+    "rank": 82,
+    "score": 2.004,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GRC",
+    "country": "Greece",
+    "year": 2025,
+    "rank": 45,
+    "score": 1.764,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GTM",
+    "country": "Guatemala",
+    "year": 2025,
+    "rank": 108,
+    "score": 2.174,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "GUY",
+    "country": "Guyana",
+    "year": 2025,
+    "rank": 106,
+    "score": 2.149,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "HND",
+    "country": "Honduras",
+    "year": 2025,
+    "rank": 124,
+    "score": 2.347,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "HRV",
+    "country": "Croatia",
+    "year": 2025,
+    "rank": 19,
+    "score": 1.519,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "HTI",
+    "country": "Haiti",
+    "year": 2025,
+    "rank": 141,
+    "score": 2.731,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "HUN",
+    "country": "Hungary",
+    "year": 2025,
+    "rank": 17,
+    "score": 1.5,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "IDN",
+    "country": "Indonesia",
+    "year": 2025,
+    "rank": 49,
+    "score": 1.786,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "IND",
+    "country": "India",
+    "year": 2025,
+    "rank": 115,
+    "score": 2.229,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "IRL",
+    "country": "Ireland",
+    "year": 2025,
+    "rank": 2,
+    "score": 1.26,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "IRN",
+    "country": "Iran",
+    "year": 2025,
+    "rank": 142,
+    "score": 2.75,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "IRQ",
+    "country": "Iraq",
+    "year": 2025,
+    "rank": 147,
+    "score": 2.862,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ISL",
+    "country": "Iceland",
+    "year": 2025,
+    "rank": 1,
+    "score": 1.095,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ISR",
+    "country": "Israel",
+    "year": 2025,
+    "rank": 155,
+    "score": 3.108,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ITA",
+    "country": "Italy",
+    "year": 2025,
+    "rank": 33,
+    "score": 1.662,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "JAM",
+    "country": "Jamaica",
+    "year": 2025,
+    "rank": 93,
+    "score": 2.047,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "JOR",
+    "country": "Jordan",
+    "year": 2025,
+    "rank": 72,
+    "score": 1.957,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "JPN",
+    "country": "Japan",
+    "year": 2025,
+    "rank": 12,
+    "score": 1.44,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "KAZ",
+    "country": "Kazakhstan",
+    "year": 2025,
+    "rank": 56,
+    "score": 1.875,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "KEN",
+    "country": "Kenya",
+    "year": 2025,
+    "rank": 127,
+    "score": 2.392,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "KGZ",
+    "country": "Kyrgyz Republic",
+    "year": 2025,
+    "rank": 78,
+    "score": 1.988,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "KHM",
+    "country": "Cambodia",
+    "year": 2025,
+    "rank": 87,
+    "score": 2.019,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "KOR",
+    "country": "South Korea",
+    "year": 2025,
+    "rank": 41,
+    "score": 1.736,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "KSV",
+    "country": "Kosovo",
+    "year": 2025,
+    "rank": 63,
+    "score": 1.908,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "KWT",
+    "country": "Kuwait",
+    "year": 2025,
+    "rank": 31,
+    "score": 1.642,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LAO",
+    "country": "Laos",
+    "year": 2025,
+    "rank": 47,
+    "score": 1.783,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LBN",
+    "country": "Lebanon",
+    "year": 2025,
+    "rank": 136,
+    "score": 2.674,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LBR",
+    "country": "Liberia",
+    "year": 2025,
+    "rank": 70,
+    "score": 1.939,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LBY",
+    "country": "Libya",
+    "year": 2025,
+    "rank": 131,
+    "score": 2.478,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LKA",
+    "country": "Sri Lanka",
+    "year": 2025,
+    "rank": 97,
+    "score": 2.075,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LSO",
+    "country": "Lesotho",
+    "year": 2025,
+    "rank": 119,
+    "score": 2.267,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LTU",
+    "country": "Lithuania",
+    "year": 2025,
+    "rank": 22,
+    "score": 1.558,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LVA",
+    "country": "Latvia",
+    "year": 2025,
+    "rank": 22,
+    "score": 1.558,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MAR",
+    "country": "Morocco",
+    "year": 2025,
+    "rank": 85,
+    "score": 2.012,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MDA",
+    "country": "Moldova",
+    "year": 2025,
+    "rank": 66,
+    "score": 1.918,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MDG",
+    "country": "Madagascar",
+    "year": 2025,
+    "rank": 59,
+    "score": 1.895,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MEX",
+    "country": "Mexico",
+    "year": 2025,
+    "rank": 135,
+    "score": 2.636,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MKD",
+    "country": "North Macedonia",
+    "year": 2025,
+    "rank": 51,
+    "score": 1.799,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MLI",
+    "country": "Mali",
+    "year": 2025,
+    "rank": 154,
+    "score": 3.061,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MMR",
+    "country": "Myanmar",
+    "year": 2025,
+    "rank": 153,
+    "score": 3.045,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MNE",
+    "country": "Montenegro",
+    "year": 2025,
+    "rank": 34,
+    "score": 1.685,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MNG",
+    "country": "Mongolia",
+    "year": 2025,
+    "rank": 37,
+    "score": 1.719,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MOZ",
+    "country": "Mozambique",
+    "year": 2025,
+    "rank": 121,
+    "score": 2.273,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MRT",
+    "country": "Mauritania",
+    "year": 2025,
+    "rank": 110,
+    "score": 2.204,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MUS",
+    "country": "Mauritius",
+    "year": 2025,
+    "rank": 26,
+    "score": 1.586,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MWI",
+    "country": "Malawi",
+    "year": 2025,
+    "rank": 71,
+    "score": 1.955,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MYS",
+    "country": "Malaysia",
+    "year": 2025,
+    "rank": 13,
+    "score": 1.469,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "NAM",
+    "country": "Namibia",
+    "year": 2025,
+    "rank": 50,
+    "score": 1.789,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "NER",
+    "country": "Niger",
+    "year": 2025,
+    "rank": 143,
+    "score": 2.759,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "NGA",
+    "country": "Nigeria",
+    "year": 2025,
+    "rank": 148,
+    "score": 2.869,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "NIC",
+    "country": "Nicaragua",
+    "year": 2025,
+    "rank": 111,
+    "score": 2.207,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "NLD",
+    "country": "Netherlands",
+    "year": 2025,
+    "rank": 14,
+    "score": 1.491,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "NOR",
+    "country": "Norway",
+    "year": 2025,
+    "rank": 32,
+    "score": 1.644,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "NPL",
+    "country": "Nepal",
+    "year": 2025,
+    "rank": 76,
+    "score": 1.987,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "NZL",
+    "country": "New Zealand",
+    "year": 2025,
+    "rank": 3,
+    "score": 1.282,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "OMN",
+    "country": "Oman",
+    "year": 2025,
+    "rank": 42,
+    "score": 1.738,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "PAK",
+    "country": "Pakistan",
+    "year": 2025,
+    "rank": 144,
+    "score": 2.797,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "PAN",
+    "country": "Panama",
+    "year": 2025,
+    "rank": 84,
+    "score": 2.006,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "PER",
+    "country": "Peru",
+    "year": 2025,
+    "rank": 96,
+    "score": 2.073,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "PHL",
+    "country": "Philippines",
+    "year": 2025,
+    "rank": 105,
+    "score": 2.148,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "PNG",
+    "country": "Papua New Guinea",
+    "year": 2025,
+    "rank": 116,
+    "score": 2.23,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "POL",
+    "country": "Poland",
+    "year": 2025,
+    "rank": 36,
+    "score": 1.713,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "PRK",
+    "country": "North Korea",
+    "year": 2025,
+    "rank": 149,
+    "score": 2.911,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "PRT",
+    "country": "Portugal",
+    "year": 2025,
+    "rank": 7,
+    "score": 1.371,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "PRY",
+    "country": "Paraguay",
+    "year": 2025,
+    "rank": 75,
+    "score": 1.981,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "PSE",
+    "country": "Palestine",
+    "year": 2025,
+    "rank": 145,
+    "score": 2.811,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "QAT",
+    "country": "Qatar",
+    "year": 2025,
+    "rank": 27,
+    "score": 1.593,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ROU",
+    "country": "Romania",
+    "year": 2025,
+    "rank": 38,
+    "score": 1.721,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "RUS",
+    "country": "Russia",
+    "year": 2025,
+    "rank": 163,
+    "score": 3.441,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "RWA",
+    "country": "Rwanda",
+    "year": 2025,
+    "rank": 91,
+    "score": 2.036,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SAU",
+    "country": "Saudi Arabia",
+    "year": 2025,
+    "rank": 90,
+    "score": 2.035,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SDN",
+    "country": "Sudan",
+    "year": 2025,
+    "rank": 161,
+    "score": 3.323,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SEN",
+    "country": "Senegal",
+    "year": 2025,
+    "rank": 69,
+    "score": 1.936,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SGP",
+    "country": "Singapore",
+    "year": 2025,
+    "rank": 6,
+    "score": 1.357,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SLE",
+    "country": "Sierra Leone",
+    "year": 2025,
+    "rank": 57,
+    "score": 1.887,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SLV",
+    "country": "El Salvador",
+    "year": 2025,
+    "rank": 104,
+    "score": 2.136,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SOM",
+    "country": "Somalia",
+    "year": 2025,
+    "rank": 151,
+    "score": 2.983,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SRB",
+    "country": "Serbia",
+    "year": 2025,
+    "rank": 64,
+    "score": 1.914,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SSD",
+    "country": "South Sudan",
+    "year": 2025,
+    "rank": 156,
+    "score": 3.117,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SVK",
+    "country": "Slovakia",
+    "year": 2025,
+    "rank": 28,
+    "score": 1.609,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SVN",
+    "country": "Slovenia",
+    "year": 2025,
+    "rank": 9,
+    "score": 1.409,
+    "category": "Band 1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SWE",
+    "country": "Sweden",
+    "year": 2025,
+    "rank": 35,
+    "score": 1.709,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SWZ",
+    "country": "Eswatini",
+    "year": 2025,
+    "rank": 99,
+    "score": 2.094,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SYR",
+    "country": "Syria",
+    "year": 2025,
+    "rank": 157,
+    "score": 3.184,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TCD",
+    "country": "Chad",
+    "year": 2025,
+    "rank": 134,
+    "score": 2.593,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TGO",
+    "country": "Togo",
+    "year": 2025,
+    "rank": 126,
+    "score": 2.381,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "THA",
+    "country": "Thailand",
+    "year": 2025,
+    "rank": 86,
+    "score": 2.017,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TJK",
+    "country": "Tajikistan",
+    "year": 2025,
+    "rank": 79,
+    "score": 1.996,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TKM",
+    "country": "Turkmenistan",
+    "year": 2025,
+    "rank": 87,
+    "score": 2.019,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TLS",
+    "country": "Timor-Leste",
+    "year": 2025,
+    "rank": 44,
+    "score": 1.758,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TTO",
+    "country": "Trinidad and Tobago",
+    "year": 2025,
+    "rank": 89,
+    "score": 2.02,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TUN",
+    "country": "Tunisia",
+    "year": 2025,
+    "rank": 81,
+    "score": 1.998,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TUR",
+    "country": "Turkiye",
+    "year": 2025,
+    "rank": 146,
+    "score": 2.852,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TWN",
+    "country": "Taiwan",
+    "year": 2025,
+    "rank": 40,
+    "score": 1.73,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "TZA",
+    "country": "Tanzania",
+    "year": 2025,
+    "rank": 73,
+    "score": 1.965,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "UGA",
+    "country": "Uganda",
+    "year": 2025,
+    "rank": 113,
+    "score": 2.217,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "UKR",
+    "country": "Ukraine",
+    "year": 2025,
+    "rank": 162,
+    "score": 3.434,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "URY",
+    "country": "Uruguay",
+    "year": 2025,
+    "rank": 48,
+    "score": 1.784,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "USA",
+    "country": "United States of America",
+    "year": 2025,
+    "rank": 128,
+    "score": 2.443,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "UZB",
+    "country": "Uzbekistan",
+    "year": 2025,
+    "rank": 67,
+    "score": 1.926,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "VEN",
+    "country": "Venezuela",
+    "year": 2025,
+    "rank": 139,
+    "score": 2.692,
+    "category": "Band 4",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "VNM",
+    "country": "Vietnam",
+    "year": 2025,
+    "rank": 38,
+    "score": 1.721,
+    "category": "Band 2",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "YEM",
+    "country": "Yemen",
+    "year": 2025,
+    "rank": 159,
+    "score": 3.262,
+    "category": "Band 5",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ZAF",
+    "country": "South Africa",
+    "year": 2025,
+    "rank": 124,
+    "score": 2.347,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ZMB",
+    "country": "Zambia",
+    "year": 2025,
+    "rank": 64,
+    "score": 1.914,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ZWE",
+    "country": "Zimbabwe",
+    "year": 2025,
+    "rank": 114,
+    "score": 2.223,
+    "category": "Band 3",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "ESH",
+    "country": "Western Sahara",
+    "year": 2025,
+    "rank": -1,
+    "score": -1,
+    "category": "Band -1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "BRB",
+    "country": "Barbados",
+    "year": 2025,
+    "rank": -1,
+    "score": -1,
+    "category": "Band -1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "CPV",
+    "country": "Cabo Verde",
+    "year": 2025,
+    "rank": -1,
+    "score": -1,
+    "category": "Band -1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LIE",
+    "country": "Liechtenstein",
+    "year": 2025,
+    "rank": -1,
+    "score": -1,
+    "category": "Band -1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MLT",
+    "country": "Malta",
+    "year": 2025,
+    "rank": -1,
+    "score": -1,
+    "category": "Band -1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "MHL",
+    "country": "Marshall Islands",
+    "year": 2025,
+    "rank": -1,
+    "score": -1,
+    "category": "Band -1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "SUR",
+    "country": "Suriname",
+    "year": 2025,
+    "rank": -1,
+    "score": -1,
+    "category": "Band -1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  },
+  {
+    "iso3": "LUX",
+    "country": "Luxembourg",
+    "year": 2025,
+    "rank": -1,
+    "score": -1,
+    "category": "Band -1",
+    "sourceUrl": "https://www.visionofhumanity.org/wp-content/uploads/2025/06/GPI_2025_2025.csv"
+  }
+]
