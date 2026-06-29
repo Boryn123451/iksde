@@ -4,7 +4,6 @@ import { DEFAULT_SECTION_VISIBILITY } from '../config/constants.js';
 
 const initialUnit = readString(STORAGE_KEYS.unitSystem, 'si');
 const initialTheme = readString(STORAGE_KEYS.theme, 'dark');
-const initialMode = readString(STORAGE_KEYS.appMode, 'weather');
 const initialCurrency = readString(STORAGE_KEYS.preferredCurrency, '');
 const initialSections = { ...DEFAULT_SECTION_VISIBILITY, ...readJson(STORAGE_KEYS.sectionVisibility, {}) };
 
@@ -36,12 +35,6 @@ export const appState = {
   },
   unitSystem: initialUnit === 'imperial' ? 'imperial' : 'si',
   preferredCurrency: /^[A-Z]{3}$/u.test(initialCurrency) ? initialCurrency : '',
-  appMode: initialMode === 'tourism' ? 'tourism' : 'weather',
-  tourism: {
-    loading: false,
-    data: null,
-    error: '',
-  },
   isDark: initialTheme !== 'light',
   chart: {
     mode: 'temp',
@@ -113,10 +106,3 @@ export function setLocationContext(context) {
   appState.locationContext = context || null;
 }
 
-export function setAppMode(mode) {
-  appState.appMode = mode === 'tourism' ? 'tourism' : 'weather';
-}
-
-export function setTourism(partial) {
-  appState.tourism = { ...appState.tourism, ...partial };
-}

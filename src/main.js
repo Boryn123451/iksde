@@ -29,7 +29,7 @@ import { renderSport } from './components/sportSection.js';
 import { renderStatusBar } from './components/statusBar.js';
 import { closeSettingsPanel, openSettingsPanel } from './components/settingsPanel.js';
 import { showToast } from './components/toast.js';
-import { loadTourismForCurrentLocation, renderTourismView } from './components/tourismView.js';
+
 import { exportForecastCsv, exportForecastJson } from './services/exportService.js';
 import { requestBrowserLocation } from './services/geolocationService.js';
 import { initRuntimeLogger, logEvent } from './services/loggerService.js';
@@ -42,11 +42,11 @@ import { applySectionVisibility, loadSectionVisibility } from './services/settin
 import { readUrlLocation, shareCurrentForecast } from './services/shareService.js';
 import { writeString } from './services/storageService.js';
 import { preferredCurrency, setPreferredCurrency } from './services/currencyService.js';
-import { appState, setAppMode, setAqi, setCacheMeta, setHistory, setLocation, setMarine, setNetworkStatus, setWeather } from './state/appState.js';
+import { appState, setAqi, setCacheMeta, setHistory, setLocation, setMarine, setNetworkStatus, setWeather } from './state/appState.js';
 import { byId, hide, show } from './utils/domUtils.js';
 import { STORAGE_KEYS } from './config/constants.js';
 
-let pendingTourismAfterLocationResolve = false;
+
 
 function currentLocationPayload() {
   return {
@@ -89,14 +89,6 @@ async function ensureLocationLabel(lat, lon) {
       timezone: current.timezone,
     });
     updateHeader();
-    updateModeAvailability();
-    if (pendingTourismAfterLocationResolve && !tourismUnavailableForCurrentLocation()) {
-      pendingTourismAfterLocationResolve = false;
-      setAppMode('tourism');
-      writeString(STORAGE_KEYS.appMode, appState.appMode);
-      applyAppMode();
-      loadTourismForCurrentLocation();
-    }
   } catch {
     // Reverse geocoding is optional; weather and map must keep working without it.
   }
@@ -252,7 +244,7 @@ export async function loadWeather(lat, lon, cityName = '', countryName = '', met
   renderRecent({ loadWeather });
   renderComparisonPanel();
   fetchMapPoints();
-  if (appState.appMode === 'tourism') loadTourismForCurrentLocation();
+
 }
 
 async function requestGeolocation(setAsHome = false) {
@@ -292,56 +284,7 @@ function rerenderCurrentWeather() {
   renderComparisonPanel();
 }
 
-function tourismUnavailableForCurrentLocation() {
-  if (!Number.isFinite(appState.location.lat) || !Number.isFinite(appState.location.lon)) return false;
-  return isPlaceholderLocationName(appState.location.city);
-}
 
-function updateModeAvailability() {
-  const unavailable = tourismUnavailableForCurrentLocation();
-  const tourismBtn = byId('modeTourismBtn');
-  if (tourismBtn) {
-    tourismBtn.hidden = unavailable;
-    tourismBtn.disabled = unavailable;
-    tourismBtn.setAttribute('aria-hidden', unavailable ? 'true' : 'false');
-  }
-  if (unavailable && appState.appMode === 'tourism') {
-    pendingTourismAfterLocationResolve = true;
-    setAppMode('weather');
-    writeString(STORAGE_KEYS.appMode, appState.appMode);
-  }
-  return unavailable;
-}
-
-function applyAppMode() {
-  const tourismUnavailable = updateModeAvailability();
-  const tourism = appState.appMode === 'tourism' && !tourismUnavailable;
-  byId('modeWeatherBtn')?.classList.toggle('active', !tourism);
-  byId('modeTourismBtn')?.classList.toggle('active', tourism);
-  byId('modeWeatherBtn')?.setAttribute('aria-selected', tourism ? 'false' : 'true');
-  byId('modeTourismBtn')?.setAttribute('aria-selected', tourism ? 'true' : 'false');
-  if (tourism) {
-    hide('weatherContent');
-    show('tourismContent', 'flex');
-    renderTourismView();
-  } else {
-    hide('tourismContent');
-    if (appState.weather) show('weatherContent', 'flex');
-  }
-}
-
-function switchMode(mode) {
-  if (mode === 'tourism' && tourismUnavailableForCurrentLocation()) {
-    showToast('Turystyka wymaga rozpoznanej nazwy miasta', 'info', 2600);
-    updateModeAvailability();
-    return;
-  }
-  setAppMode(mode);
-  writeString(STORAGE_KEYS.appMode, appState.appMode);
-  logEvent('info', 'app_mode_changed', { mode: appState.appMode });
-  applyAppMode();
-  if (appState.appMode === 'tourism') loadTourismForCurrentLocation();
-}
 
 function refreshCurrentWeather() {
   const { lat, lon, city, country } = appState.location;
@@ -387,8 +330,6 @@ function bindGlobalEvents() {
   });
   byId('settingsBtn')?.addEventListener('click', openSettingsPanel);
   byId('settingsClose')?.addEventListener('click', closeSettingsPanel);
-  byId('modeWeatherBtn')?.addEventListener('click', () => switchMode('weather'));
-  byId('modeTourismBtn')?.addEventListener('click', () => switchMode('tourism'));
   byId('homeBtn')?.addEventListener('click', () => {
     const home = getHomeLocation();
     if (home) loadWeather(home.lat, home.lon, home.city || home.name, home.country, { countryCode: home.countryCode || '' });
