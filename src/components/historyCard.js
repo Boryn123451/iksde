@@ -21,15 +21,4 @@ export function renderHistory(data) {
     ]));
   });
 
-  const chart = byId('historyChart');
-  clear(chart);
-  const values = (daily.precipitation_sum || []).map((value) => value || 0);
-  const max = Math.max(...values, 1);
-  values.forEach((value, i) => {
-    chart.append(createEl('div', {
-      className: 'hist-bar',
-      title: `${fmtDay(daily.time[i])}: ${Number(value).toFixed(1)} mm`,
-      style: { height: `${Math.max(4, Math.round((value / max) * 36))}px` },
-    }));
-  });
 }

@@ -11,7 +11,7 @@ import { renderAstronomy } from './components/astronomySection.js';
 import { setupChartControls, renderChart } from './components/chart.js';
 import { renderClothingCard } from './components/clothingCard.js';
 import { bindComparisonPanel, renderComparisonPanel } from './components/comparisonPanel.js';
-import { renderComfortCard } from './components/comfortCard.js';
+
 import { renderDaily } from './components/dailyForecast.js';
 import { renderDetails } from './components/detailsGrid.js';
 import { updateBackground, updateFavBtn, updateHeader, updateHomeBtn } from './components/header.js';
@@ -114,7 +114,7 @@ function renderAll(data) {
   renderDaily(data.daily, { onSelectDay: openDayModal });
   renderDetails(data.current, data.daily);
   renderAlertCards(data.current, data.daily, appState.aqi);
-  renderComfortCard(data.current, data.daily, appState.aqi);
+
   renderClothingCard(data.current, data.daily);
   renderNextHoursCard(data);
   renderInsights(data.current, data.daily);
@@ -165,7 +165,7 @@ async function loadSupplementaryData(lat, lon) {
     renderAQI(results[0].value);
     if (appState.weather) {
       renderAlertCards(appState.weather.current, appState.weather.daily, results[0].value);
-      renderComfortCard(appState.weather.current, appState.weather.daily, results[0].value);
+
     }
   } else {
     showToast('Jakość powietrza chwilowo niedostępna', 'info', 2500);
