@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-29T09:40:21.003Z",
-  "start_date": "2026-05-28",
-  "end_date": "2026-06-27",
+  "updated": "2026-06-30T06:11:23.872Z",
+  "start_date": "2026-05-29",
+  "end_date": "2026-06-28",
   "hot": [
     {
       "name": "Basra",
@@ -44,14 +44,6 @@
       "lon": 47.145
     },
     {
-      "name": "Turbat",
-      "country": "Pakistan",
-      "temp": 49.5,
-      "date": "2026-05-28",
-      "lat": 26.002,
-      "lon": 63.048
-    },
-    {
       "name": "Ahvaz",
       "country": "Iran",
       "temp": 49.3,
@@ -60,28 +52,36 @@
       "lon": 48.67
     },
     {
-      "name": "Jacobabad",
-      "country": "Pakistan",
-      "temp": 49,
-      "date": "2026-05-28",
-      "lat": 28.281,
-      "lon": 68.438
-    },
-    {
-      "name": "Sibi",
-      "country": "Pakistan",
-      "temp": 49,
-      "date": "2026-05-28",
-      "lat": 29.543,
-      "lon": 67.877
-    },
-    {
       "name": "Fahud",
       "country": "Oman",
       "temp": 48.5,
       "date": "2026-06-11",
       "lat": 22.25,
       "lon": 56.483
+    },
+    {
+      "name": "Sibi",
+      "country": "Pakistan",
+      "temp": 48.5,
+      "date": "2026-06-10",
+      "lat": 29.543,
+      "lon": 67.877
+    },
+    {
+      "name": "Turbat",
+      "country": "Pakistan",
+      "temp": 48.3,
+      "date": "2026-05-29",
+      "lat": 26.002,
+      "lon": 63.048
+    },
+    {
+      "name": "Lut Desert",
+      "country": "Iran",
+      "temp": 48,
+      "date": "2026-06-28",
+      "lat": 30.605,
+      "lon": 59.068
     }
   ],
   "cold": []
