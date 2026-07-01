@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-30T06:11:23.872Z",
-  "start_date": "2026-05-29",
-  "end_date": "2026-06-28",
+  "updated": "2026-07-01T06:25:54.970Z",
+  "start_date": "2026-05-30",
+  "end_date": "2026-06-29",
   "hot": [
     {
       "name": "Basra",
@@ -68,20 +68,20 @@
       "lon": 67.877
     },
     {
-      "name": "Turbat",
-      "country": "Pakistan",
-      "temp": 48.3,
-      "date": "2026-05-29",
-      "lat": 26.002,
-      "lon": 63.048
-    },
-    {
       "name": "Lut Desert",
       "country": "Iran",
-      "temp": 48,
-      "date": "2026-06-28",
+      "temp": 48.2,
+      "date": "2026-06-29",
       "lat": 30.605,
       "lon": 59.068
+    },
+    {
+      "name": "Turbat",
+      "country": "Pakistan",
+      "temp": 48,
+      "date": "2026-05-31",
+      "lat": 26.002,
+      "lon": 63.048
     }
   ],
   "cold": []
