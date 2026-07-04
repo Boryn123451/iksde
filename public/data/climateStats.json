@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-03T05:52:49.150Z",
-  "start_date": "2026-06-01",
-  "end_date": "2026-07-01",
+  "updated": "2026-07-04T05:44:53.928Z",
+  "start_date": "2026-06-02",
+  "end_date": "2026-07-02",
   "hot": [
     {
       "name": "Basra",
@@ -76,12 +76,12 @@
       "lon": 59.068
     },
     {
-      "name": "Jacobabad",
-      "country": "Pakistan",
-      "temp": 48.1,
-      "date": "2026-06-10",
-      "lat": 28.281,
-      "lon": 68.438
+      "name": "Turpan",
+      "country": "Chiny",
+      "temp": 48.3,
+      "date": "2026-07-02",
+      "lat": 42.946,
+      "lon": 89.176
     }
   ],
   "cold": []
