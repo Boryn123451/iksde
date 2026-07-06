@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-05T06:03:49.871Z",
-  "start_date": "2026-06-03",
-  "end_date": "2026-07-03",
+  "updated": "2026-07-06T06:27:43.768Z",
+  "start_date": "2026-06-04",
+  "end_date": "2026-07-04",
   "hot": [
     {
       "name": "Basra",
@@ -10,6 +10,14 @@
       "date": "2026-06-23",
       "lat": 30.508,
       "lon": 47.783
+    },
+    {
+      "name": "Turpan",
+      "country": "Chiny",
+      "temp": 50.3,
+      "date": "2026-07-04",
+      "lat": 42.946,
+      "lon": 89.176
     },
     {
       "name": "Sulaibiya",
@@ -42,14 +50,6 @@
       "date": "2026-06-22",
       "lat": 31.845,
       "lon": 47.145
-    },
-    {
-      "name": "Turpan",
-      "country": "Chiny",
-      "temp": 49.4,
-      "date": "2026-07-03",
-      "lat": 42.946,
-      "lon": 89.176
     },
     {
       "name": "Ahvaz",
