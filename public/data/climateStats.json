@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-08T05:20:32.094Z",
-  "start_date": "2026-06-06",
-  "end_date": "2026-07-06",
+  "updated": "2026-07-09T06:04:06.935Z",
+  "start_date": "2026-06-07",
+  "end_date": "2026-07-07",
   "hot": [
     {
       "name": "Basra",
@@ -84,5 +84,86 @@
       "lon": 59.068
     }
   ],
-  "cold": []
+  "cold": [
+    {
+      "name": "Vostok Station",
+      "country": "Antarktyda",
+      "temp": -76.2,
+      "date": "2026-06-12",
+      "lat": -78.464,
+      "lon": 106.837
+    },
+    {
+      "name": "Ridge A",
+      "country": "Antarktyda",
+      "temp": -69,
+      "date": "2026-06-13",
+      "lat": -81.5,
+      "lon": 73.5
+    },
+    {
+      "name": "Dome C (Concordia)",
+      "country": "Antarktyda",
+      "temp": -68.9,
+      "date": "2026-06-12",
+      "lat": -75.1,
+      "lon": 123.35
+    },
+    {
+      "name": "Dome F (Valkyrie)",
+      "country": "Antarktyda",
+      "temp": -68.9,
+      "date": "2026-06-16",
+      "lat": -77.317,
+      "lon": 39.7
+    },
+    {
+      "name": "Dome A (Kunlun)",
+      "country": "Antarktyda",
+      "temp": -67.9,
+      "date": "2026-06-11",
+      "lat": -80.367,
+      "lon": 77.35
+    },
+    {
+      "name": "Amundsen-Scott",
+      "country": "Antarktyda",
+      "temp": -61.5,
+      "date": "2026-06-16",
+      "lat": -90,
+      "lon": 0
+    },
+    {
+      "name": "McMurdo Station",
+      "country": "Antarktyda",
+      "temp": -41.5,
+      "date": "2026-06-12",
+      "lat": -77.846,
+      "lon": 166.668
+    },
+    {
+      "name": "Novolazarevskaya",
+      "country": "Antarktyda",
+      "temp": -36.1,
+      "date": "2026-06-24",
+      "lat": -70.767,
+      "lon": 11.833
+    },
+    {
+      "name": "Mawson Station",
+      "country": "Antarktyda",
+      "temp": -33.1,
+      "date": "2026-07-01",
+      "lat": -67.602,
+      "lon": 62.871
+    },
+    {
+      "name": "Halley VI Station",
+      "country": "Antarktyda",
+      "temp": -31.6,
+      "date": "2026-06-16",
+      "lat": -75.583,
+      "lon": -26.65
+    }
+  ]
 }
