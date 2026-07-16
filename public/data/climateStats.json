@@ -1,8 +1,16 @@
 {
-  "updated": "2026-07-15T04:51:10.766Z",
-  "start_date": "2026-06-13",
-  "end_date": "2026-07-13",
+  "updated": "2026-07-16T05:09:42.743Z",
+  "start_date": "2026-06-14",
+  "end_date": "2026-07-14",
   "hot": [
+    {
+      "name": "Ahvaz",
+      "country": "Iran",
+      "temp": 50.9,
+      "date": "2026-07-14",
+      "lat": 31.318,
+      "lon": 48.67
+    },
     {
       "name": "Basra",
       "country": "Irak",
@@ -26,14 +34,6 @@
       "date": "2026-06-23",
       "lat": 29.283,
       "lon": 47.817
-    },
-    {
-      "name": "Ahvaz",
-      "country": "Iran",
-      "temp": 49.9,
-      "date": "2026-07-13",
-      "lat": 31.318,
-      "lon": 48.67
     },
     {
       "name": "Nasiriyah",
