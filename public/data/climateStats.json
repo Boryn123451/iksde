@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-23T05:23:56.253Z",
-  "start_date": "2026-06-21",
-  "end_date": "2026-07-21",
+  "updated": "2026-07-24T05:19:16.665Z",
+  "start_date": "2026-06-22",
+  "end_date": "2026-07-22",
   "hot": [
     {
       "name": "Ahvaz",
@@ -76,12 +76,12 @@
       "lon": 63.048
     },
     {
-      "name": "Fahud",
-      "country": "Oman",
+      "name": "Touggourt",
+      "country": "Algieria",
       "temp": 47.9,
-      "date": "2026-06-21",
-      "lat": 22.25,
-      "lon": 56.483
+      "date": "2026-07-22",
+      "lat": 33.1,
+      "lon": 6.067
     }
   ],
   "cold": []
