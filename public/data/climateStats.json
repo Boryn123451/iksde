@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-26T05:31:27.685Z",
-  "start_date": "2026-06-24",
-  "end_date": "2026-07-24",
+  "updated": "2026-07-27T05:49:50.512Z",
+  "start_date": "2026-06-25",
+  "end_date": "2026-07-25",
   "hot": [
     {
       "name": "Ahvaz",
@@ -44,6 +44,14 @@
       "lon": 47.36
     },
     {
+      "name": "Needles",
+      "country": "USA",
+      "temp": 49.5,
+      "date": "2026-07-25",
+      "lat": 34.848,
+      "lon": -114.614
+    },
+    {
       "name": "Amarah",
       "country": "Irak",
       "temp": 49.4,
@@ -60,28 +68,20 @@
       "lon": 46.257
     },
     {
+      "name": "El Centro",
+      "country": "USA",
+      "temp": 48.9,
+      "date": "2026-07-25",
+      "lat": 32.792,
+      "lon": -115.563
+    },
+    {
       "name": "Touggourt",
       "country": "Algieria",
       "temp": 48.9,
       "date": "2026-07-24",
       "lat": 33.1,
       "lon": 6.067
-    },
-    {
-      "name": "Needles",
-      "country": "USA",
-      "temp": 48.7,
-      "date": "2026-07-24",
-      "lat": 34.848,
-      "lon": -114.614
-    },
-    {
-      "name": "Mexicali",
-      "country": "Meksyk",
-      "temp": 48.5,
-      "date": "2026-07-24",
-      "lat": 32.653,
-      "lon": -115.468
     }
   ],
   "cold": []
