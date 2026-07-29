@@ -1,32 +1,8 @@
 {
-  "updated": "2026-07-28T05:14:08.316Z",
-  "start_date": "2026-06-26",
-  "end_date": "2026-07-26",
+  "updated": "2026-07-29T05:20:59.329Z",
+  "start_date": "2026-06-27",
+  "end_date": "2026-07-27",
   "hot": [
-    {
-      "name": "Khuzestan Plain",
-      "country": "Iran",
-      "temp": 51.7,
-      "date": "2026-07-14",
-      "lat": 32,
-      "lon": 48.5
-    },
-    {
-      "name": "Omidieh",
-      "country": "Iran",
-      "temp": 51,
-      "date": "2026-07-14",
-      "lat": 30.76,
-      "lon": 49.706
-    },
-    {
-      "name": "Shush",
-      "country": "Iran",
-      "temp": 51,
-      "date": "2026-07-14",
-      "lat": 32.194,
-      "lon": 48.244
-    },
     {
       "name": "Ahvaz",
       "country": "Iran",
@@ -34,14 +10,6 @@
       "date": "2026-07-14",
       "lat": 31.318,
       "lon": 48.67
-    },
-    {
-      "name": "Fao",
-      "country": "Irak",
-      "temp": 50.8,
-      "date": "2026-07-19",
-      "lat": 29.974,
-      "lon": 48.473
     },
     {
       "name": "Basra",
@@ -52,36 +20,68 @@
       "lon": 47.783
     },
     {
-      "name": "Zubair",
-      "country": "Irak",
-      "temp": 50.6,
-      "date": "2026-07-19",
-      "lat": 30.392,
-      "lon": 47.701
+      "name": "Turpan",
+      "country": "Chiny",
+      "temp": 50.3,
+      "date": "2026-07-04",
+      "lat": 42.946,
+      "lon": 89.176
     },
     {
-      "name": "Abadan",
-      "country": "Iran",
-      "temp": 50.6,
-      "date": "2026-07-13",
-      "lat": 30.339,
-      "lon": 48.257
-    },
-    {
-      "name": "Qurnah",
-      "country": "Irak",
-      "temp": 50.6,
-      "date": "2026-07-19",
-      "lat": 31.012,
-      "lon": 47.432
-    },
-    {
-      "name": "Mina Al Ahmadi",
+      "name": "Sulaibiya",
       "country": "Kuwejt",
-      "temp": 50.5,
+      "temp": 50,
       "date": "2026-07-19",
-      "lat": 29.076,
-      "lon": 48.087
+      "lat": 29.283,
+      "lon": 47.817
+    },
+    {
+      "name": "Mitribah",
+      "country": "Kuwejt",
+      "temp": 49.8,
+      "date": "2026-07-19",
+      "lat": 29.825,
+      "lon": 47.36
+    },
+    {
+      "name": "Needles",
+      "country": "USA",
+      "temp": 49.5,
+      "date": "2026-07-25",
+      "lat": 34.848,
+      "lon": -114.614
+    },
+    {
+      "name": "Amarah",
+      "country": "Irak",
+      "temp": 49.4,
+      "date": "2026-07-19",
+      "lat": 31.845,
+      "lon": 47.145
+    },
+    {
+      "name": "Nasiriyah",
+      "country": "Irak",
+      "temp": 49.3,
+      "date": "2026-07-19",
+      "lat": 31.058,
+      "lon": 46.257
+    },
+    {
+      "name": "Touggourt",
+      "country": "Algieria",
+      "temp": 49,
+      "date": "2026-07-26",
+      "lat": 33.1,
+      "lon": 6.067
+    },
+    {
+      "name": "El Oued",
+      "country": "Algieria",
+      "temp": 49,
+      "date": "2026-07-26",
+      "lat": 33.368,
+      "lon": 6.863
     }
   ],
   "cold": []
