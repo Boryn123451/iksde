@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-31T05:34:29.435Z",
-  "start_date": "2026-06-29",
-  "end_date": "2026-07-29",
+  "updated": "2026-08-01T05:26:13.809Z",
+  "start_date": "2026-06-30",
+  "end_date": "2026-07-30",
   "hot": [
     {
       "name": "Ahvaz",
@@ -44,20 +44,20 @@
       "lon": 47.36
     },
     {
+      "name": "Amarah",
+      "country": "Irak",
+      "temp": 49.6,
+      "date": "2026-07-30",
+      "lat": 31.845,
+      "lon": 47.145
+    },
+    {
       "name": "Needles",
       "country": "USA",
       "temp": 49.5,
       "date": "2026-07-25",
       "lat": 34.848,
       "lon": -114.614
-    },
-    {
-      "name": "Amarah",
-      "country": "Irak",
-      "temp": 49.4,
-      "date": "2026-07-19",
-      "lat": 31.845,
-      "lon": 47.145
     },
     {
       "name": "Nasiriyah",
