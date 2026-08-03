@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-02T05:26:07.258Z",
-  "start_date": "2026-07-01",
-  "end_date": "2026-07-31",
+  "updated": "2026-08-03T05:40:51.781Z",
+  "start_date": "2026-07-02",
+  "end_date": "2026-08-01",
   "hot": [
     {
       "name": "Ahvaz",
@@ -20,12 +20,28 @@
       "lon": 47.783
     },
     {
+      "name": "Nasiriyah",
+      "country": "Irak",
+      "temp": 50.3,
+      "date": "2026-08-01",
+      "lat": 31.058,
+      "lon": 46.257
+    },
+    {
       "name": "Turpan",
       "country": "Chiny",
       "temp": 50.3,
       "date": "2026-07-04",
       "lat": 42.946,
       "lon": 89.176
+    },
+    {
+      "name": "Needles",
+      "country": "USA",
+      "temp": 50,
+      "date": "2026-08-01",
+      "lat": 34.848,
+      "lon": -114.614
     },
     {
       "name": "Sulaibiya",
@@ -44,28 +60,12 @@
       "lon": 47.36
     },
     {
-      "name": "Nasiriyah",
-      "country": "Irak",
-      "temp": 49.7,
-      "date": "2026-07-31",
-      "lat": 31.058,
-      "lon": 46.257
-    },
-    {
       "name": "Amarah",
       "country": "Irak",
-      "temp": 49.6,
-      "date": "2026-07-30",
+      "temp": 49.8,
+      "date": "2026-08-01",
       "lat": 31.845,
       "lon": 47.145
-    },
-    {
-      "name": "Needles",
-      "country": "USA",
-      "temp": 49.5,
-      "date": "2026-07-25",
-      "lat": 34.848,
-      "lon": -114.614
     },
     {
       "name": "Touggourt",
