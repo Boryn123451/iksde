@@ -1,32 +1,8 @@
 {
-  "updated": "2026-08-05T05:14:13.259Z",
-  "start_date": "2026-07-04",
-  "end_date": "2026-08-03",
+  "updated": "2026-08-06T05:15:46.382Z",
+  "start_date": "2026-07-05",
+  "end_date": "2026-08-04",
   "hot": [
-    {
-      "name": "Khuzestan Plain",
-      "country": "Iran",
-      "temp": 51.7,
-      "date": "2026-07-14",
-      "lat": 32,
-      "lon": 48.5
-    },
-    {
-      "name": "Omidieh",
-      "country": "Iran",
-      "temp": 51,
-      "date": "2026-07-14",
-      "lat": 30.76,
-      "lon": 49.706
-    },
-    {
-      "name": "Shush",
-      "country": "Iran",
-      "temp": 51,
-      "date": "2026-07-14",
-      "lat": 32.194,
-      "lon": 48.244
-    },
     {
       "name": "Ahvaz",
       "country": "Iran",
@@ -34,22 +10,6 @@
       "date": "2026-07-14",
       "lat": 31.318,
       "lon": 48.67
-    },
-    {
-      "name": "Qurnah",
-      "country": "Irak",
-      "temp": 50.9,
-      "date": "2026-08-01",
-      "lat": 31.012,
-      "lon": 47.432
-    },
-    {
-      "name": "Fao",
-      "country": "Irak",
-      "temp": 50.8,
-      "date": "2026-07-19",
-      "lat": 29.974,
-      "lon": 48.473
     },
     {
       "name": "Basra",
@@ -60,110 +20,69 @@
       "lon": 47.783
     },
     {
-      "name": "Zubair",
+      "name": "Nasiriyah",
       "country": "Irak",
-      "temp": 50.6,
-      "date": "2026-07-19",
-      "lat": 30.392,
-      "lon": 47.701
+      "temp": 50.3,
+      "date": "2026-08-01",
+      "lat": 31.058,
+      "lon": 46.257
     },
     {
-      "name": "Abadan",
-      "country": "Iran",
-      "temp": 50.6,
-      "date": "2026-07-13",
-      "lat": 30.339,
-      "lon": 48.257
+      "name": "Needles",
+      "country": "USA",
+      "temp": 50,
+      "date": "2026-08-01",
+      "lat": 34.848,
+      "lon": -114.614
     },
     {
-      "name": "Mina Al Ahmadi",
+      "name": "Sulaibiya",
       "country": "Kuwejt",
-      "temp": 50.5,
+      "temp": 50,
       "date": "2026-07-19",
-      "lat": 29.076,
-      "lon": 48.087
+      "lat": 29.283,
+      "lon": 47.817
+    },
+    {
+      "name": "Mitribah",
+      "country": "Kuwejt",
+      "temp": 49.8,
+      "date": "2026-07-19",
+      "lat": 29.825,
+      "lon": 47.36
+    },
+    {
+      "name": "Amarah",
+      "country": "Irak",
+      "temp": 49.8,
+      "date": "2026-08-01",
+      "lat": 31.845,
+      "lon": 47.145
+    },
+    {
+      "name": "Touggourt",
+      "country": "Algieria",
+      "temp": 49,
+      "date": "2026-07-26",
+      "lat": 33.1,
+      "lon": 6.067
+    },
+    {
+      "name": "El Oued",
+      "country": "Algieria",
+      "temp": 49,
+      "date": "2026-07-26",
+      "lat": 33.368,
+      "lon": 6.863
+    },
+    {
+      "name": "Reggane",
+      "country": "Algieria",
+      "temp": 48.9,
+      "date": "2026-07-27",
+      "lat": 26.719,
+      "lon": 0.171
     }
   ],
-  "cold": [
-    {
-      "name": "Vostok Station",
-      "country": "Antarktyda",
-      "temp": -87.6,
-      "date": "2026-07-14",
-      "lat": -78.464,
-      "lon": 106.837
-    },
-    {
-      "name": "Dome C (Concordia)",
-      "country": "Antarktyda",
-      "temp": -76.2,
-      "date": "2026-07-18",
-      "lat": -75.1,
-      "lon": 123.35
-    },
-    {
-      "name": "Ridge A",
-      "country": "Antarktyda",
-      "temp": -71.5,
-      "date": "2026-07-18",
-      "lat": -81.5,
-      "lon": 73.5
-    },
-    {
-      "name": "Dome A (Kunlun)",
-      "country": "Antarktyda",
-      "temp": -70.4,
-      "date": "2026-07-19",
-      "lat": -80.367,
-      "lon": 77.35
-    },
-    {
-      "name": "Dome F (Valkyrie)",
-      "country": "Antarktyda",
-      "temp": -67.9,
-      "date": "2026-07-31",
-      "lat": -77.317,
-      "lon": 39.7
-    },
-    {
-      "name": "Amundsen-Scott",
-      "country": "Antarktyda",
-      "temp": -66.5,
-      "date": "2026-07-19",
-      "lat": -90,
-      "lon": 0
-    },
-    {
-      "name": "Halley VI Station",
-      "country": "Antarktyda",
-      "temp": -44.7,
-      "date": "2026-07-20",
-      "lat": -75.583,
-      "lon": -26.65
-    },
-    {
-      "name": "McMurdo Station",
-      "country": "Antarktyda",
-      "temp": -42.3,
-      "date": "2026-08-03",
-      "lat": -77.846,
-      "lon": 166.668
-    },
-    {
-      "name": "Zhongshan",
-      "country": "Antarktyda",
-      "temp": -33.1,
-      "date": "2026-07-26",
-      "lat": -69.373,
-      "lon": 76.373
-    },
-    {
-      "name": "Mawson Station",
-      "country": "Antarktyda",
-      "temp": -32.4,
-      "date": "2026-07-19",
-      "lat": -67.602,
-      "lon": 62.871
-    }
-  ]
+  "cold": []
 }
