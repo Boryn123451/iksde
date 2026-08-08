@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-07T04:24:55.519Z",
-  "start_date": "2026-07-06",
-  "end_date": "2026-08-05",
+  "updated": "2026-08-08T03:23:49.983Z",
+  "start_date": "2026-07-07",
+  "end_date": "2026-08-06",
   "hot": [
     {
       "name": "Ahvaz",
@@ -28,20 +28,20 @@
       "lon": 46.257
     },
     {
+      "name": "Sulaibiya",
+      "country": "Kuwejt",
+      "temp": 50.2,
+      "date": "2026-08-06",
+      "lat": 29.283,
+      "lon": 47.817
+    },
+    {
       "name": "Needles",
       "country": "USA",
       "temp": 50,
       "date": "2026-08-01",
       "lat": 34.848,
       "lon": -114.614
-    },
-    {
-      "name": "Sulaibiya",
-      "country": "Kuwejt",
-      "temp": 50,
-      "date": "2026-07-19",
-      "lat": 29.283,
-      "lon": 47.817
     },
     {
       "name": "Mitribah",
