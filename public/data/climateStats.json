@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-14T04:07:24.089Z",
-  "start_date": "2026-07-13",
-  "end_date": "2026-08-12",
+  "updated": "2026-08-15T02:49:53.041Z",
+  "start_date": "2026-07-14",
+  "end_date": "2026-08-13",
   "hot": [
     {
       "name": "Ahvaz",
@@ -44,20 +44,20 @@
       "lon": -114.614
     },
     {
+      "name": "Amarah",
+      "country": "Irak",
+      "temp": 50,
+      "date": "2026-08-13",
+      "lat": 31.845,
+      "lon": 47.145
+    },
+    {
       "name": "Mitribah",
       "country": "Kuwejt",
       "temp": 49.8,
       "date": "2026-07-19",
       "lat": 29.825,
       "lon": 47.36
-    },
-    {
-      "name": "Amarah",
-      "country": "Irak",
-      "temp": 49.8,
-      "date": "2026-08-01",
-      "lat": 31.845,
-      "lon": 47.145
     },
     {
       "name": "Touggourt",
