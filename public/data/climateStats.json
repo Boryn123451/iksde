@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-29T08:38:16.295Z",
-  "start_date": "2026-07-28",
-  "end_date": "2026-08-27",
+  "updated": "2026-08-30T07:52:57.716Z",
+  "start_date": "2026-07-29",
+  "end_date": "2026-08-28",
   "hot": [
     {
       "name": "Basra",
@@ -76,12 +76,12 @@
       "lon": -115.468
     },
     {
-      "name": "Reggane",
-      "country": "Algieria",
+      "name": "Bullhead City",
+      "country": "USA",
       "temp": 48.4,
-      "date": "2026-07-28",
-      "lat": 26.719,
-      "lon": 0.171
+      "date": "2026-08-01",
+      "lat": 35.147,
+      "lon": -114.568
     }
   ],
   "cold": []
