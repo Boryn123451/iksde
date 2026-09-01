@@ -1,13 +1,13 @@
 {
-  "updated": "2026-08-31T08:07:26.038Z",
-  "start_date": "2026-07-30",
-  "end_date": "2026-08-29",
+  "updated": "2026-09-01T07:16:55.568Z",
+  "start_date": "2026-07-31",
+  "end_date": "2026-08-30",
   "hot": [
     {
       "name": "Basra",
       "country": "Irak",
-      "temp": 50.4,
-      "date": "2026-08-06",
+      "temp": 50.5,
+      "date": "2026-08-30",
       "lat": 30.508,
       "lon": 47.783
     },
@@ -36,6 +36,14 @@
       "lon": -114.614
     },
     {
+      "name": "Mitribah",
+      "country": "Kuwejt",
+      "temp": 50,
+      "date": "2026-08-30",
+      "lat": 29.825,
+      "lon": 47.36
+    },
+    {
       "name": "Amarah",
       "country": "Irak",
       "temp": 50,
@@ -50,14 +58,6 @@
       "date": "2026-08-16",
       "lat": 31.318,
       "lon": 48.67
-    },
-    {
-      "name": "Mitribah",
-      "country": "Kuwejt",
-      "temp": 49.7,
-      "date": "2026-08-06",
-      "lat": 29.825,
-      "lon": 47.36
     },
     {
       "name": "El Centro",
