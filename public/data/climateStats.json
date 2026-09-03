@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-02T06:48:54.369Z",
-  "start_date": "2026-08-01",
-  "end_date": "2026-08-31",
+  "updated": "2026-09-03T06:51:29.147Z",
+  "start_date": "2026-08-02",
+  "end_date": "2026-09-01",
   "hot": [
     {
       "name": "Basra",
@@ -23,17 +23,9 @@
       "name": "Nasiriyah",
       "country": "Irak",
       "temp": 50.3,
-      "date": "2026-08-01",
+      "date": "2026-08-12",
       "lat": 31.058,
       "lon": 46.257
-    },
-    {
-      "name": "Needles",
-      "country": "USA",
-      "temp": 50,
-      "date": "2026-08-01",
-      "lat": 34.848,
-      "lon": -114.614
     },
     {
       "name": "Mitribah",
@@ -60,6 +52,14 @@
       "lon": 48.67
     },
     {
+      "name": "Needles",
+      "country": "USA",
+      "temp": 49.5,
+      "date": "2026-08-02",
+      "lat": 34.848,
+      "lon": -114.614
+    },
+    {
       "name": "El Centro",
       "country": "USA",
       "temp": 48.5,
@@ -68,20 +68,20 @@
       "lon": -115.563
     },
     {
-      "name": "Mexicali",
-      "country": "Meksyk",
-      "temp": 48.4,
-      "date": "2026-08-01",
-      "lat": 32.653,
-      "lon": -115.468
-    },
-    {
       "name": "Bullhead City",
       "country": "USA",
       "temp": 48.4,
-      "date": "2026-08-01",
+      "date": "2026-08-02",
       "lat": 35.147,
       "lon": -114.568
+    },
+    {
+      "name": "Mexicali",
+      "country": "Meksyk",
+      "temp": 48.3,
+      "date": "2026-08-02",
+      "lat": 32.653,
+      "lon": -115.468
     }
   ],
   "cold": []
