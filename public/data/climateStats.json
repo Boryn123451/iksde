@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-03T06:51:29.147Z",
-  "start_date": "2026-08-02",
-  "end_date": "2026-09-01",
+  "updated": "2026-09-04T07:03:28.798Z",
+  "start_date": "2026-08-03",
+  "end_date": "2026-09-02",
   "hot": [
     {
       "name": "Basra",
@@ -54,32 +54,32 @@
     {
       "name": "Needles",
       "country": "USA",
-      "temp": 49.5,
-      "date": "2026-08-02",
+      "temp": 49.4,
+      "date": "2026-08-03",
       "lat": 34.848,
       "lon": -114.614
     },
     {
       "name": "El Centro",
       "country": "USA",
-      "temp": 48.5,
-      "date": "2026-08-02",
+      "temp": 48.4,
+      "date": "2026-08-03",
       "lat": 32.792,
       "lon": -115.563
     },
     {
       "name": "Bullhead City",
       "country": "USA",
-      "temp": 48.4,
-      "date": "2026-08-02",
+      "temp": 48,
+      "date": "2026-08-03",
       "lat": 35.147,
       "lon": -114.568
     },
     {
       "name": "Mexicali",
       "country": "Meksyk",
-      "temp": 48.3,
-      "date": "2026-08-02",
+      "temp": 47.8,
+      "date": "2026-08-03",
       "lat": 32.653,
       "lon": -115.468
     }
