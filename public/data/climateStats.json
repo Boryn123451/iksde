@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-07T07:00:44.529Z",
-  "start_date": "2026-08-06",
-  "end_date": "2026-09-05",
+  "updated": "2026-09-08T06:55:26.528Z",
+  "start_date": "2026-08-07",
+  "end_date": "2026-09-06",
   "hot": [
     {
       "name": "Basra",
@@ -60,14 +60,6 @@
       "lon": -114.614
     },
     {
-      "name": "Mecca",
-      "country": "Arabia Saudyjska",
-      "temp": 47.8,
-      "date": "2026-08-06",
-      "lat": 21.389,
-      "lon": 39.858
-    },
-    {
       "name": "Timimoun",
       "country": "Algieria",
       "temp": 47.7,
@@ -82,6 +74,14 @@
       "date": "2026-08-22",
       "lat": 27.874,
       "lon": -0.286
+    },
+    {
+      "name": "Reggane",
+      "country": "Algieria",
+      "temp": 47.4,
+      "date": "2026-08-23",
+      "lat": 26.719,
+      "lon": 0.171
     }
   ],
   "cold": []
