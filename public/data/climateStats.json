@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-13T07:10:44.052Z",
-  "start_date": "2026-08-12",
-  "end_date": "2026-09-11",
+  "updated": "2026-09-14T07:34:19.922Z",
+  "start_date": "2026-08-13",
+  "end_date": "2026-09-12",
   "hot": [
     {
       "name": "Basra",
@@ -14,18 +14,10 @@
     {
       "name": "Sulaibiya",
       "country": "Kuwejt",
-      "temp": 50.4,
-      "date": "2026-08-12",
+      "temp": 50.1,
+      "date": "2026-08-30",
       "lat": 29.283,
       "lon": 47.817
-    },
-    {
-      "name": "Nasiriyah",
-      "country": "Irak",
-      "temp": 50.3,
-      "date": "2026-08-12",
-      "lat": 31.058,
-      "lon": 46.257
     },
     {
       "name": "Mitribah",
@@ -50,6 +42,14 @@
       "date": "2026-08-16",
       "lat": 31.318,
       "lon": 48.67
+    },
+    {
+      "name": "Nasiriyah",
+      "country": "Irak",
+      "temp": 49.8,
+      "date": "2026-08-26",
+      "lat": 31.058,
+      "lon": 46.257
     },
     {
       "name": "Needles",
