@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-14T07:34:19.922Z",
-  "start_date": "2026-08-13",
-  "end_date": "2026-09-12",
+  "updated": "2026-09-15T07:12:36.048Z",
+  "start_date": "2026-08-14",
+  "end_date": "2026-09-13",
   "hot": [
     {
       "name": "Basra",
@@ -28,14 +28,6 @@
       "lon": 47.36
     },
     {
-      "name": "Amarah",
-      "country": "Irak",
-      "temp": 50,
-      "date": "2026-08-13",
-      "lat": 31.845,
-      "lon": 47.145
-    },
-    {
       "name": "Ahvaz",
       "country": "Iran",
       "temp": 49.9,
@@ -50,6 +42,14 @@
       "date": "2026-08-26",
       "lat": 31.058,
       "lon": 46.257
+    },
+    {
+      "name": "Amarah",
+      "country": "Irak",
+      "temp": 49.5,
+      "date": "2026-08-16",
+      "lat": 31.845,
+      "lon": 47.145
     },
     {
       "name": "Needles",
