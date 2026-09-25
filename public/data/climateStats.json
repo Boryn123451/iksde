@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-24T07:12:37.645Z",
-  "start_date": "2026-08-23",
-  "end_date": "2026-09-22",
+  "updated": "2026-09-25T07:07:42.188Z",
+  "start_date": "2026-08-24",
+  "end_date": "2026-09-23",
   "hot": [
     {
       "name": "Basra",
@@ -60,28 +60,28 @@
       "lon": -114.614
     },
     {
-      "name": "Timimoun",
+      "name": "Reggane",
       "country": "Algieria",
-      "temp": 47.7,
-      "date": "2026-08-23",
-      "lat": 29.263,
-      "lon": 0.23
+      "temp": 47.3,
+      "date": "2026-09-03",
+      "lat": 26.719,
+      "lon": 0.171
     },
     {
       "name": "Adrar",
       "country": "Algieria",
-      "temp": 47.6,
-      "date": "2026-08-23",
+      "temp": 47.2,
+      "date": "2026-09-03",
       "lat": 27.874,
       "lon": -0.286
     },
     {
-      "name": "Reggane",
+      "name": "Timimoun",
       "country": "Algieria",
-      "temp": 47.4,
-      "date": "2026-08-23",
-      "lat": 26.719,
-      "lon": 0.171
+      "temp": 47.1,
+      "date": "2026-08-26",
+      "lat": 29.263,
+      "lon": 0.23
     }
   ],
   "cold": []
