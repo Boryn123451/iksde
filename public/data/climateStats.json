@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-02T07:56:47.748Z",
-  "start_date": "2026-08-31",
-  "end_date": "2026-09-30",
+  "updated": "2026-10-03T07:35:55.554Z",
+  "start_date": "2026-09-01",
+  "end_date": "2026-10-01",
   "hot": [
     {
       "name": "Dongola",
@@ -134,20 +134,20 @@
       "lon": -85.94
     },
     {
+      "name": "Qaanaaq (Thule)",
+      "country": "Grenlandia",
+      "temp": -11.5,
+      "date": "2026-10-01",
+      "lat": 77.467,
+      "lon": -69.231
+    },
+    {
       "name": "Resolute",
       "country": "Kanada",
       "temp": -10.7,
       "date": "2026-09-26",
       "lat": 74.697,
       "lon": -94.832
-    },
-    {
-      "name": "Qaanaaq (Thule)",
-      "country": "Grenlandia",
-      "temp": -10,
-      "date": "2026-09-30",
-      "lat": 77.467,
-      "lon": -69.231
     },
     {
       "name": "Grise Fiord",
