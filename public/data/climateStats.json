@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-03T07:35:55.554Z",
-  "start_date": "2026-09-01",
-  "end_date": "2026-10-01",
+  "updated": "2026-10-04T07:46:44.479Z",
+  "start_date": "2026-09-02",
+  "end_date": "2026-10-02",
   "hot": [
     {
       "name": "Dongola",
@@ -63,7 +63,7 @@
       "name": "Akjoujt",
       "country": "Mauretania",
       "temp": 44.4,
-      "date": "2026-09-01",
+      "date": "2026-09-06",
       "lat": 19.748,
       "lon": -14.382
     },
@@ -152,18 +152,18 @@
     {
       "name": "Grise Fiord",
       "country": "Kanada",
-      "temp": -10,
-      "date": "2026-09-27",
+      "temp": -10.1,
+      "date": "2026-10-02",
       "lat": 76.417,
       "lon": -82.896
     },
     {
-      "name": "Oymyakon",
-      "country": "Rosja",
-      "temp": -8,
-      "date": "2026-09-30",
-      "lat": 63.462,
-      "lon": 142.787
+      "name": "Prospect Creek",
+      "country": "USA",
+      "temp": -10.1,
+      "date": "2026-10-02",
+      "lat": 66.814,
+      "lon": -150.644
     }
   ]
 }
