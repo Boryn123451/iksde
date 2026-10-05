@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-04T07:46:44.479Z",
-  "start_date": "2026-09-02",
-  "end_date": "2026-10-02",
+  "updated": "2026-10-05T08:21:57.100Z",
+  "start_date": "2026-09-03",
+  "end_date": "2026-10-03",
   "hot": [
     {
       "name": "Dongola",
@@ -136,34 +136,34 @@
     {
       "name": "Qaanaaq (Thule)",
       "country": "Grenlandia",
-      "temp": -11.5,
-      "date": "2026-10-01",
+      "temp": -12.4,
+      "date": "2026-10-03",
       "lat": 77.467,
       "lon": -69.231
     },
     {
-      "name": "Resolute",
-      "country": "Kanada",
-      "temp": -10.7,
-      "date": "2026-09-26",
-      "lat": 74.697,
-      "lon": -94.832
+      "name": "Prospect Creek",
+      "country": "USA",
+      "temp": -12.4,
+      "date": "2026-10-03",
+      "lat": 66.814,
+      "lon": -150.644
     },
     {
       "name": "Grise Fiord",
       "country": "Kanada",
-      "temp": -10.1,
-      "date": "2026-10-02",
+      "temp": -11.2,
+      "date": "2026-10-03",
       "lat": 76.417,
       "lon": -82.896
     },
     {
-      "name": "Prospect Creek",
+      "name": "Bettles",
       "country": "USA",
-      "temp": -10.1,
-      "date": "2026-10-02",
-      "lat": 66.814,
-      "lon": -150.644
+      "temp": -10.8,
+      "date": "2026-10-03",
+      "lat": 66.918,
+      "lon": -151.515
     }
   ]
 }
