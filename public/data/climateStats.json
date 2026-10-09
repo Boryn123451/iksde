@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-08T08:25:40.934Z",
-  "start_date": "2026-09-06",
-  "end_date": "2026-10-06",
+  "updated": "2026-10-09T08:29:54.118Z",
+  "start_date": "2026-09-07",
+  "end_date": "2026-10-07",
   "hot": [
     {
       "name": "Dongola",
@@ -44,28 +44,12 @@
       "lon": 31.85
     },
     {
-      "name": "Atar",
-      "country": "Mauretania",
-      "temp": 45.3,
-      "date": "2026-09-06",
-      "lat": 20.517,
-      "lon": -13.05
-    },
-    {
       "name": "Atbara",
       "country": "Sudan",
       "temp": 44.5,
       "date": "2026-09-15",
       "lat": 17.693,
       "lon": 33.987
-    },
-    {
-      "name": "Akjoujt",
-      "country": "Mauretania",
-      "temp": 44.4,
-      "date": "2026-09-06",
-      "lat": 19.748,
-      "lon": -14.382
     },
     {
       "name": "Tessalit",
@@ -82,6 +66,22 @@
       "date": "2026-09-15",
       "lat": 18.904,
       "lon": -3.529
+    },
+    {
+      "name": "Faya-Largeau",
+      "country": "Czad",
+      "temp": 43.7,
+      "date": "2026-09-15",
+      "lat": 17.925,
+      "lon": 19.104
+    },
+    {
+      "name": "Akjoujt",
+      "country": "Mauretania",
+      "temp": 43.6,
+      "date": "2026-09-16",
+      "lat": 19.748,
+      "lon": -14.382
     }
   ],
   "cold": [
@@ -104,16 +104,16 @@
     {
       "name": "North Ice Station",
       "country": "Grenlandia",
-      "temp": -36.4,
-      "date": "2026-09-30",
+      "temp": -36.7,
+      "date": "2026-10-07",
       "lat": 78.067,
       "lon": -38.483
     },
     {
       "name": "Eismitte",
       "country": "Grenlandia",
-      "temp": -35.3,
-      "date": "2026-10-06",
+      "temp": -36.5,
+      "date": "2026-10-07",
       "lat": 70.9,
       "lon": -40.7
     },
