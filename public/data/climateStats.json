@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-09T08:29:54.118Z",
-  "start_date": "2026-09-07",
-  "end_date": "2026-10-07",
+  "updated": "2026-10-10T08:07:00.006Z",
+  "start_date": "2026-09-08",
+  "end_date": "2026-10-08",
   "hot": [
     {
       "name": "Dongola",
@@ -86,6 +86,14 @@
   ],
   "cold": [
     {
+      "name": "North Ice Station",
+      "country": "Grenlandia",
+      "temp": -38.7,
+      "date": "2026-10-08",
+      "lat": 78.067,
+      "lon": -38.483
+    },
+    {
       "name": "Summit Station",
       "country": "Grenlandia",
       "temp": -37.5,
@@ -100,14 +108,6 @@
       "date": "2026-09-29",
       "lat": 72.3,
       "lon": -40.483
-    },
-    {
-      "name": "North Ice Station",
-      "country": "Grenlandia",
-      "temp": -36.7,
-      "date": "2026-10-07",
-      "lat": 78.067,
-      "lon": -38.483
     },
     {
       "name": "Eismitte",
@@ -126,6 +126,14 @@
       "lon": -62.348
     },
     {
+      "name": "Grise Fiord",
+      "country": "Kanada",
+      "temp": -15.1,
+      "date": "2026-10-08",
+      "lat": 76.417,
+      "lon": -82.896
+    },
+    {
       "name": "Eureka",
       "country": "Kanada",
       "temp": -14.5,
@@ -134,36 +142,28 @@
       "lon": -85.94
     },
     {
+      "name": "Bettles",
+      "country": "USA",
+      "temp": -14.2,
+      "date": "2026-10-08",
+      "lat": 66.918,
+      "lon": -151.515
+    },
+    {
       "name": "Batagay",
       "country": "Rosja",
-      "temp": -12.7,
-      "date": "2026-10-06",
+      "temp": -13.7,
+      "date": "2026-10-08",
       "lat": 67.65,
       "lon": 134.633
     },
     {
-      "name": "Qaanaaq (Thule)",
-      "country": "Grenlandia",
-      "temp": -12.4,
-      "date": "2026-10-03",
-      "lat": 77.467,
-      "lon": -69.231
-    },
-    {
-      "name": "Prospect Creek",
-      "country": "USA",
-      "temp": -12.4,
-      "date": "2026-10-03",
-      "lat": 66.814,
-      "lon": -150.644
-    },
-    {
-      "name": "Oymyakon",
-      "country": "Rosja",
-      "temp": -11.8,
-      "date": "2026-10-05",
-      "lat": 63.462,
-      "lon": 142.787
+      "name": "Resolute",
+      "country": "Kanada",
+      "temp": -13.4,
+      "date": "2026-10-08",
+      "lat": 74.697,
+      "lon": -94.832
     }
   ]
 }
