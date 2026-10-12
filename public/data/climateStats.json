@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-11T08:18:08.233Z",
-  "start_date": "2026-09-09",
-  "end_date": "2026-10-09",
+  "updated": "2026-10-12T08:37:39.226Z",
+  "start_date": "2026-09-10",
+  "end_date": "2026-10-10",
   "hot": [
     {
       "name": "Dongola",
@@ -120,26 +120,34 @@
     {
       "name": "Alert",
       "country": "Kanada",
-      "temp": -20.8,
-      "date": "2026-10-06",
+      "temp": -23.5,
+      "date": "2026-10-10",
       "lat": 82.502,
       "lon": -62.348
     },
     {
       "name": "Eureka",
       "country": "Kanada",
-      "temp": -17.6,
-      "date": "2026-10-09",
+      "temp": -19.7,
+      "date": "2026-10-10",
       "lat": 79.98,
       "lon": -85.94
     },
     {
       "name": "Grise Fiord",
       "country": "Kanada",
-      "temp": -16.4,
-      "date": "2026-10-09",
+      "temp": -17.2,
+      "date": "2026-10-10",
       "lat": 76.417,
       "lon": -82.896
+    },
+    {
+      "name": "Qaanaaq (Thule)",
+      "country": "Grenlandia",
+      "temp": -16.9,
+      "date": "2026-10-10",
+      "lat": 77.467,
+      "lon": -69.231
     },
     {
       "name": "Oymyakon",
@@ -156,14 +164,6 @@
       "date": "2026-10-09",
       "lat": 67.65,
       "lon": 134.633
-    },
-    {
-      "name": "Bettles",
-      "country": "USA",
-      "temp": -14.2,
-      "date": "2026-10-08",
-      "lat": 66.918,
-      "lon": -151.515
     }
   ]
 }
