@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-12T08:37:39.226Z",
-  "start_date": "2026-09-10",
-  "end_date": "2026-10-10",
+  "updated": "2026-10-13T08:57:22.715Z",
+  "start_date": "2026-09-11",
+  "end_date": "2026-10-11",
   "hot": [
     {
       "name": "Dongola",
@@ -104,8 +104,8 @@
     {
       "name": "North Ice Station",
       "country": "Grenlandia",
-      "temp": -38.7,
-      "date": "2026-10-08",
+      "temp": -39.5,
+      "date": "2026-10-11",
       "lat": 78.067,
       "lon": -38.483
     },
@@ -120,10 +120,18 @@
     {
       "name": "Alert",
       "country": "Kanada",
-      "temp": -23.5,
-      "date": "2026-10-10",
+      "temp": -25,
+      "date": "2026-10-11",
       "lat": 82.502,
       "lon": -62.348
+    },
+    {
+      "name": "Qaanaaq (Thule)",
+      "country": "Grenlandia",
+      "temp": -19.7,
+      "date": "2026-10-11",
+      "lat": 77.467,
+      "lon": -69.231
     },
     {
       "name": "Eureka",
@@ -142,28 +150,20 @@
       "lon": -82.896
     },
     {
-      "name": "Qaanaaq (Thule)",
-      "country": "Grenlandia",
-      "temp": -16.9,
-      "date": "2026-10-10",
-      "lat": 77.467,
-      "lon": -69.231
-    },
-    {
       "name": "Oymyakon",
       "country": "Rosja",
-      "temp": -15.3,
-      "date": "2026-10-09",
+      "temp": -17,
+      "date": "2026-10-11",
       "lat": 63.462,
       "lon": 142.787
     },
     {
-      "name": "Batagay",
+      "name": "Ust-Nera",
       "country": "Rosja",
-      "temp": -14.4,
-      "date": "2026-10-09",
-      "lat": 67.65,
-      "lon": 134.633
+      "temp": -15,
+      "date": "2026-10-11",
+      "lat": 64.567,
+      "lon": 143.237
     }
   ]
 }
