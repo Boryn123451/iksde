@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-13T08:57:22.715Z",
-  "start_date": "2026-09-11",
-  "end_date": "2026-10-11",
+  "updated": "2026-10-14T07:06:20.250Z",
+  "start_date": "2026-09-12",
+  "end_date": "2026-10-12",
   "hot": [
     {
       "name": "Dongola",
@@ -46,7 +46,7 @@
     {
       "name": "Atbara",
       "country": "Sudan",
-      "temp": 44.5,
+      "temp": 44.6,
       "date": "2026-09-15",
       "lat": 17.693,
       "lon": 33.987
@@ -86,6 +86,14 @@
   ],
   "cold": [
     {
+      "name": "North Ice Station",
+      "country": "Grenlandia",
+      "temp": -46.4,
+      "date": "2026-10-12",
+      "lat": 78.067,
+      "lon": -38.483
+    },
+    {
       "name": "Klinck Station",
       "country": "Grenlandia",
       "temp": -40.9,
@@ -102,14 +110,6 @@
       "lon": -38.46
     },
     {
-      "name": "North Ice Station",
-      "country": "Grenlandia",
-      "temp": -39.5,
-      "date": "2026-10-11",
-      "lat": 78.067,
-      "lon": -38.483
-    },
-    {
       "name": "Eismitte",
       "country": "Grenlandia",
       "temp": -37.7,
@@ -120,31 +120,31 @@
     {
       "name": "Alert",
       "country": "Kanada",
-      "temp": -25,
-      "date": "2026-10-11",
+      "temp": -26.4,
+      "date": "2026-10-12",
       "lat": 82.502,
       "lon": -62.348
     },
     {
+      "name": "Eureka",
+      "country": "Kanada",
+      "temp": -22,
+      "date": "2026-10-12",
+      "lat": 79.98,
+      "lon": -85.94
+    },
+    {
       "name": "Qaanaaq (Thule)",
       "country": "Grenlandia",
-      "temp": -19.7,
+      "temp": -19.8,
       "date": "2026-10-11",
       "lat": 77.467,
       "lon": -69.231
     },
     {
-      "name": "Eureka",
-      "country": "Kanada",
-      "temp": -19.7,
-      "date": "2026-10-10",
-      "lat": 79.98,
-      "lon": -85.94
-    },
-    {
       "name": "Grise Fiord",
       "country": "Kanada",
-      "temp": -17.2,
+      "temp": -17.3,
       "date": "2026-10-10",
       "lat": 76.417,
       "lon": -82.896
@@ -160,8 +160,8 @@
     {
       "name": "Ust-Nera",
       "country": "Rosja",
-      "temp": -15,
-      "date": "2026-10-11",
+      "temp": -15.7,
+      "date": "2026-10-12",
       "lat": 64.567,
       "lon": 143.237
     }
