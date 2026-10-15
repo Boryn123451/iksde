@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-14T07:06:20.250Z",
-  "start_date": "2026-09-12",
-  "end_date": "2026-10-12",
+  "updated": "2026-10-15T06:58:20.412Z",
+  "start_date": "2026-09-13",
+  "end_date": "2026-10-13",
   "hot": [
     {
       "name": "Dongola",
@@ -120,16 +120,16 @@
     {
       "name": "Alert",
       "country": "Kanada",
-      "temp": -26.4,
-      "date": "2026-10-12",
+      "temp": -26.5,
+      "date": "2026-10-13",
       "lat": 82.502,
       "lon": -62.348
     },
     {
       "name": "Eureka",
       "country": "Kanada",
-      "temp": -22,
-      "date": "2026-10-12",
+      "temp": -23.6,
+      "date": "2026-10-13",
       "lat": 79.98,
       "lon": -85.94
     },
@@ -144,8 +144,8 @@
     {
       "name": "Grise Fiord",
       "country": "Kanada",
-      "temp": -17.3,
-      "date": "2026-10-10",
+      "temp": -18,
+      "date": "2026-10-13",
       "lat": 76.417,
       "lon": -82.896
     },
@@ -160,8 +160,8 @@
     {
       "name": "Ust-Nera",
       "country": "Rosja",
-      "temp": -15.7,
-      "date": "2026-10-12",
+      "temp": -16.9,
+      "date": "2026-10-13",
       "lat": 64.567,
       "lon": 143.237
     }
