@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-20T07:11:09.906Z",
-  "start_date": "2026-09-18",
-  "end_date": "2026-10-18",
+  "updated": "2026-10-21T07:04:34.304Z",
+  "start_date": "2026-09-19",
+  "end_date": "2026-10-19",
   "hot": [
     {
       "name": "Dongola",
@@ -44,14 +44,6 @@
       "lon": 33.987
     },
     {
-      "name": "Wadi Halfa",
-      "country": "Sudan",
-      "temp": 43.3,
-      "date": "2026-09-18",
-      "lat": 21.792,
-      "lon": 31.374
-    },
-    {
       "name": "Akjoujt",
       "country": "Mauretania",
       "temp": 42.9,
@@ -82,6 +74,14 @@
       "date": "2026-09-26",
       "lat": 17.925,
       "lon": 19.104
+    },
+    {
+      "name": "Atar",
+      "country": "Mauretania",
+      "temp": 42.1,
+      "date": "2026-09-30",
+      "lat": 20.517,
+      "lon": -13.05
     }
   ],
   "cold": [
