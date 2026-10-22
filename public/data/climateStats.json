@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-21T07:04:34.304Z",
-  "start_date": "2026-09-19",
-  "end_date": "2026-10-19",
+  "updated": "2026-10-22T07:06:33.526Z",
+  "start_date": "2026-09-20",
+  "end_date": "2026-10-20",
   "hot": [
     {
       "name": "Dongola",
@@ -52,6 +52,14 @@
       "lon": -14.382
     },
     {
+      "name": "Tete",
+      "country": "Mozambik",
+      "temp": 42.8,
+      "date": "2026-10-20",
+      "lat": -16.156,
+      "lon": 33.586
+    },
+    {
       "name": "Marble Bar",
       "country": "Australia",
       "temp": 42.5,
@@ -68,20 +76,12 @@
       "lon": 128.122
     },
     {
-      "name": "Faya-Largeau",
-      "country": "Czad",
-      "temp": 42.1,
-      "date": "2026-09-26",
-      "lat": 17.925,
-      "lon": 19.104
-    },
-    {
-      "name": "Atar",
-      "country": "Mauretania",
-      "temp": 42.1,
-      "date": "2026-09-30",
-      "lat": 20.517,
-      "lon": -13.05
+      "name": "Port Hedland",
+      "country": "Australia",
+      "temp": 42.4,
+      "date": "2026-10-20",
+      "lat": -20.311,
+      "lon": 118.601
     }
   ],
   "cold": [
