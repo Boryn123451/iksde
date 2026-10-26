@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-25T07:16:53.595Z",
-  "start_date": "2026-09-23",
-  "end_date": "2026-10-23",
+  "updated": "2026-10-26T07:25:23.827Z",
+  "start_date": "2026-09-24",
+  "end_date": "2026-10-24",
   "hot": [
     {
       "name": "Dongola",
@@ -36,14 +36,6 @@
       "lon": 33.586
     },
     {
-      "name": "Abu Hamed",
-      "country": "Sudan",
-      "temp": 43,
-      "date": "2026-09-23",
-      "lat": 19.533,
-      "lon": 33.316
-    },
-    {
       "name": "Akjoujt",
       "country": "Mauretania",
       "temp": 42.9,
@@ -58,6 +50,14 @@
       "date": "2026-09-26",
       "lat": 17.693,
       "lon": 33.987
+    },
+    {
+      "name": "Abu Hamed",
+      "country": "Sudan",
+      "temp": 42.6,
+      "date": "2026-09-25",
+      "lat": 19.533,
+      "lon": 33.316
     },
     {
       "name": "Marble Bar",
@@ -134,6 +134,22 @@
       "lon": -85.94
     },
     {
+      "name": "Ust-Nera",
+      "country": "Rosja",
+      "temp": -23.2,
+      "date": "2026-10-24",
+      "lat": 64.567,
+      "lon": 143.237
+    },
+    {
+      "name": "Oymyakon",
+      "country": "Rosja",
+      "temp": -21,
+      "date": "2026-10-24",
+      "lat": 63.462,
+      "lon": 142.787
+    },
+    {
       "name": "Qaanaaq (Thule)",
       "country": "Grenlandia",
       "temp": -21,
@@ -148,22 +164,6 @@
       "date": "2026-10-15",
       "lat": 76.417,
       "lon": -82.896
-    },
-    {
-      "name": "Ust-Nera",
-      "country": "Rosja",
-      "temp": -20.9,
-      "date": "2026-10-15",
-      "lat": 64.567,
-      "lon": 143.237
-    },
-    {
-      "name": "Bettles",
-      "country": "USA",
-      "temp": -20.8,
-      "date": "2026-10-21",
-      "lat": 66.918,
-      "lon": -151.515
     }
   ]
 }
