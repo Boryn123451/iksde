@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-27T07:18:56.910Z",
-  "start_date": "2026-09-25",
-  "end_date": "2026-10-25",
+  "updated": "2026-10-28T07:55:40.316Z",
+  "start_date": "2026-09-26",
+  "end_date": "2026-10-26",
   "hot": [
     {
       "name": "Dongola",
@@ -10,14 +10,6 @@
       "date": "2026-09-29",
       "lat": 19.171,
       "lon": 30.474
-    },
-    {
-      "name": "Dallol",
-      "country": "Etiopia",
-      "temp": 44.6,
-      "date": "2026-09-25",
-      "lat": 14.242,
-      "lon": 40.298
     },
     {
       "name": "Karima",
@@ -34,6 +26,14 @@
       "date": "2026-10-23",
       "lat": -16.156,
       "lon": 33.586
+    },
+    {
+      "name": "Dallol",
+      "country": "Etiopia",
+      "temp": 43.5,
+      "date": "2026-09-26",
+      "lat": 14.242,
+      "lon": 40.298
     },
     {
       "name": "Akjoujt",
@@ -55,7 +55,7 @@
       "name": "Abu Hamed",
       "country": "Sudan",
       "temp": 42.6,
-      "date": "2026-09-25",
+      "date": "2026-09-27",
       "lat": 19.533,
       "lon": 33.316
     },
@@ -134,20 +134,28 @@
       "lon": -85.94
     },
     {
+      "name": "Oymyakon",
+      "country": "Rosja",
+      "temp": -25.1,
+      "date": "2026-10-26",
+      "lat": 63.462,
+      "lon": 142.787
+    },
+    {
       "name": "Ust-Nera",
       "country": "Rosja",
-      "temp": -23.2,
-      "date": "2026-10-24",
+      "temp": -24,
+      "date": "2026-10-26",
       "lat": 64.567,
       "lon": 143.237
     },
     {
-      "name": "Oymyakon",
+      "name": "Zhigansk",
       "country": "Rosja",
-      "temp": -22.3,
-      "date": "2026-10-25",
-      "lat": 63.462,
-      "lon": 142.787
+      "temp": -23,
+      "date": "2026-10-26",
+      "lat": 66.769,
+      "lon": 123.364
     },
     {
       "name": "Qaanaaq (Thule)",
@@ -156,14 +164,6 @@
       "date": "2026-10-18",
       "lat": 77.467,
       "lon": -69.231
-    },
-    {
-      "name": "Grise Fiord",
-      "country": "Kanada",
-      "temp": -21,
-      "date": "2026-10-15",
-      "lat": 76.417,
-      "lon": -82.896
     }
   ]
 }
