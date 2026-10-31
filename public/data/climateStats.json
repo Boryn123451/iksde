@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-30T08:03:31.497Z",
-  "start_date": "2026-09-28",
-  "end_date": "2026-10-28",
+  "updated": "2026-10-31T07:59:24.817Z",
+  "start_date": "2026-09-29",
+  "end_date": "2026-10-29",
   "hot": [
     {
       "name": "Dongola",
@@ -46,8 +46,8 @@
     {
       "name": "Abu Hamed",
       "country": "Sudan",
-      "temp": 42.6,
-      "date": "2026-09-28",
+      "temp": 42.5,
+      "date": "2026-09-30",
       "lat": 19.533,
       "lon": 33.316
     },
@@ -120,8 +120,8 @@
     {
       "name": "Neryungri",
       "country": "Rosja",
-      "temp": -30.1,
-      "date": "2026-10-28",
+      "temp": -30.3,
+      "date": "2026-10-29",
       "lat": 56.671,
       "lon": 124.718
     },
@@ -142,28 +142,28 @@
       "lon": -62.348
     },
     {
+      "name": "Batagay",
+      "country": "Rosja",
+      "temp": -25.6,
+      "date": "2026-10-29",
+      "lat": 67.65,
+      "lon": 134.633
+    },
+    {
       "name": "Eureka",
       "country": "Kanada",
-      "temp": -25.2,
-      "date": "2026-10-14",
+      "temp": -25.5,
+      "date": "2026-10-29",
       "lat": 79.98,
       "lon": -85.94
     },
     {
-      "name": "Ust-Nera",
+      "name": "Vilyuysk",
       "country": "Rosja",
-      "temp": -24.4,
-      "date": "2026-10-27",
-      "lat": 64.567,
-      "lon": 143.237
-    },
-    {
-      "name": "Batagay",
-      "country": "Rosja",
-      "temp": -23.4,
-      "date": "2026-10-28",
-      "lat": 67.65,
-      "lon": 134.633
+      "temp": -25,
+      "date": "2026-10-29",
+      "lat": 63.755,
+      "lon": 121.624
     }
   ]
 }
