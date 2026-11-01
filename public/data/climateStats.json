@@ -1,24 +1,8 @@
 {
-  "updated": "2026-10-31T07:59:24.817Z",
-  "start_date": "2026-09-29",
-  "end_date": "2026-10-29",
+  "updated": "2026-11-01T08:42:55.906Z",
+  "start_date": "2026-09-30",
+  "end_date": "2026-10-30",
   "hot": [
-    {
-      "name": "Dongola",
-      "country": "Sudan",
-      "temp": 44.9,
-      "date": "2026-09-29",
-      "lat": 19.171,
-      "lon": 30.474
-    },
-    {
-      "name": "Karima",
-      "country": "Sudan",
-      "temp": 44.4,
-      "date": "2026-09-29",
-      "lat": 18.55,
-      "lon": 31.85
-    },
     {
       "name": "Tete",
       "country": "Mozambik",
@@ -31,25 +15,9 @@
       "name": "Dallol",
       "country": "Etiopia",
       "temp": 43.4,
-      "date": "2026-09-29",
+      "date": "2026-10-01",
       "lat": 14.242,
       "lon": 40.298
-    },
-    {
-      "name": "Akjoujt",
-      "country": "Mauretania",
-      "temp": 42.9,
-      "date": "2026-10-01",
-      "lat": 19.748,
-      "lon": -14.382
-    },
-    {
-      "name": "Abu Hamed",
-      "country": "Sudan",
-      "temp": 42.5,
-      "date": "2026-09-30",
-      "lat": 19.533,
-      "lon": 33.316
     },
     {
       "name": "Marble Bar",
@@ -82,6 +50,38 @@
       "date": "2026-10-20",
       "lat": -18.194,
       "lon": 125.563
+    },
+    {
+      "name": "Roebourne",
+      "country": "Australia",
+      "temp": 41.8,
+      "date": "2026-10-17",
+      "lat": -20.778,
+      "lon": 117.143
+    },
+    {
+      "name": "Pozo de Maza",
+      "country": "Argentyna",
+      "temp": 40.7,
+      "date": "2026-10-22",
+      "lat": -23.566,
+      "lon": -61.7
+    },
+    {
+      "name": "Maun",
+      "country": "Botswana",
+      "temp": 40.6,
+      "date": "2026-10-22",
+      "lat": -19.983,
+      "lon": 23.417
+    },
+    {
+      "name": "Shakawe",
+      "country": "Botswana",
+      "temp": 40.3,
+      "date": "2026-10-22",
+      "lat": -18.366,
+      "lon": 21.841
     }
   ],
   "cold": [
@@ -144,26 +144,26 @@
     {
       "name": "Batagay",
       "country": "Rosja",
-      "temp": -25.6,
-      "date": "2026-10-29",
+      "temp": -26.3,
+      "date": "2026-10-30",
       "lat": 67.65,
       "lon": 134.633
     },
     {
-      "name": "Eureka",
-      "country": "Kanada",
-      "temp": -25.5,
-      "date": "2026-10-29",
-      "lat": 79.98,
-      "lon": -85.94
+      "name": "Zhigansk",
+      "country": "Rosja",
+      "temp": -25.8,
+      "date": "2026-10-30",
+      "lat": 66.769,
+      "lon": 123.364
     },
     {
-      "name": "Vilyuysk",
+      "name": "Aldan",
       "country": "Rosja",
-      "temp": -25,
-      "date": "2026-10-29",
-      "lat": 63.755,
-      "lon": 121.624
+      "temp": -25.7,
+      "date": "2026-10-30",
+      "lat": 58.604,
+      "lon": 125.389
     }
   ]
 }
