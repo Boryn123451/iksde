@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-01T08:42:55.906Z",
-  "start_date": "2026-09-30",
-  "end_date": "2026-10-30",
+  "updated": "2026-11-02T08:53:53.063Z",
+  "start_date": "2026-10-01",
+  "end_date": "2026-10-31",
   "hot": [
     {
       "name": "Tete",
@@ -118,6 +118,22 @@
       "lon": -40.7
     },
     {
+      "name": "Oymyakon",
+      "country": "Rosja",
+      "temp": -30.5,
+      "date": "2026-10-31",
+      "lat": 63.462,
+      "lon": 142.787
+    },
+    {
+      "name": "Aldan",
+      "country": "Rosja",
+      "temp": -30.4,
+      "date": "2026-10-31",
+      "lat": 58.604,
+      "lon": 125.389
+    },
+    {
       "name": "Neryungri",
       "country": "Rosja",
       "temp": -30.3,
@@ -126,12 +142,12 @@
       "lon": 124.718
     },
     {
-      "name": "Oymyakon",
+      "name": "Ust-Nera",
       "country": "Rosja",
-      "temp": -27,
-      "date": "2026-10-27",
-      "lat": 63.462,
-      "lon": 142.787
+      "temp": -28.1,
+      "date": "2026-10-31",
+      "lat": 64.567,
+      "lon": 143.237
     },
     {
       "name": "Alert",
@@ -148,22 +164,6 @@
       "date": "2026-10-30",
       "lat": 67.65,
       "lon": 134.633
-    },
-    {
-      "name": "Zhigansk",
-      "country": "Rosja",
-      "temp": -25.8,
-      "date": "2026-10-30",
-      "lat": 66.769,
-      "lon": 123.364
-    },
-    {
-      "name": "Aldan",
-      "country": "Rosja",
-      "temp": -25.7,
-      "date": "2026-10-30",
-      "lat": 58.604,
-      "lon": 125.389
     }
   ]
 }
