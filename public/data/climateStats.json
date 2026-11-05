@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-04T08:37:41.929Z",
-  "start_date": "2026-10-03",
-  "end_date": "2026-11-02",
+  "updated": "2026-11-05T08:57:59.328Z",
+  "start_date": "2026-10-04",
+  "end_date": "2026-11-03",
   "hot": [
     {
       "name": "Tete",
@@ -12,6 +12,14 @@
       "lon": 33.586
     },
     {
+      "name": "Fitzroy Crossing",
+      "country": "Australia",
+      "temp": 44.1,
+      "date": "2026-11-03",
+      "lat": -18.194,
+      "lon": 125.563
+    },
+    {
       "name": "Dallol",
       "country": "Etiopia",
       "temp": 43.4,
@@ -20,12 +28,12 @@
       "lon": 40.298
     },
     {
-      "name": "Fitzroy Crossing",
+      "name": "Marble Bar",
       "country": "Australia",
-      "temp": 43,
-      "date": "2026-11-02",
-      "lat": -18.194,
-      "lon": 125.563
+      "temp": 43.2,
+      "date": "2026-11-03",
+      "lat": -21.171,
+      "lon": 119.743
     },
     {
       "name": "Birdsville",
@@ -34,14 +42,6 @@
       "date": "2026-11-02",
       "lat": -25.899,
       "lon": 139.351
-    },
-    {
-      "name": "Marble Bar",
-      "country": "Australia",
-      "temp": 42.5,
-      "date": "2026-10-18",
-      "lat": -21.171,
-      "lon": 119.743
     },
     {
       "name": "Wyndham",
@@ -76,12 +76,12 @@
       "lon": 140.198
     },
     {
-      "name": "Pozo de Maza",
-      "country": "Argentyna",
+      "name": "Villamontes",
+      "country": "Boliwia",
       "temp": 40.7,
-      "date": "2026-10-22",
-      "lat": -23.566,
-      "lon": -61.7
+      "date": "2026-11-03",
+      "lat": -21.261,
+      "lon": -63.454
     }
   ],
   "cold": [
