@@ -1,8 +1,24 @@
 {
-  "updated": "2026-11-05T08:57:59.328Z",
-  "start_date": "2026-10-04",
-  "end_date": "2026-11-03",
+  "updated": "2026-11-06T08:55:55.144Z",
+  "start_date": "2026-10-05",
+  "end_date": "2026-11-04",
   "hot": [
+    {
+      "name": "Fitzroy Crossing",
+      "country": "Australia",
+      "temp": 45.5,
+      "date": "2026-11-04",
+      "lat": -18.194,
+      "lon": 125.563
+    },
+    {
+      "name": "Roebourne",
+      "country": "Australia",
+      "temp": 44.8,
+      "date": "2026-11-04",
+      "lat": -20.778,
+      "lon": 117.143
+    },
     {
       "name": "Tete",
       "country": "Mozambik",
@@ -12,12 +28,20 @@
       "lon": 33.586
     },
     {
-      "name": "Fitzroy Crossing",
+      "name": "Villamontes",
+      "country": "Boliwia",
+      "temp": 43.6,
+      "date": "2026-11-04",
+      "lat": -21.261,
+      "lon": -63.454
+    },
+    {
+      "name": "Marble Bar",
       "country": "Australia",
-      "temp": 44.1,
-      "date": "2026-11-03",
-      "lat": -18.194,
-      "lon": 125.563
+      "temp": 43.6,
+      "date": "2026-11-04",
+      "lat": -21.171,
+      "lon": 119.743
     },
     {
       "name": "Dallol",
@@ -28,12 +52,12 @@
       "lon": 40.298
     },
     {
-      "name": "Marble Bar",
+      "name": "Port Hedland",
       "country": "Australia",
       "temp": 43.2,
-      "date": "2026-11-03",
-      "lat": -21.171,
-      "lon": 119.743
+      "date": "2026-11-04",
+      "lat": -20.311,
+      "lon": 118.601
     },
     {
       "name": "Birdsville",
@@ -52,36 +76,12 @@
       "lon": 128.122
     },
     {
-      "name": "Port Hedland",
-      "country": "Australia",
-      "temp": 42.4,
-      "date": "2026-10-20",
-      "lat": -20.311,
-      "lon": 118.601
-    },
-    {
-      "name": "Roebourne",
-      "country": "Australia",
-      "temp": 41.8,
-      "date": "2026-10-17",
-      "lat": -20.778,
-      "lon": 117.143
-    },
-    {
-      "name": "Moomba",
-      "country": "Australia",
-      "temp": 40.8,
-      "date": "2026-11-02",
-      "lat": -28.101,
-      "lon": 140.198
-    },
-    {
-      "name": "Villamontes",
-      "country": "Boliwia",
-      "temp": 40.7,
-      "date": "2026-11-03",
-      "lat": -21.261,
-      "lon": -63.454
+      "name": "Mariscal Estig.",
+      "country": "Paragwaj",
+      "temp": 42.3,
+      "date": "2026-11-04",
+      "lat": -22.029,
+      "lon": -60.621
     }
   ],
   "cold": [
