@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-06T08:55:55.144Z",
-  "start_date": "2026-10-05",
-  "end_date": "2026-11-04",
+  "updated": "2026-11-07T08:19:49.620Z",
+  "start_date": "2026-10-06",
+  "end_date": "2026-11-05",
   "hot": [
     {
       "name": "Fitzroy Crossing",
@@ -28,20 +28,20 @@
       "lon": 33.586
     },
     {
+      "name": "Marble Bar",
+      "country": "Australia",
+      "temp": 43.9,
+      "date": "2026-11-05",
+      "lat": -21.171,
+      "lon": 119.743
+    },
+    {
       "name": "Villamontes",
       "country": "Boliwia",
       "temp": 43.6,
       "date": "2026-11-04",
       "lat": -21.261,
       "lon": -63.454
-    },
-    {
-      "name": "Marble Bar",
-      "country": "Australia",
-      "temp": 43.6,
-      "date": "2026-11-04",
-      "lat": -21.171,
-      "lon": 119.743
     },
     {
       "name": "Dallol",
@@ -118,10 +118,18 @@
       "lon": -40.7
     },
     {
+      "name": "Oymyakon",
+      "country": "Rosja",
+      "temp": -35.6,
+      "date": "2026-11-05",
+      "lat": 63.462,
+      "lon": 142.787
+    },
+    {
       "name": "Neryungri",
       "country": "Rosja",
-      "temp": -33.6,
-      "date": "2026-11-01",
+      "temp": -33.8,
+      "date": "2026-11-05",
       "lat": 56.671,
       "lon": 124.718
     },
@@ -134,36 +142,28 @@
       "lon": 125.389
     },
     {
-      "name": "Oymyakon",
+      "name": "Batagay",
       "country": "Rosja",
-      "temp": -32.5,
-      "date": "2026-11-01",
-      "lat": 63.462,
-      "lon": 142.787
+      "temp": -31.5,
+      "date": "2026-11-05",
+      "lat": 67.65,
+      "lon": 134.633
     },
     {
       "name": "Ust-Nera",
       "country": "Rosja",
-      "temp": -28.1,
-      "date": "2026-10-31",
+      "temp": -29.8,
+      "date": "2026-11-05",
       "lat": 64.567,
       "lon": 143.237
     },
     {
-      "name": "Alert",
-      "country": "Kanada",
-      "temp": -26.9,
-      "date": "2026-10-14",
-      "lat": 82.502,
-      "lon": -62.348
-    },
-    {
-      "name": "Zhigansk",
+      "name": "Verkhoyansk",
       "country": "Rosja",
-      "temp": -26.4,
-      "date": "2026-11-01",
-      "lat": 66.769,
-      "lon": 123.364
+      "temp": -29.6,
+      "date": "2026-11-05",
+      "lat": 67.551,
+      "lon": 133.385
     }
   ]
 }
