@@ -1,88 +1,169 @@
 {
-  "updated": "2026-11-09T09:09:16.870Z",
-  "start_date": "2026-10-08",
-  "end_date": "2026-11-07",
-  "hot": [],
+  "updated": "2026-11-10T09:16:25.440Z",
+  "start_date": "2026-10-09",
+  "end_date": "2026-11-08",
+  "hot": [
+    {
+      "name": "Fitzroy Crossing",
+      "country": "Australia",
+      "temp": 45.5,
+      "date": "2026-11-04",
+      "lat": -18.194,
+      "lon": 125.563
+    },
+    {
+      "name": "Roebourne",
+      "country": "Australia",
+      "temp": 44.8,
+      "date": "2026-11-04",
+      "lat": -20.778,
+      "lon": 117.143
+    },
+    {
+      "name": "Tete",
+      "country": "Mozambik",
+      "temp": 44.4,
+      "date": "2026-10-23",
+      "lat": -16.156,
+      "lon": 33.586
+    },
+    {
+      "name": "Marble Bar",
+      "country": "Australia",
+      "temp": 44.1,
+      "date": "2026-11-08",
+      "lat": -21.171,
+      "lon": 119.743
+    },
+    {
+      "name": "Villamontes",
+      "country": "Boliwia",
+      "temp": 43.6,
+      "date": "2026-11-04",
+      "lat": -21.261,
+      "lon": -63.454
+    },
+    {
+      "name": "Dallol",
+      "country": "Etiopia",
+      "temp": 43.2,
+      "date": "2026-10-11",
+      "lat": 14.242,
+      "lon": 40.298
+    },
+    {
+      "name": "Port Hedland",
+      "country": "Australia",
+      "temp": 43.2,
+      "date": "2026-11-04",
+      "lat": -20.311,
+      "lon": 118.601
+    },
+    {
+      "name": "Birdsville",
+      "country": "Australia",
+      "temp": 42.6,
+      "date": "2026-11-02",
+      "lat": -25.899,
+      "lon": 139.351
+    },
+    {
+      "name": "Wyndham",
+      "country": "Australia",
+      "temp": 42.5,
+      "date": "2026-10-14",
+      "lat": -15.483,
+      "lon": 128.122
+    },
+    {
+      "name": "Mariscal Estig.",
+      "country": "Paragwaj",
+      "temp": 42.3,
+      "date": "2026-11-04",
+      "lat": -22.029,
+      "lon": -60.621
+    }
+  ],
   "cold": [
     {
-      "name": "Dome F (Valkyrie)",
-      "country": "Antarktyda",
-      "temp": -59.2,
-      "date": "2026-10-09",
-      "lat": -77.317,
-      "lon": 39.7
+      "name": "North Ice Station",
+      "country": "Grenlandia",
+      "temp": -46.4,
+      "date": "2026-10-12",
+      "lat": 78.067,
+      "lon": -38.483
     },
     {
-      "name": "Ridge A",
-      "country": "Antarktyda",
-      "temp": -58.2,
-      "date": "2026-10-19",
-      "lat": -81.5,
-      "lon": 73.5
+      "name": "Klinck Station",
+      "country": "Grenlandia",
+      "temp": -44.2,
+      "date": "2026-10-22",
+      "lat": 72.3,
+      "lon": -40.483
     },
     {
-      "name": "Vostok Station",
-      "country": "Antarktyda",
-      "temp": -57.4,
-      "date": "2026-10-15",
-      "lat": -78.464,
-      "lon": 106.837
+      "name": "Summit Station",
+      "country": "Grenlandia",
+      "temp": -42,
+      "date": "2026-10-22",
+      "lat": 72.58,
+      "lon": -38.46
     },
     {
-      "name": "Dome A (Kunlun)",
-      "country": "Antarktyda",
-      "temp": -57.1,
-      "date": "2026-10-15",
-      "lat": -80.367,
-      "lon": 77.35
+      "name": "Eismitte",
+      "country": "Grenlandia",
+      "temp": -40.6,
+      "date": "2026-11-08",
+      "lat": 70.9,
+      "lon": -40.7
     },
     {
-      "name": "Dome C (Concordia)",
-      "country": "Antarktyda",
-      "temp": -55.2,
-      "date": "2026-10-15",
-      "lat": -75.1,
-      "lon": 123.35
-    },
-    {
-      "name": "Amundsen-Scott",
-      "country": "Antarktyda",
-      "temp": -51.8,
-      "date": "2026-10-13",
-      "lat": -90,
-      "lon": 0
-    },
-    {
-      "name": "Oymyakon Station",
+      "name": "Oymyakon",
       "country": "Rosja",
-      "temp": -39.5,
-      "date": "2026-11-07",
-      "lat": 63.45,
-      "lon": 142.79
+      "temp": -40.5,
+      "date": "2026-11-08",
+      "lat": 63.462,
+      "lon": 142.787
     },
     {
-      "name": "Zhigansk Station",
+      "name": "Batagay",
+      "country": "Rosja",
+      "temp": -34.9,
+      "date": "2026-11-08",
+      "lat": 67.65,
+      "lon": 134.633
+    },
+    {
+      "name": "Verkhoyansk",
+      "country": "Rosja",
+      "temp": -34.3,
+      "date": "2026-11-08",
+      "lat": 67.551,
+      "lon": 133.385
+    },
+    {
+      "name": "Vilyuysk",
+      "country": "Rosja",
+      "temp": -34.1,
+      "date": "2026-11-07",
+      "lat": 63.755,
+      "lon": 121.624
+    },
+    {
+      "name": "Neryungri",
+      "country": "Rosja",
+      "temp": -33.8,
+      "date": "2026-11-05",
+      "lat": 56.671,
+      "lon": 124.718
+    },
+    {
+      "name": "Zhigansk",
       "country": "Rosja",
       "temp": -33.7,
       "date": "2026-11-07",
-      "lat": 66.77,
-      "lon": 123.37
-    },
-    {
-      "name": "Batagay Station",
-      "country": "Rosja",
-      "temp": -33.7,
-      "date": "2026-11-06",
-      "lat": 67.66,
-      "lon": 134.64
-    },
-    {
-      "name": "Verkhoyansk St.",
-      "country": "Rosja",
-      "temp": -33,
-      "date": "2026-11-06",
-      "lat": 67.54,
-      "lon": 133.39
+      "lat": 66.769,
+      "lon": 123.364
     }
   ]
 }
