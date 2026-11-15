@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-14T08:36:55.988Z",
-  "start_date": "2026-10-13",
-  "end_date": "2026-11-12",
+  "updated": "2026-11-15T08:50:17.047Z",
+  "start_date": "2026-10-14",
+  "end_date": "2026-11-13",
   "hot": [
     {
       "name": "Fitzroy Crossing",
@@ -52,6 +52,14 @@
       "lon": 118.601
     },
     {
+      "name": "Oran",
+      "country": "Argentyna",
+      "temp": 43.2,
+      "date": "2026-11-13",
+      "lat": -23.133,
+      "lon": -64.316
+    },
+    {
       "name": "Dallol",
       "country": "Etiopia",
       "temp": 42.6,
@@ -68,23 +76,23 @@
       "lon": 139.351
     },
     {
-      "name": "Wyndham",
-      "country": "Australia",
+      "name": "Rivadavia",
+      "country": "Argentyna",
       "temp": 42.5,
-      "date": "2026-10-14",
-      "lat": -15.483,
-      "lon": 128.122
-    },
-    {
-      "name": "Mariscal Estig.",
-      "country": "Paragwaj",
-      "temp": 42.3,
-      "date": "2026-11-04",
-      "lat": -22.029,
-      "lon": -60.621
+      "date": "2026-11-13",
+      "lat": -24.192,
+      "lon": -62.898
     }
   ],
   "cold": [
+    {
+      "name": "Klinck Station",
+      "country": "Grenlandia",
+      "temp": -47.1,
+      "date": "2026-11-13",
+      "lat": 72.3,
+      "lon": -40.483
+    },
     {
       "name": "Summit Station",
       "country": "Grenlandia",
@@ -94,26 +102,18 @@
       "lon": -38.46
     },
     {
-      "name": "Klinck Station",
-      "country": "Grenlandia",
-      "temp": -46.6,
-      "date": "2026-11-12",
-      "lat": 72.3,
-      "lon": -40.483
-    },
-    {
       "name": "North Ice Station",
       "country": "Grenlandia",
-      "temp": -45.7,
-      "date": "2026-10-13",
+      "temp": -44.8,
+      "date": "2026-10-17",
       "lat": 78.067,
       "lon": -38.483
     },
     {
       "name": "Eismitte",
       "country": "Grenlandia",
-      "temp": -42.8,
-      "date": "2026-11-12",
+      "temp": -44.8,
+      "date": "2026-11-13",
       "lat": 70.9,
       "lon": -40.7
     },
@@ -128,16 +128,24 @@
     {
       "name": "Batagay",
       "country": "Rosja",
-      "temp": -34.9,
-      "date": "2026-11-08",
+      "temp": -36.4,
+      "date": "2026-11-13",
       "lat": 67.65,
       "lon": 134.633
     },
     {
+      "name": "Saskylakh",
+      "country": "Rosja",
+      "temp": -34.9,
+      "date": "2026-11-13",
+      "lat": 71.966,
+      "lon": 114.083
+    },
+    {
       "name": "Verkhoyansk",
       "country": "Rosja",
-      "temp": -34.3,
-      "date": "2026-11-08",
+      "temp": -34.5,
+      "date": "2026-11-13",
       "lat": 67.551,
       "lon": 133.385
     },
@@ -156,14 +164,6 @@
       "date": "2026-11-05",
       "lat": 56.671,
       "lon": 124.718
-    },
-    {
-      "name": "Zhigansk",
-      "country": "Rosja",
-      "temp": -33.7,
-      "date": "2026-11-07",
-      "lat": 66.769,
-      "lon": 123.364
     }
   ]
 }
