@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-16T09:00:42.095Z",
-  "start_date": "2026-10-15",
-  "end_date": "2026-11-14",
+  "updated": "2026-11-17T10:17:27.430Z",
+  "start_date": "2026-10-16",
+  "end_date": "2026-11-15",
   "hot": [
     {
       "name": "Fitzroy Crossing",
@@ -86,6 +86,46 @@
   ],
   "cold": [
     {
+      "name": "Ridge A",
+      "country": "Antarktyda",
+      "temp": -58.2,
+      "date": "2026-10-19",
+      "lat": -81.5,
+      "lon": 73.5
+    },
+    {
+      "name": "Vostok Station",
+      "country": "Antarktyda",
+      "temp": -57.4,
+      "date": "2026-10-16",
+      "lat": -78.464,
+      "lon": 106.837
+    },
+    {
+      "name": "Dome A (Kunlun)",
+      "country": "Antarktyda",
+      "temp": -57,
+      "date": "2026-10-18",
+      "lat": -80.367,
+      "lon": 77.35
+    },
+    {
+      "name": "Dome F (Valkyrie)",
+      "country": "Antarktyda",
+      "temp": -56.3,
+      "date": "2026-10-16",
+      "lat": -77.317,
+      "lon": 39.7
+    },
+    {
+      "name": "Dome C (Concordia)",
+      "country": "Antarktyda",
+      "temp": -54.4,
+      "date": "2026-10-28",
+      "lat": -75.1,
+      "lon": 123.35
+    },
+    {
       "name": "Klinck Station",
       "country": "Grenlandia",
       "temp": -47.1,
@@ -118,52 +158,12 @@
       "lon": -40.7
     },
     {
-      "name": "Oymyakon",
-      "country": "Rosja",
-      "temp": -40.5,
-      "date": "2026-11-08",
-      "lat": 63.462,
-      "lon": 142.787
-    },
-    {
-      "name": "Batagay",
-      "country": "Rosja",
-      "temp": -39.5,
-      "date": "2026-11-14",
-      "lat": 67.65,
-      "lon": 134.633
-    },
-    {
-      "name": "Verkhoyansk",
-      "country": "Rosja",
-      "temp": -35.9,
-      "date": "2026-11-14",
-      "lat": 67.551,
-      "lon": 133.385
-    },
-    {
-      "name": "Saskylakh",
-      "country": "Rosja",
-      "temp": -34.9,
-      "date": "2026-11-13",
-      "lat": 71.966,
-      "lon": 114.083
-    },
-    {
-      "name": "Zhigansk",
-      "country": "Rosja",
-      "temp": -34.2,
-      "date": "2026-11-14",
-      "lat": 66.769,
-      "lon": 123.364
-    },
-    {
-      "name": "Vilyuysk",
-      "country": "Rosja",
-      "temp": -34.1,
-      "date": "2026-11-07",
-      "lat": 63.755,
-      "lon": 121.624
+      "name": "Amundsen-Scott",
+      "country": "Antarktyda",
+      "temp": -42,
+      "date": "2026-10-28",
+      "lat": -90,
+      "lon": 0
     }
   ]
 }
