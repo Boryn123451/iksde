@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-19T09:54:24.856Z",
-  "start_date": "2026-10-18",
-  "end_date": "2026-11-17",
+  "updated": "2026-11-20T09:41:12.631Z",
+  "start_date": "2026-10-19",
+  "end_date": "2026-11-18",
   "hot": [
     {
       "name": "Fitzroy Crossing",
@@ -118,6 +118,14 @@
       "lon": -40.7
     },
     {
+      "name": "North Ice Station",
+      "country": "Grenlandia",
+      "temp": -44.4,
+      "date": "2026-11-18",
+      "lat": 78.067,
+      "lon": -38.483
+    },
+    {
       "name": "Batagay",
       "country": "Rosja",
       "temp": -42.8,
@@ -134,20 +142,20 @@
       "lon": 133.385
     },
     {
-      "name": "North Ice Station",
-      "country": "Grenlandia",
-      "temp": -41.5,
-      "date": "2026-11-17",
-      "lat": 78.067,
-      "lon": -38.483
-    },
-    {
       "name": "Zhigansk",
       "country": "Rosja",
-      "temp": -38.7,
-      "date": "2026-11-17",
+      "temp": -40.2,
+      "date": "2026-11-18",
       "lat": 66.769,
       "lon": 123.364
+    },
+    {
+      "name": "Yakutsk",
+      "country": "Rosja",
+      "temp": -38.4,
+      "date": "2026-11-18",
+      "lat": 62.031,
+      "lon": 129.733
     },
     {
       "name": "Vilyuysk",
@@ -156,14 +164,6 @@
       "date": "2026-11-16",
       "lat": 63.755,
       "lon": 121.624
-    },
-    {
-      "name": "Yakutsk",
-      "country": "Rosja",
-      "temp": -36.6,
-      "date": "2026-11-17",
-      "lat": 62.031,
-      "lon": 129.733
     }
   ]
 }
