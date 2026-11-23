@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-22T09:22:28.819Z",
-  "start_date": "2026-10-21",
-  "end_date": "2026-11-20",
+  "updated": "2026-11-23T10:19:03.843Z",
+  "start_date": "2026-10-22",
+  "end_date": "2026-11-21",
   "hot": [
     {
       "name": "Fitzroy Crossing",
@@ -104,8 +104,8 @@
     {
       "name": "Oymyakon",
       "country": "Rosja",
-      "temp": -45.3,
-      "date": "2026-11-17",
+      "temp": -46.5,
+      "date": "2026-11-21",
       "lat": 63.462,
       "lon": 142.787
     },
@@ -158,12 +158,12 @@
       "lon": 129.733
     },
     {
-      "name": "Vilyuysk",
+      "name": "Ust-Nera",
       "country": "Rosja",
-      "temp": -36.9,
-      "date": "2026-11-16",
-      "lat": 63.755,
-      "lon": 121.624
+      "temp": -37.2,
+      "date": "2026-11-21",
+      "lat": 64.567,
+      "lon": 143.237
     }
   ]
 }
