@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-23T10:19:03.843Z",
-  "start_date": "2026-10-22",
-  "end_date": "2026-11-21",
+  "updated": "2026-11-25T10:52:54.677Z",
+  "start_date": "2026-10-24",
+  "end_date": "2026-11-23",
   "hot": [
     {
       "name": "Fitzroy Crossing",
@@ -20,12 +20,12 @@
       "lon": 117.143
     },
     {
-      "name": "Tete",
-      "country": "Mozambik",
-      "temp": 44.4,
-      "date": "2026-10-23",
-      "lat": -16.156,
-      "lon": 33.586
+      "name": "Birdsville",
+      "country": "Australia",
+      "temp": 44.6,
+      "date": "2026-11-22",
+      "lat": -25.899,
+      "lon": 139.351
     },
     {
       "name": "Marble Bar",
@@ -36,6 +36,30 @@
       "lon": 119.743
     },
     {
+      "name": "Oodnadatta",
+      "country": "Australia",
+      "temp": 44,
+      "date": "2026-11-22",
+      "lat": -27.548,
+      "lon": 135.445
+    },
+    {
+      "name": "Oodnadatta Air.",
+      "country": "Australia",
+      "temp": 44,
+      "date": "2026-11-22",
+      "lat": -27.557,
+      "lon": 135.452
+    },
+    {
+      "name": "Moomba",
+      "country": "Australia",
+      "temp": 43.9,
+      "date": "2026-11-22",
+      "lat": -28.101,
+      "lon": 140.198
+    },
+    {
       "name": "Villamontes",
       "country": "Boliwia",
       "temp": 43.6,
@@ -44,47 +68,31 @@
       "lon": -63.454
     },
     {
+      "name": "Tete",
+      "country": "Mozambik",
+      "temp": 43.4,
+      "date": "2026-11-08",
+      "lat": -16.156,
+      "lon": 33.586
+    },
+    {
       "name": "Port Hedland",
       "country": "Australia",
       "temp": 43.2,
       "date": "2026-11-04",
       "lat": -20.311,
       "lon": 118.601
-    },
-    {
-      "name": "Oran",
-      "country": "Argentyna",
-      "temp": 43.2,
-      "date": "2026-11-13",
-      "lat": -23.133,
-      "lon": -64.316
-    },
-    {
-      "name": "Birdsville",
-      "country": "Australia",
-      "temp": 42.6,
-      "date": "2026-11-02",
-      "lat": -25.899,
-      "lon": 139.351
-    },
-    {
-      "name": "Rivadavia",
-      "country": "Argentyna",
-      "temp": 42.5,
-      "date": "2026-11-13",
-      "lat": -24.192,
-      "lon": -62.898
-    },
-    {
-      "name": "Mariscal Estig.",
-      "country": "Paragwaj",
-      "temp": 42.3,
-      "date": "2026-11-04",
-      "lat": -22.029,
-      "lon": -60.621
     }
   ],
   "cold": [
+    {
+      "name": "Oymyakon",
+      "country": "Rosja",
+      "temp": -48.4,
+      "date": "2026-11-22",
+      "lat": 63.462,
+      "lon": 142.787
+    },
     {
       "name": "Klinck Station",
       "country": "Grenlandia",
@@ -100,14 +108,6 @@
       "date": "2026-11-12",
       "lat": 72.58,
       "lon": -38.46
-    },
-    {
-      "name": "Oymyakon",
-      "country": "Rosja",
-      "temp": -46.5,
-      "date": "2026-11-21",
-      "lat": 63.462,
-      "lon": 142.787
     },
     {
       "name": "Eismitte",
@@ -150,20 +150,20 @@
       "lon": 123.364
     },
     {
+      "name": "Ust-Nera",
+      "country": "Rosja",
+      "temp": -38.9,
+      "date": "2026-11-22",
+      "lat": 64.567,
+      "lon": 143.237
+    },
+    {
       "name": "Yakutsk",
       "country": "Rosja",
       "temp": -38.4,
       "date": "2026-11-18",
       "lat": 62.031,
       "lon": 129.733
-    },
-    {
-      "name": "Ust-Nera",
-      "country": "Rosja",
-      "temp": -37.2,
-      "date": "2026-11-21",
-      "lat": 64.567,
-      "lon": 143.237
     }
   ]
 }
