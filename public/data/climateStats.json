@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-26T10:28:51.590Z",
-  "start_date": "2026-10-25",
-  "end_date": "2026-11-24",
+  "updated": "2026-11-27T10:31:34.028Z",
+  "start_date": "2026-10-26",
+  "end_date": "2026-11-25",
   "hot": [
     {
       "name": "Fitzroy Crossing",
@@ -88,8 +88,8 @@
     {
       "name": "Oymyakon",
       "country": "Rosja",
-      "temp": -48.4,
-      "date": "2026-11-22",
+      "temp": -50.1,
+      "date": "2026-11-25",
       "lat": 63.462,
       "lon": 142.787
     },
@@ -110,6 +110,22 @@
       "lon": -38.46
     },
     {
+      "name": "Batagay",
+      "country": "Rosja",
+      "temp": -46.1,
+      "date": "2026-11-25",
+      "lat": 67.65,
+      "lon": 134.633
+    },
+    {
+      "name": "Verkhoyansk",
+      "country": "Rosja",
+      "temp": -45.6,
+      "date": "2026-11-25",
+      "lat": 67.551,
+      "lon": 133.385
+    },
+    {
       "name": "Eismitte",
       "country": "Grenlandia",
       "temp": -44.8,
@@ -126,22 +142,6 @@
       "lon": -38.483
     },
     {
-      "name": "Batagay",
-      "country": "Rosja",
-      "temp": -43.2,
-      "date": "2026-11-24",
-      "lat": 67.65,
-      "lon": 134.633
-    },
-    {
-      "name": "Verkhoyansk",
-      "country": "Rosja",
-      "temp": -43,
-      "date": "2026-11-24",
-      "lat": 67.551,
-      "lon": 133.385
-    },
-    {
       "name": "Zhigansk",
       "country": "Rosja",
       "temp": -40.2,
@@ -152,8 +152,8 @@
     {
       "name": "Ust-Nera",
       "country": "Rosja",
-      "temp": -39,
-      "date": "2026-11-24",
+      "temp": -40,
+      "date": "2026-11-25",
       "lat": 64.567,
       "lon": 143.237
     },
